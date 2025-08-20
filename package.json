@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "start-frontend": "npm run dev --prefix frontend",
-    "start-backend": "cd backend && flask run",
-    "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\""
+    "start-backend": "cd backend && flask run"
   },
   "keywords": [],
   "author": "",
