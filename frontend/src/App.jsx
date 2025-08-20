@@ -4,7 +4,7 @@ function App() {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate("/reports");
+    navigate("/core");
   };
 
   return (
@@ -19,7 +19,7 @@ function App() {
         <div className="flex w-full max-w-md items-center">
           
           {/* Target Button */}
-          <button className="flex items-center justify-center w-10 h-10 bg-[#e0e0e0] mr-2.5 border-2 rounded-full cursor-pointer hover:bg-gray-200 transition">
+          <button className="flex items-center justify-center w-12 h-12 bg-[#e0e0e0] mr-2.5 rounded-full cursor-pointer hover:bg-gray-200 transition shadow-[_0_2px_2px_rgba(0,0,0,0.5)]">
             <img
               src="/target-icon.png"
               alt="Target Icon"
@@ -31,13 +31,13 @@ function App() {
           <input
             type="text"
             placeholder="Enter your location"
-            className="flex-1 h-10 bg-[#e0e0e0] border-2 rounded-full pl-4 mr-2.5 focus:outline-none focus:ring-2 focus:ring-[#00796b]"
+            className="flex-1 h-12 bg-[#e0e0e0] rounded-full pl-4 mr-2.5 focus:outline-none focus:ring-2 focus:ring-[#00796b] shadow-[_0_2px_2px_rgba(0,0,0,0.5)]"
           />
 
           {/* Arrow Button */}
           <button
             onClick={handleRedirect}
-            className="flex items-center justify-center w-10 h-10 bg-[#e0e0e0] border-2 rounded-full cursor-pointer hover:bg-gray-200 transition"
+            className="flex items-center justify-center w-12 h-12 bg-[#e0e0e0] rounded-full cursor-pointer hover:bg-gray-200 transition shadow-[_0_2px_2px_rgba(0,0,0,0.5)]"
           >
             <img
               src="/arrow-icon.png"

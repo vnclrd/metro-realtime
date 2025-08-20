@@ -3,14 +3,14 @@ import { createRoot } from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import App from "./App.jsx"
-import Reports from './jsx/Reports.jsx'
+import Core from './jsx/Core.jsx'
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/reports" element={<Reports />} />
+        <Route path="/core" element={<Core />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

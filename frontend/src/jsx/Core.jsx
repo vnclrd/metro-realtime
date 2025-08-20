@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-function Reports() {
+function Core() {
   // Use state to track which div is currently active.
-  const [activeDiv, setActiveDiv] = useState('div1');
-  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[75px] cursor-pointer';
+  const [activeDiv, setActiveDiv] = useState('div1')
+  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[75px] cursor-pointer'
 
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
@@ -144,7 +144,7 @@ function Reports() {
         </button>
       </footer>
     </div>
-  );
+  )
 }
 
-export default Reports;
+export default Core
