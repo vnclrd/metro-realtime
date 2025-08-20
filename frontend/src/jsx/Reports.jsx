@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 function Reports() {
   // Use state to track which div is currently active.
   const [activeDiv, setActiveDiv] = useState('div1');
-  const baseButtonClasses = 'flex flex-col items-center justify-center w-[25%] h-[75px] cursor-pointer';
+  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[75px] cursor-pointer';
 
   return (
-    <div className='flex flex-col w-full min-h-screen'>
+    <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
@@ -20,27 +20,24 @@ function Reports() {
 
       {/* Reports Page Content */}
       <div
-        className={`flex-1 flex mt-[75px] mb-[100px] ${
+        className={`flex flex-col mt-[75px] mb-[100px] ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+        <h1 className='text-[2rem] text-[#e0e0e0] ml-10 mt-10'>Reports</h1>
 
         {/* Left Panel */}
-        <div className='w-[50%] h-auto bg-[#009688] m-10'>
-          <h1 className='text-[2rem] text-[#e0e0e0] font-medium mb-10'>Reports</h1>
-
-          <div className='flex flex-col gap-5 bg-amber-50'>
-            <div className='w-[625px] h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-[625px] h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-[625px] h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-[625px] h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-          </div>
+        <div className='w-[50%] h-[350px] bg-[#009688] pl-10 pr-5 mt-12 rounded-[15px] overflow-y-scroll'>
           
 
-
-
-
-
+          <div className='flex flex-col gap-5'>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
+          </div>
         </div>
 
         {/* Right Panel */}
@@ -80,7 +77,7 @@ function Reports() {
         
         {/* Reports Button */}
         <button
-          className={`${baseButtonClasses} ${
+          className={`${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
               ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
               : 'bg-transparent text-[#e0e0e0]'
@@ -97,7 +94,7 @@ function Reports() {
 
         {/* Location Button */}
         <button
-          className={`${baseButtonClasses} ${
+          className={`${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
               ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
               : 'bg-transparent text-[#e0e0e0]'
@@ -114,7 +111,7 @@ function Reports() {
 
         {/* Make Report Button */}
         <button
-          className={`${baseButtonClasses} ${
+          className={`${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
               ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
               : 'bg-transparent text-[#e0e0e0]'
@@ -131,7 +128,7 @@ function Reports() {
 
         {/* Settings Button */}
         <button
-          className={`${baseButtonClasses} ${
+          className={`${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
               ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
               : 'bg-transparent text-[#e0e0e0]'
