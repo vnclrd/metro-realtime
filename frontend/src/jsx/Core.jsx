@@ -20,45 +20,40 @@ function Core() {
 
       {/* Reports Page Content */}
       <div
-        className={`flex flex-col mt-[75px] mb-[100px] ${
+        className={`flex flex-col mt-[75px] mb-[75px] ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
-      >
-
-        {/* Page Titles */}
-        <div className='flex'>
-          <div className='flex flex-col items-center justify-center w-[50%] h-[75px] mb-5 mt-5'>
-            <h1 className='text-[2rem] text-[#e0e0e0]'>Reports</h1>
-            <p className='text-[0.75rem] text-[#e0e0e0]'>Showing reports near **location**</p>
-          </div>
-
-          <div className='flex items-center justify-center w-[50%] mb-5 mt-5'>
-            <h1 className='text-[2rem] text-[#e0e0e0]'>Title of Issue</h1>
-          </div>
-        </div>
-
+      >    
         {/* Panels */}
-        <div className='flex'>
 
+        <div className='flex item-center justify-center'>
+          
           {/* Left Panel */}
-          <div className='flex align-center justify-center w-[50%] h-[400px] pl-10'>
-            <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-            </div>
-          </div>
+          <div className='flex flex-col w-[50%] h-[500px] ml-10 mr-5 mt-5'>
+            
+            <h1 className='text-[2.5rem] text-[#e0e0e0]'>Reports</h1>
+            <p className='text-[0.8rem] text-[#e0e0e0] mb-5'>near 242 D, A. Bonifacio Street</p>
 
+            <div className='flex align-center justify-center'>
+              <div class="flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg">
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              </div>
+            </div>
+
+          </div>
+          
           {/* Right Panel */}
-          <div className='flex items-center justify-center w-[50%] h-[400px] pl-10 pr-10'>
+          <div className='flex items-center justify-center w-[50%] h-[500px] mt-5 pr-10'>
             <div className='flex flex-col w-[100%] h-full bg-[#008C7F] rounded-[15px] p-5 gap-5'>
 
               {/* Image Holder */}
-              <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
+              <div className='w-full h-[70%] rounded-[15px] bg-[#009688]'>
                 <img src="" alt="Photo of report" />
               </div>
 
@@ -79,6 +74,10 @@ function Core() {
             </div>
           </div>
 
+
+
+
+
         </div>
         
       </div>
@@ -97,7 +96,7 @@ function Core() {
       >
         {/* Page Titles */}
         <div className='flex items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
-          <h1 className='text-[2rem] text-[#e0e0e0]'>Select Location</h1>
+          <h1 className='text-[2.5rem] text-[#e0e0e0]'>Select Location</h1>
         </div>
 
         {/* Maps container */}
