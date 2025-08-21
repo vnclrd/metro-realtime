@@ -18,38 +18,22 @@ function Core() {
         
       </header>
 
-
-      {/* Left Panel */}
-      <div className='w-[50%] h-screen mt-[75px] bg-white'>
-
-
-
-      </div>
-
-
-
-
-
-
-
-
-
-
-
       {/* Reports Page Content */}
       <div
         className={`flex flex-col mt-[75px] mb-[100px] ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
-        <div className='flex'>
+        <div className='bg-white mb-10'>
+          <h1 className='text-[2rem] text-[#e0e0e0] pl-10 mt-10'>Reports</h1>
+        </div>
+        
+
           {/* Left Panel */}
 
-          {/*
-            <div className='w-[50%] h-[350px] bg-[#009688] rounded-[15px]'>
-              <h1 className='text-[2rem] text-[#e0e0e0] pl-10 mt-10'>Reports</h1>
-              <div class="flex pl-10">
-                <div class="flex flex-col w-[50%] h-[350px] gap-5 mt-10 pr-5 overflow-y-scroll rounded-lg">
+            <div className='flex align-center justify-center w-[50%] h-[400px] bg-[#fff] rounded-[15px] pl-10'>
+            
+                <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
                   <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
                   <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
                   <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
@@ -58,15 +42,14 @@ function Core() {
                   <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
                   <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
                 </div>
-              </div>
+ 
             </div>
-          */}
+
 
           {/* Right Panel 
           <div className='w-[50%] h-[350px] bg-[#fff] rounded-[25px]'></div>
           */}
 
-        </div>
           
 
         
