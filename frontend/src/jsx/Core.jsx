@@ -52,7 +52,7 @@ function Core() {
           {/* Right Panel */}
           <div className='flex items-center justify-center w-[50%] h-[500px]'>
 
-            <div className='flex flex-col w-[100%] h-full bg-[#008C7F] rounded-[15px] p-5 gap-5'>
+            <div className='flex flex-col w-[100%] h-full bg-[#00786D] rounded-[15px] p-5 gap-5'>
 
               {/* Image Holder */}
               <div className='w-full h-[70%] rounded-[15px] bg-[#009688]'>
