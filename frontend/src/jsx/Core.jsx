@@ -27,12 +27,12 @@ function Core() {
 
         {/* Page Titles */}
         <div className='flex'>
-          <div className='flex flex-col items-center justify-center w-[50%] h-[75px] bg-white mb-5 mt-5'>
+          <div className='flex flex-col items-center justify-center w-[50%] h-[75px] mb-5 mt-5'>
             <h1 className='text-[2rem] text-[#e0e0e0]'>Reports</h1>
             <p className='text-[0.75rem] text-[#e0e0e0]'>Showing reports near **location**</p>
           </div>
 
-          <div className='flex items-center justify-center w-[50%] bg-white mb-5 mt-5'>
+          <div className='flex items-center justify-center w-[50%] mb-5 mt-5'>
             <h1 className='text-[2rem] text-[#e0e0e0]'>Title of Issue</h1>
           </div>
         </div>
@@ -41,7 +41,7 @@ function Core() {
         <div className='flex'>
 
           {/* Left Panel */}
-          <div className='flex align-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10'>
+          <div className='flex align-center justify-center w-[50%] h-[400px] pl-10'>
             <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
               <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
               <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
@@ -54,7 +54,7 @@ function Core() {
           </div>
 
           {/* Right Panel */}
-          <div className='flex items-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10 pr-10'>
+          <div className='flex items-center justify-center w-[50%] h-[400px] pl-10 pr-10'>
             <div className='w-[100%] h-full bg-[#008C7F] rounded-[25px]'></div>
           </div>
 
@@ -150,7 +150,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div2')}
@@ -163,7 +163,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div3')}
@@ -176,7 +176,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div4')}
