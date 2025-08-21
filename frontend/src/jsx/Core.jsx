@@ -24,37 +24,48 @@ function Core() {
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+        {/* Page Title */}
         <div className='bg-white mb-10'>
           <h1 className='text-[2rem] text-[#e0e0e0] pl-10 mt-10'>Reports</h1>
         </div>
-        
 
+        {/* Panels */}
+        <div className='flex'>
           {/* Left Panel */}
-
-            <div className='flex align-center justify-center w-[50%] h-[400px] bg-[#fff] rounded-[15px] pl-10'>
-            
-                <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                </div>
- 
+          <div className='flex align-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10'>
+            <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
             </div>
+          </div>
+
+          {/* Right Panel */}
+          <div className='flex items-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10 pr-10'>
+            <div className='w-[100%] h-full bg-[#008C7F] rounded-[25px]'></div>
 
 
-          {/* Right Panel 
-          <div className='w-[50%] h-[350px] bg-[#fff] rounded-[25px]'></div>
-          */}
+          </div>
 
-          
 
+        </div>
         
+        
+
+
+
+
+
 
       </div>
+
+      {/* Right Panel 
+      <div className='w-[50%] h-[350px] bg-[#fff] rounded-[25px]'></div>
+      */}
 
 
 
