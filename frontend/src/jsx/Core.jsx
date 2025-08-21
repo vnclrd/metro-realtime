@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function Core() {
   // Use state to track which div is currently active.
   const [activeDiv, setActiveDiv] = useState('div1')
-  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[75px] cursor-pointer'
+  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
 
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
@@ -18,32 +18,82 @@ function Core() {
         
       </header>
 
+
+      {/* Left Panel */}
+      <div className='w-[50%] h-screen mt-[75px] bg-white'>
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
       {/* Reports Page Content */}
       <div
         className={`flex flex-col mt-[75px] mb-[100px] ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
-        <h1 className='text-[2rem] text-[#e0e0e0] ml-10 mt-10'>Reports</h1>
+        <div className='flex'>
+          {/* Left Panel */}
 
-        {/* Left Panel */}
-        <div className='w-[50%] h-[350px] bg-[#009688] pl-10 pr-5 mt-12 rounded-[15px] overflow-y-scroll'>
+          {/*
+            <div className='w-[50%] h-[350px] bg-[#009688] rounded-[15px]'>
+              <h1 className='text-[2rem] text-[#e0e0e0] pl-10 mt-10'>Reports</h1>
+              <div class="flex pl-10">
+                <div class="flex flex-col w-[50%] h-[350px] gap-5 mt-10 pr-5 overflow-y-scroll rounded-lg">
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                  <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                </div>
+              </div>
+            </div>
+          */}
+
+          {/* Right Panel 
+          <div className='w-[50%] h-[350px] bg-[#fff] rounded-[25px]'></div>
+          */}
+
+        </div>
           
 
-          <div className='flex flex-col gap-5'>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-            <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F]'></div>
-          </div>
-        </div>
-
-        {/* Right Panel */}
-        <div className='w-[50%] h-auto bg-[#009688]'></div>
+        
 
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       {/* Location Page Content */}
       <div
@@ -72,24 +122,28 @@ function Core() {
         <h1 className='text-white text-3xl'>Settings Page</h1>
       </div>
 
+
+
+
+
+
+
+
+
       {/* Footer */}
-      <footer className='fixed flex justify-around items-center w-full h-[100px] bottom-0 bg-[#008377] p-10'>
+      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-10'>
         
         {/* Reports Button */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div1')}
         >
-          <img
-            src='/public/reports-icon.png'
-            alt='Reports Icon'
-            className='w-[30px] h-[30px] filter invert'
-          />
-          <p className='font-light text-sm mt-[3px]'>Reports</p>
+          <img src='/public/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
+          <p className='font-light text-sm mt-[1px]'>Reports</p>
         </button>
 
         {/* Location Button */}
@@ -101,12 +155,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div2')}
         >
-          <img
-            src='/public/location-icon.png'
-            alt='Location Icon'
-            className='w-[30px] h-[30px] filter invert'
-          />
-          <p className='font-light text-sm mt-[3px]'>Location</p>
+          <img src='/public/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
+          <p className='font-light text-sm mt-[1px]'>Location</p>
         </button>
 
         {/* Make Report Button */}
@@ -118,12 +168,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div3')}
         >
-          <img
-            src='/public/make-report-icon.png'
-            alt='Make Report Icon'
-            className='w-[30px] h-[30px] filter invert'
-          />
-          <p className='font-light text-sm mt-[3px]'>Make Report</p>
+          <img src='/public/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
+          <p className='font-light text-sm mt-[1px]'>Make Report</p>
         </button>
 
         {/* Settings Button */}
@@ -135,12 +181,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div4')}
         >
-          <img
-            src='/public/settings-icon.png'
-            alt='Settings Icon'
-            className='w-[30px] h-[30px] filter invert'
-          />
-          <p className='font-light text-sm mt-[3px]'>Settings</p>
+          <img src='/public/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
+          <p className='font-light text-sm mt-[1px]'>Settings</p>
         </button>
       </footer>
     </div>
