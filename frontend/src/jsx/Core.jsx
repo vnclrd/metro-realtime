@@ -24,9 +24,18 @@ function Core() {
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
-        {/* Page Title */}
-        <div className='bg-white mb-10'>
-          <h1 className='text-[2rem] text-[#e0e0e0] pl-10 mt-10'>Reports</h1>
+
+
+        {/* Page Titles */}
+        <div className='flex'>
+          <div className='flex flex-col items-center justify-center w-[50%] h-[75px] bg-white mb-5 mt-5'>
+            <h1 className='text-[2rem] text-[#e0e0e0]'>Reports</h1>
+            <p className='text-[0.75rem] text-[#e0e0e0]'>Showing reports near **location**</p>
+          </div>
+
+          <div className='flex items-center justify-center w-[50%] bg-white mb-5 mt-5'>
+            <h1 className='text-[2rem] text-[#e0e0e0]'>Title of Issue</h1>
+          </div>
         </div>
 
         {/* Panels */}
