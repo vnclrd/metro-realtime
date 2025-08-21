@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function Core() {
-  // Use state to track which div is currently active.
+  // Use state to track which div is currently active
   const [activeDiv, setActiveDiv] = useState('div1')
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
 
@@ -25,7 +25,6 @@ function Core() {
         }`}
       >
 
-
         {/* Page Titles */}
         <div className='flex'>
           <div className='flex flex-col items-center justify-center w-[50%] h-[75px] bg-white mb-5 mt-5'>
@@ -40,6 +39,7 @@ function Core() {
 
         {/* Panels */}
         <div className='flex'>
+
           {/* Left Panel */}
           <div className='flex align-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10'>
             <div class="flex flex-col w-[100%] gap-5 pr-5 overflow-y-scroll rounded-lg">
@@ -56,11 +56,32 @@ function Core() {
           {/* Right Panel */}
           <div className='flex items-center justify-center w-[50%] h-[400px] bg-[#fff] pl-10 pr-10'>
             <div className='w-[100%] h-full bg-[#008C7F] rounded-[25px]'></div>
-
-
           </div>
 
+        </div>
+        
+      </div>
 
+
+
+
+
+
+      
+      {/* Location Page Content */}
+      <div
+        className={`flex flex-col items-center justify-center mt-[75px] mb-[100px] ${
+          activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
+        }`}
+      >
+        {/* Page Titles */}
+        <div className='flex items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
+          <h1 className='text-[2rem] text-[#e0e0e0]'>Select Location</h1>
+        </div>
+
+        {/* Maps container */}
+        <div className='w-full pl-10 pr-10'>
+          <div className='w-full h-[400px] bg-[#008C7F] rounded-[25px]'></div>
         </div>
         
         
@@ -68,13 +89,8 @@ function Core() {
 
 
 
-
-
       </div>
 
-      {/* Right Panel 
-      <div className='w-[50%] h-[350px] bg-[#fff] rounded-[25px]'></div>
-      */}
 
 
 
@@ -87,25 +103,6 @@ function Core() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-      {/* Location Page Content */}
-      <div
-        className={`flex-1 flex items-center justify-center p-4 mt-[75px] mb-[100px] ${
-          activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
-        }`}
-      >
-        <h1 className='text-white text-3xl'>Location Page</h1>
-      </div>
 
       {/* Make a Report Page Content */}
       <div
