@@ -55,7 +55,28 @@ function Core() {
 
           {/* Right Panel */}
           <div className='flex items-center justify-center w-[50%] h-[400px] pl-10 pr-10'>
-            <div className='w-[100%] h-full bg-[#008C7F] rounded-[25px]'></div>
+            <div className='flex flex-col w-[100%] h-full bg-[#008C7F] rounded-[15px] p-5 gap-5'>
+
+              {/* Image Holder */}
+              <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
+                <img src="" alt="Photo of report" />
+              </div>
+
+              {/* Description of report */}
+              <div className='w-full h-[25%] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5'>
+                <p>Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
+                  Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
+                  Araw-araw may nadadapa o muntik maaksidente dahil dito. Hindi na po ito ligtas!
+                  Sana naman po ay may kumilos na agad bago may masaktan nang seryoso
+                </p>
+              </div>
+
+              {/* "I see this too" Button */}
+                <button className='flex items-center justify-center w-full h-[50px] bg-[#009688] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
+                  <img src="/public/vision-icon.png" alt="Vision Icon" className='w-[40px] h-[40px] filter invert m-3' />
+                  I see this too
+                </button>
+            </div>
           </div>
 
         </div>
@@ -121,7 +142,7 @@ function Core() {
       >
         <h1 className='text-white text-3xl'>Settings Page</h1>
       </div>
-
+    
 
 
 
