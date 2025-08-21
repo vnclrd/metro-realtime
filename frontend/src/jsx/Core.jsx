@@ -20,46 +20,53 @@ function Core() {
 
       {/* Reports Page Content */}
       <div
-        className={`flex flex-col mt-[75px] mb-[75px] ${
+        className={`flex flex-col min-h-screen items-center justify-center ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
-      >    
+      >
         {/* Panels */}
+        <div className='flex items-center justify-center w-full max-w-[1400px]'>
 
-        <div className='flex item-center justify-center'>
-          
           {/* Left Panel */}
-          <div className='flex flex-col w-[50%] h-[500px] ml-10 mr-5 mt-5'>
-            
-            <h1 className='text-[2.5rem] text-[#e0e0e0]'>Reports</h1>
-            <p className='text-[0.8rem] text-[#e0e0e0] mb-5'>near 242 D, A. Bonifacio Street</p>
+          <div className='flex flex-col w-[50%] h-[500px] mr-5'>
 
-            <div className='flex align-center justify-center'>
-              <div class="flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg">
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div class="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+            <h1 className='text-[2.5rem] text-[#e0e0e0]'>Reports</h1>
+            <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
+              near 242 D, A. Bonifacio Street
+            </p>
+
+            <div className='flex items-center justify-center'>
+              <div className="flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg">
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
               </div>
             </div>
 
           </div>
-          
+
           {/* Right Panel */}
-          <div className='flex items-center justify-center w-[50%] h-[500px] mt-5 pr-10'>
+          <div className='flex items-center justify-center w-[50%] h-[500px]'>
+
             <div className='flex flex-col w-[100%] h-full bg-[#008C7F] rounded-[15px] p-5 gap-5'>
 
               {/* Image Holder */}
               <div className='w-full h-[70%] rounded-[15px] bg-[#009688]'>
-                <img src="" alt="Photo of report" />
+                <img
+                  src="/public/pothole.png"
+                  alt="Photo of report"
+                  className='w-full h-full object-contain rounded-[15px]'
+                />
               </div>
 
               {/* Description of report */}
               <div className='w-full h-[25%] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5'>
-                <p>Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
+                <p>
+                  Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
                   Araw-araw may nadadapa o muntik maaksidente dahil dito. Hindi na po ito ligtas!
                   Sana naman po ay may kumilos na agad bago may masaktan nang seryoso
@@ -67,20 +74,20 @@ function Core() {
               </div>
 
               {/* "I see this too" Button */}
-                <button className='flex items-center justify-center w-full h-[50px] bg-[#009688] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
-                  <img src="/public/vision-icon.png" alt="Vision Icon" className='w-[40px] h-[40px] filter invert m-3' />
-                  I see this too
-                </button>
+              <button className='flex items-center justify-center w-full h-[50px] bg-[#009688] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
+                <img
+                  src="/public/vision-icon.png"
+                  alt="Vision Icon"
+                  className='w-[40px] h-[40px] filter invert m-3'
+                />
+                I see this too
+              </button>
             </div>
+
           </div>
-
-
-
-
-
         </div>
-        
       </div>
+
 
 
 
