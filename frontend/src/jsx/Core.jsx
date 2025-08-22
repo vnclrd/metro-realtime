@@ -31,11 +31,7 @@ function Core() {
         {/* Panels */}
         <div className='
           flex items-center justify-between w-auto ml-5 mr-5 gap-5 rounded-[15px] bg-[#008c7f] p-5
-
-
-
-
-
+          
           '
         >
 
@@ -87,12 +83,8 @@ function Core() {
               </div>
 
               {/* 'I see this too' Button */}
-              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
-                <img
-                  src='/public/vision-icon.png'
-                  alt='Vision Icon'
-                  className='w-[40px] h-[40px] filter invert m-3'
-                />
+              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+                <img src='/public/vision-icon.png' alt='Vision Icon' className='w-[40px] h-[40px] filter invert m-3' />
                 I see this too
               </button>
             </div>
@@ -118,10 +110,8 @@ function Core() {
         </div>
 
         {/* Maps container */}
+        <div className='flex items-center justify-center w-[1000px] h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
 
-          <div className='flex items-center justify-center w-[1000px] h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
-
-        
       </div>
 
       {/* ================================================== Make Report Page Content ================================================== */}
@@ -203,9 +193,7 @@ function Core() {
       >
 
         <div className='flex flex-col w-full h-full items-center justify-center p-5 gap-5'>
-
-
-
+          
           <h1 className='text-white text-[2rem] font-bold'>Settings</h1>
 
           {/* Dark mode */}
