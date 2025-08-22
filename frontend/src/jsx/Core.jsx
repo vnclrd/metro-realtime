@@ -37,7 +37,7 @@ function Core() {
             <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Reports</h1>
 
             <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
-              near 242 D, A. Bonifacio Street
+              near <span className='italic'>242 D, A. Bonifacio Street</span>
             </p>
 
             {/* Reports Container */}
@@ -107,7 +107,7 @@ function Core() {
         {/* Page Titles */}
         <div className='flex flex-col w-full h-full items-center justify-center mb-5'>
           <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Select Location</h1>
-          <p className='text-[1rem] text-[#e0e0e0]'>242 D, A. Bonifacio Street</p>
+          <p className='text-[1rem] text-[#e0e0e0] italic'>242 D, A. Bonifacio Street</p>
         </div>
 
         {/* Maps container */}
@@ -155,18 +155,19 @@ function Core() {
 
             {/* Description container */}
             <label for='description' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
-            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[150px] align-text-top resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
+            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[100px] align-text-top resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
 
             {/* Upload image button */}
-            <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-5 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+            <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-2 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
               <img src='/public/upload-photo-icon.png' alt='Upload Photo Icon' className='w-[26px] h-[26px] mr-2' />
               Upload image
             </button>
+            <p className='text-[#e0e0e0] text-[0.75rem] mb-3'>Image uploaded: <span className='italic'>report.jpg</span></p>
 
             {/* Make report button */}
             <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
               <img src='/public/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
-              Make report!
+              Submit report!
             </button>
 
 
@@ -317,7 +318,7 @@ function Core() {
             </div>
 
             {/* Right Section: Social Links */}
-            <div className="flex w-[400px] h-[40px] text-[0.75rem] items-center">
+            <div className="flex w-[400px] h-[40px] text-[0.75rem] items-center text-right">
               <p>
                 Ulat PH is a community-driven reporting web app that enables civilians
                 to crowdsource and track local community issues.
