@@ -12,7 +12,7 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
-        <img src='/public/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-10' />
+        <img src='/public/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-5' />
         <div className='flex flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
@@ -29,12 +29,12 @@ function Core() {
       >
 
         {/* Panels */}
-        <div className='flex items-center justify-center w-full max-w-[1400px]'>
+        <div className='flex items-center justify-between w-auto ml-5 mr-5 gap-5'>
 
           {/* Left Panel */}
-          <div className='flex flex-col w-[50%] h-[500px] mr-5'>
+          <div className='flex flex-col w-[50%] h-[500px]'>
 
-            <h1 className='text-[2.5rem] text-[#e0e0e0]'>Reports</h1>
+            <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Reports</h1>
 
             <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
               near 242 D, A. Bonifacio Street
@@ -106,12 +106,12 @@ function Core() {
 
         {/* Page Titles */}
         <div className='flex flex-col items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
-          <h1 className='text-[2.5rem] text-[#e0e0e0]'>Select Location</h1>
+          <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Select Location</h1>
           <p className='text-[1rem] text-[#e0e0e0]'>242 D, A. Bonifacio Street</p>
         </div>
 
         {/* Maps container */}
-        <div className='w-full pl-10 pr-10'>
+        <div className='w-full pl-5 pr-5'>
           <div className='flex item-center justify-center w-full h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
         </div>
         
@@ -128,7 +128,7 @@ function Core() {
         <div className='flex flex-col'>
 
           <div className='flex flex-col items-center justify-center w-[100%] mb-5'>
-            <h1 className='text-[2rem] text-[#e0e0e0]'>Report an Issue</h1>
+            <h1 className='text-[2rem] text-[#e0e0e0] font-bold'>Report an Issue</h1>
             <p className='text-[0.8rem] text-[#e0e0e0]'>near 242 D, A. Bonifacio Street</p>
           </div>
 
@@ -187,10 +187,32 @@ function Core() {
         <h1 className='text-white text-3xl'>Settings Page</h1>
 
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
       {/* ================================================== Footer ================================================== */}
 
-      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-10'>
+      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-5'>
         
         {/* ========================= Reports Button ========================= */}
         <button
