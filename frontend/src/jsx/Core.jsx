@@ -8,6 +8,8 @@ function Core() {
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
 
+      {/* ================================================== Header Content ================================================== */}
+
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
         <img src="/public/ulat-ph-logo.png" alt="Ulat PH Logo 2" className='w-[50px] m-2.5 ml-10' />
@@ -18,12 +20,14 @@ function Core() {
         
       </header>
 
-      {/* Reports Page Content */}
+      {/* ================================================== Reports Page Content ================================================== */}
+
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
           activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+
         {/* Panels */}
         <div className='flex items-center justify-center w-full max-w-[1400px]'>
 
@@ -31,10 +35,12 @@ function Core() {
           <div className='flex flex-col w-[50%] h-[500px] mr-5'>
 
             <h1 className='text-[2.5rem] text-[#e0e0e0]'>Reports</h1>
+
             <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
               near 242 D, A. Bonifacio Street
             </p>
 
+            {/* Reports Container */}
             <div className='flex items-center justify-center'>
               <div className="flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg">
                 <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
@@ -85,22 +91,19 @@ function Core() {
             </div>
 
           </div>
+
         </div>
+
       </div>
 
+      {/* ================================================== Location Page Content ================================================== */}
 
-
-
-
-
-
-      
-      {/* Location Page Content */}
       <div
         className={`flex flex-col items-center justify-center mt-[75px] mb-[100px] ${
           activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+
         {/* Page Titles */}
         <div className='flex items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
           <h1 className='text-[2.5rem] text-[#e0e0e0]'>Select Location</h1>
@@ -111,34 +114,21 @@ function Core() {
           <div className='w-full h-[400px] bg-[#008C7F] rounded-[25px]'></div>
         </div>
         
-        
-
-
-
-
       </div>
 
+      {/* ================================================== Make Report Page Content ================================================== */}
 
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Make a Report Page Content */}
       <div
         className={`flex-1 flex items-center justify-center p-4 mt-[75px] mb-[100px] ${
           activeDiv === 'div3' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+
         <h1 className='text-white text-3xl'>Make Report Page</h1>
+
       </div>
+
+      {/* ================================================== Settings Page Content ================================================== */}
 
       {/* Settings Page Content */}
       <div
@@ -146,21 +136,16 @@ function Core() {
           activeDiv === 'div4' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+
         <h1 className='text-white text-3xl'>Settings Page</h1>
+
       </div>
-    
+        
+      {/* ================================================== Footer ================================================== */}
 
-
-
-
-
-
-
-
-      {/* Footer */}
       <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-10'>
         
-        {/* Reports Button */}
+        {/* ========================= Reports Button ========================= */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
@@ -169,11 +154,13 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div1')}
         >
+
           <img src='/public/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Reports</p>
+
         </button>
 
-        {/* Location Button */}
+        {/* ========================= Location Button ========================= */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
@@ -182,11 +169,13 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div2')}
         >
+
           <img src='/public/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Location</p>
+
         </button>
 
-        {/* Make Report Button */}
+        {/* ========================= Make Report Button ========================= */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
@@ -195,11 +184,13 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div3')}
         >
+
           <img src='/public/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Make Report</p>
+
         </button>
 
-        {/* Settings Button */}
+        {/* ========================= Settings Button ========================= */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
@@ -208,10 +199,14 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div4')}
         >
+
           <img src='/public/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Settings</p>
+          
         </button>
+
       </footer>
+
     </div>
   )
 }
