@@ -42,7 +42,8 @@ function Core() {
 
             {/* Reports Container */}
             <div className='flex items-center justify-center'>
-              <div className='flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg'>
+              <div className='flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg
+              scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]'>
                 <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
                 <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
                 <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
