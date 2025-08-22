@@ -99,7 +99,7 @@ function Core() {
       {/* ================================================== Location Page Content ================================================== */}
 
       <div
-        className={`flex flex-col items-center justify-center mt-[75px] mb-[100px] ${
+        className={`flex flex-col min-h-screen items-center justify-center ${
           activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
