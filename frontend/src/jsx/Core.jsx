@@ -59,15 +59,11 @@ function Core() {
           {/* Right Panel */}
           <div className='flex items-center justify-center w-[50%] h-[500px]'>
 
-            <div className='flex flex-col w-[100%] h-full bg-[#008c7f] rounded-[15px] p-5 gap-5'>
+            <div className='flex flex-col w-[100%] h-full bg-[#008c7f] rounded-[15px] gap-5'>
 
               {/* Image Holder */}
               <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
-                <img
-                  src='/public/pothole.png'
-                  alt='Photo of report'
-                  className='w-full h-full object-contain rounded-[15px]'
-                />
+                <img src='/public/pothole.png' alt='Photo of report' className='w-full h-full object-contain rounded-[15px]' />
               </div>
 
               {/* Description of report */}
