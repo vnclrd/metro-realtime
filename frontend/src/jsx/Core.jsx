@@ -105,13 +105,14 @@ function Core() {
       >
 
         {/* Page Titles */}
-        <div className='flex items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
+        <div className='flex flex-col items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
           <h1 className='text-[2.5rem] text-[#e0e0e0]'>Select Location</h1>
+          <p className='text-[1rem] text-[#e0e0e0]'>242 D, A. Bonifacio Street</p>
         </div>
 
         {/* Maps container */}
         <div className='w-full pl-10 pr-10'>
-          <div className='w-full h-[400px] bg-[#008C7F] rounded-[25px]'></div>
+          <div className='flex item-center justify-center w-full h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
         </div>
         
       </div>
@@ -119,12 +120,48 @@ function Core() {
       {/* ================================================== Make Report Page Content ================================================== */}
 
       <div
-        className={`flex-1 flex items-center justify-center p-4 mt-[75px] mb-[100px] ${
+        className={`flex-1 flex min-h-screen items-center justify-center ${
           activeDiv === 'div3' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
+        
+        <div className='flex flex-col'>
 
-        <h1 className='text-white text-3xl'>Make Report Page</h1>
+          <div className='flex flex-col items-center justify-center w-[100%] mb-5'>
+            <h1 className='text-[2rem] text-[#e0e0e0]'>Report an Issue</h1>
+            <p className='text-[0.8rem] text-[#e0e0e0]'>near 242 D, A. Bonifacio Street</p>
+          </div>
+
+          <div className='flex flex-col items-center w-[800px] rounded-[15px]'>
+
+            {/* Type of issue selection */}
+            <label for="issues" className='text-[1.25rem] text-[#e0e0e0] mb-2'>Type of issue</label>
+            <select name="issues" id="fruits" className='w-[350px] h-[40px] rounded-[15px] bg-[#e0e0e0] mb-5'>
+              <option value="apple">Issue 1</option>
+              <option value="banana">Issue 2</option>
+              <option value="orange">Issue 3</option>
+              <option value="grape">Issue 4</option>
+            </select>
+
+            {/* Description container */}
+            <label for="description" className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
+            <input type="text" placeholder='Write a short description about the issue' className='w-[600px] h-[150px] bg-[#008c7f] rounded-[15px] mb-5' />
+
+            {/* Upload image button */}
+            <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-5'>
+              <img src="/public/upload-photo-icon.png" alt="Upload Photo Icon" className='w-[26px] h-[26px] mr-2' />
+              Upload image
+            </button>
+
+            <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
+              <img src="/public/upload-icon.png" alt="Upload Icon" className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
+              Make report!
+            </button>
+
+
+          </div>
+
+        </div>
 
       </div>
 
