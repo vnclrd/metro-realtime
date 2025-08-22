@@ -70,7 +70,7 @@ function Core() {
               </div>
 
               {/* Description of report */}
-              <div className='w-full h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5 pt-2'>
+              <div className='w-full h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5 pt-3 pb-3'>
                 <p>
                   Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
@@ -105,7 +105,7 @@ function Core() {
       >
 
         {/* Page Titles */}
-        <div className='flex flex-col items-center justify-center w-[100%] h-[75px] mb-5'>
+        <div className='flex flex-col w-full h-full items-center justify-center mb-5'>
           <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Select Location</h1>
           <p className='text-[1rem] text-[#e0e0e0]'>242 D, A. Bonifacio Street</p>
         </div>
@@ -125,7 +125,7 @@ function Core() {
         }`}
       >
         
-        <div className='flex flex-col'>
+        <div className='flex flex-col w-full h-full items-center justify-center'>
 
           <div className='flex flex-col items-center justify-center w-[100%] mb-4'>
             <h1 className='text-[2rem] text-[#e0e0e0] font-bold'>Report an Issue</h1>
@@ -146,7 +146,7 @@ function Core() {
                     <option value='issue-4'>Issue 4</option>
                 </select>
 
-                {/* Custom Arrow */}
+                {/* Custom arrow */}
                 <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pb-5 pr-4'>
                     <img src='/public/arrow-down.png' alt='Arrow Down Icon' className='w-[20px] h-[20px]' />
                 </div>
@@ -163,6 +163,7 @@ function Core() {
               Upload image
             </button>
 
+            {/* Make report button */}
             <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
               <img src='/public/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
               Make report!
@@ -179,37 +180,156 @@ function Core() {
 
       {/* Settings Page Content */}
       <div
-        className={`flex-1 flex items-center justify-center p-4 mt-[75px] mb-[100px] ${
+        className={`flex-1 flex min-h-screen items-center justify-center ${
           activeDiv === 'div4' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
 
-        <h1 className='text-white text-3xl'>Settings Page</h1>
+        <div className='flex flex-col w-full h-full items-center justify-center p-5 gap-5'>
 
+
+
+          <h1 className='text-white text-[2rem] font-bold'>Settings</h1>
+
+          {/* Dark mode */}
+          <div className="flex w-[50%] h-[75px] items-center justify-between bg-[#008c7f] rounded-[15px] text-[1.25rem] text-[#e0e0e0] p-5 shadow-lg">
+            
+            {/* Left Section: Icon + Text */}
+            <div className="flex items-center gap-5"> 
+              {/* Icon */}
+              <img src="/public/dark-mode-icon.png" alt="Dark Mode Icon" className="w-[26px] h-[26px] filter invert brightness-[200%]" />
+
+              {/* Texts */}
+              <div className="flex flex-col leading-tight">
+                <h1 className="text-[1.25rem] font-bold">Dark Mode</h1>
+                <p className="text-[0.8rem]">Press/Click to enable dark mode</p>
+              </div>
+            </div>
+
+            {/* Right Section: Toggle Button */}
+            <div className="flex items-center justify-center w-[125px] h-[40px] rounded-[15px] text-[0.8rem] appearance-none cursor-pointer">
+              <div id="toggleButton" className="w-12 h-6 flex items-center bg-gray-300 rounded-full cursor-pointer">
+                <div className="toggle-circle w-5 h-5 bg-white rounded-full transform duration-300 ease-in-out"></div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Select language */}
+          <div className='flex w-[50%] h-[75px] items-center justify-between bg-[#008c7f] rounded-[15px] text-[1.25rem] text-[#e0e0e0] p-5 shadow-lg'>
+
+            {/* Left Section: Icon + Text */}
+            <div className="flex items-center gap-5">
+              {/* Icon */}
+              <img src="/public/language-icon.png" alt="Language Icon" className='w-[26px] h-[26px] filter invert brightness-[200%]' />
+
+              {/* Texts */}
+              <div className="flex flex-col leading-tight">
+                <h1 className="text-[1.25rem] font-bold">Change Language</h1>
+                <p className="text-[0.8rem]">Select your preferred language</p>
+              </div>
+            </div>
+
+            {/* Right Section: Select Language */}
+            <select name="lang" id="lang" className="w-[125px] h-[40px] rounded-[15px] text-[0.8rem] appearance-none cursor-pointer text-[#008c7f] text-center bg-white focus:outline-none shadow-sm">
+              <option value="english">English</option>
+              <option value="filipino">Filipino</option>
+            </select>
+            
+          </div>
+
+          {/* Report a bug */}
+          <div className='flex w-[50%] h-[75px] items-center justify-between bg-[#008c7f] rounded-[15px] text-[1.25rem] text-[#e0e0e0] p-5 shadow-lg'>
+
+            {/* Left Section: Icon + Text */}
+            <div className="flex items-center gap-5">
+              {/* Icon */}
+              <img src="/public/bug-icon.png" alt="Bug Icon" className='w-[26px] h-[26px] filter invert brightness-[200%]' />
+
+              {/* Texts */}
+              <div className="flex flex-col leading-tight">
+                <h1 className="text-[1.25rem] font-bold">Report Bug</h1>
+                <p className="text-[0.8rem]">Help us improve Ulat PH by reporting issues</p>
+              </div>
+            </div>
+
+            {/* Right Section: Report a Bug Button */}
+            <button className='flex items-center justify-center w-[125px] h-[40px] font-bold bg-[#ff0000] rounded-[15px] text-[0.8rem] appearance-none cursor-pointer shadow-sm gap-1'>
+              <p>Report a Bug</p>
+            </button>
+            
+          </div>
+
+          {/* Developer */}
+          <div className="flex w-[50%] h-[75px] items-center justify-between bg-[#008c7f] rounded-[15px] text-[1.25rem] text-[#e0e0e0] p-5 shadow-lg">
+
+            {/* Left Section: Icon + Text */}
+            <div className="flex items-center gap-5">
+              {/* Icon */}
+              <img
+                src="/public/user-icon.png"
+                alt="User Icon"
+                className="w-[26px] h-[26px] filter invert brightness-[200%]"
+              />
+
+              {/* Texts */}
+              <div className="flex flex-col leading-tight">
+                <h1 className="text-[1.25rem] font-bold">Developer</h1>
+                <p className="text-[0.8rem]">Miguel Ivan Calarde</p>
+              </div>
+            </div>
+
+            {/* Right Section: Social Links */}
+            <div className="flex items-center gap-5 filter invert brightness-[200%]">
+              {/* GitHub Link */}
+              <a href="https://github.com/vnclrd" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                <img src="/public/github-logo.png" alt="GitHub Logo" className="w-[40px] h-[40px]" />
+              </a>
+
+              {/* LinkedIn Link */}
+              <a href="https://www.linkedin.com/in/vnclrd/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                <img src="/public/linkedin-logo.png" alt="LinkedIn Logo" className="w-[40px] h-[40px]" />
+              </a>
+
+              {/* Portfolio Website Link */}
+              <a href="https://vnclrd.github.io/miguel-portfolio/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                <img src="/public/portfolio-website-icon.png" alt="Portfolio Icon" className="w-[40px] h-[40px]" />
+              </a>
+
+            </div>
+
+          </div>
+
+          {/* About */}
+          <div className="flex w-[50%] h-[75px] items-center justify-between bg-[#008c7f] rounded-[15px] text-[1.25rem] text-[#e0e0e0] p-5 shadow-lg">
+
+            {/* Left Section: Icon + Text */}
+            <div className="flex items-center gap-5">
+              {/* Icon */}
+              <img
+                src="/public/about-icon.png"
+                alt="User Icon"
+                className="w-[26px] h-[26px] filter invert brightness-[200%]"
+              />
+
+              {/* Texts */}
+              <h1 className="flex flex-col leading-tight text-[1.25rem] font-bold">About</h1>
+            </div>
+
+            {/* Right Section: Social Links */}
+            <div className="flex w-[400px] h-[40px] text-[0.75rem] items-center">
+              <p>
+                Ulat PH is a community-driven reporting web app that enables civilians
+                to crowdsource and track local community issues.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+        
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
       {/* ================================================== Footer ================================================== */}
 
       <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-5'>
