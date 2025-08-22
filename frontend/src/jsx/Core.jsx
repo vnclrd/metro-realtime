@@ -58,10 +58,10 @@ function Core() {
           {/* Right Panel */}
           <div className='flex items-center justify-center w-[50%] h-[500px]'>
 
-            <div className='flex flex-col w-[100%] h-full bg-[#00786D] rounded-[15px] p-5 gap-5'>
+            <div className='flex flex-col w-[100%] h-full bg-[#008c7f] rounded-[15px] p-5 gap-5'>
 
               {/* Image Holder */}
-              <div className='w-full h-[70%] rounded-[15px] bg-[#009688]'>
+              <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
                 <img
                   src='/public/pothole.png'
                   alt='Photo of report'
@@ -70,7 +70,7 @@ function Core() {
               </div>
 
               {/* Description of report */}
-              <div className='w-full h-[25%] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5'>
+              <div className='w-full h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5 pt-2'>
                 <p>
                   Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
@@ -80,7 +80,7 @@ function Core() {
               </div>
 
               {/* 'I see this too' Button */}
-              <button className='flex items-center justify-center w-full h-[50px] bg-[#009688] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
+              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
                 <img
                   src='/public/vision-icon.png'
                   alt='Vision Icon'
@@ -105,15 +105,15 @@ function Core() {
       >
 
         {/* Page Titles */}
-        <div className='flex flex-col items-center justify-center w-[100%] h-[75px] mt-5 mb-5'>
+        <div className='flex flex-col items-center justify-center w-[100%] h-[75px] mb-5'>
           <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Select Location</h1>
           <p className='text-[1rem] text-[#e0e0e0]'>242 D, A. Bonifacio Street</p>
         </div>
 
         {/* Maps container */}
-        <div className='w-full pl-5 pr-5'>
-          <div className='flex item-center justify-center w-full h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
-        </div>
+
+          <div className='flex items-center justify-center w-[1000px] h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
+
         
       </div>
 
@@ -127,12 +127,12 @@ function Core() {
         
         <div className='flex flex-col'>
 
-          <div className='flex flex-col items-center justify-center w-[100%] mb-5'>
+          <div className='flex flex-col items-center justify-center w-[100%] mb-4'>
             <h1 className='text-[2rem] text-[#e0e0e0] font-bold'>Report an Issue</h1>
             <p className='text-[0.8rem] text-[#e0e0e0]'>near 242 D, A. Bonifacio Street</p>
           </div>
 
-          <div className='flex flex-col items-center w-[800px] rounded-[15px]'>
+          <div className='flex flex-col items-center w-[700px] rounded-[15px] bg-[#008c7f] pt-3 pb-5'>
 
             {/* Type of issue selection */}
             <label htmlFor='issues' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Type of issue</label>
@@ -155,7 +155,7 @@ function Core() {
 
             {/* Description container */}
             <label for='description' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
-            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[150px] align-text-top resize-none bg-[#008c7f] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
+            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[150px] align-text-top resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
 
             {/* Upload image button */}
             <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-5 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
