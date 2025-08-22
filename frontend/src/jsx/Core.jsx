@@ -29,7 +29,7 @@ function Core() {
       >
 
         {/* Panels */}
-        <div className='flex items-center justify-between w-auto ml-5 mr-5 gap-5'>
+        <div className='flex items-center justify-between w-auto ml-5 mr-5 gap-5 rounded-[15px] bg-[#008c7f] p-5'>
 
           {/* Left Panel */}
           <div className='flex flex-col w-[50%] h-[500px]'>
@@ -43,13 +43,13 @@ function Core() {
             {/* Reports Container */}
             <div className='flex items-center justify-center'>
               <div className='flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg'>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
               </div>
             </div>
 
