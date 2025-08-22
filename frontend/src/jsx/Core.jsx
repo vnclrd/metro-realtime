@@ -34,11 +34,13 @@ function Core() {
           {/* Left Panel */}
           <div className='flex flex-col w-[50%] h-[500px]'>
 
-            <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Reports</h1>
+            <div className='flex flex-col items-center'>
+              <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Reports</h1>
 
-            <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
-              near <span className='italic'>242 D, A. Bonifacio Street</span>
-            </p>
+              <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
+                near <span className='italic'>242 D, A. Bonifacio Street</span>
+              </p>
+            </div>
 
             {/* Reports Container */}
             <div className='flex items-center justify-center'>
