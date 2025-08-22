@@ -12,7 +12,7 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
-        <img src="/public/ulat-ph-logo.png" alt="Ulat PH Logo 2" className='w-[50px] m-2.5 ml-10' />
+        <img src='/public/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-10' />
         <div className='flex flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
@@ -42,14 +42,14 @@ function Core() {
 
             {/* Reports Container */}
             <div className='flex items-center justify-center'>
-              <div className="flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg">
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
-                <div className="w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0"></div>
+              <div className='flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg'>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
+                <div className='w-full h-[75px] rounded-[25px] bg-[#008C7F] flex-shrink-0'></div>
               </div>
             </div>
 
@@ -63,8 +63,8 @@ function Core() {
               {/* Image Holder */}
               <div className='w-full h-[70%] rounded-[15px] bg-[#009688]'>
                 <img
-                  src="/public/pothole.png"
-                  alt="Photo of report"
+                  src='/public/pothole.png'
+                  alt='Photo of report'
                   className='w-full h-full object-contain rounded-[15px]'
                 />
               </div>
@@ -79,11 +79,11 @@ function Core() {
                 </p>
               </div>
 
-              {/* "I see this too" Button */}
+              {/* 'I see this too' Button */}
               <button className='flex items-center justify-center w-full h-[50px] bg-[#009688] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
                 <img
-                  src="/public/vision-icon.png"
-                  alt="Vision Icon"
+                  src='/public/vision-icon.png'
+                  alt='Vision Icon'
                   className='w-[40px] h-[40px] filter invert m-3'
                 />
                 I see this too
@@ -135,26 +135,36 @@ function Core() {
           <div className='flex flex-col items-center w-[800px] rounded-[15px]'>
 
             {/* Type of issue selection */}
-            <label for="issues" className='text-[1.25rem] text-[#e0e0e0] mb-2'>Type of issue</label>
-            <select name="issues" id="fruits" className='w-[350px] h-[40px] rounded-[15px] bg-[#e0e0e0] mb-5'>
-              <option value="apple">Issue 1</option>
-              <option value="banana">Issue 2</option>
-              <option value="orange">Issue 3</option>
-              <option value="grape">Issue 4</option>
-            </select>
+            <label htmlFor='issues' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Type of issue</label>
+            <div className='relative'>
+
+                <select name='issues' id='issues' defaultValue='' className='w-[350px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] mb-5 pl-5 pr-10 appearance-none cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+                    <option value='' disabled>Select type of issue</option>
+                    <option value='issue-1'>Issue 1</option>
+                    <option value='issue-2'>Issue 2</option>
+                    <option value='issue-3'>Issue 3</option>
+                    <option value='issue-4'>Issue 4</option>
+                </select>
+
+                {/* Custom Arrow */}
+                <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pb-5 pr-4'>
+                    <img src='/public/arrow-down.png' alt='Arrow Down Icon' className='w-[20px] h-[20px]' />
+                </div>
+
+            </div>
 
             {/* Description container */}
-            <label for="description" className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
-            <input type="text" placeholder='Write a short description about the issue' className='w-[600px] h-[150px] bg-[#008c7f] rounded-[15px] mb-5' />
+            <label for='description' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
+            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[150px] align-text-top resize-none bg-[#008c7f] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
 
             {/* Upload image button */}
-            <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-5'>
-              <img src="/public/upload-photo-icon.png" alt="Upload Photo Icon" className='w-[26px] h-[26px] mr-2' />
+            <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-5 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+              <img src='/public/upload-photo-icon.png' alt='Upload Photo Icon' className='w-[26px] h-[26px] mr-2' />
               Upload image
             </button>
 
             <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
-              <img src="/public/upload-icon.png" alt="Upload Icon" className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
+              <img src='/public/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
               Make report!
             </button>
 
