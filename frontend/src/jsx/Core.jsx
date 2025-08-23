@@ -12,18 +12,18 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
-        <img src='/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-5' />
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex lg:flex-col items-center justify-center'>
+          <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='w-[50px] m-2.5 ml-5' />
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
-          <p className='text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
+          <p className='hidden lg:block text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
         </div>
         
       </header>
 
       {/* ================================================== Reports Page Content ================================================== */}
       <div
-        className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
+        className={`flex flex-col min-h-screen items-center justify-center pt-[75px] pb-[75px] ${
+          activeDiv === 'div1' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
         }`}
       >
         {/* Panels */}
@@ -31,7 +31,7 @@ function Core() {
           className='
             flex flex-col md:flex-row items-center md:items-start justify-between
             w-full max-w-[1200px] mx-auto gap-5 p-5
-            rounded-[15px] bg-[#008c7f] shadow-lg
+            rounded-[15px] bg-[#008c7f] lg:shadow-lg
           '
         >
           {/* Left Panel */}
@@ -49,7 +49,7 @@ function Core() {
             <div className='flex items-center justify-center'>
               <div
                 className='
-                  flex flex-col w-full h-[300px] md:h-[400px] pr-3 gap-4 overflow-y-scroll rounded-lg
+                  flex flex-col w-full h-[400px] md:h-[400px] pr-3 gap-4 overflow-y-scroll rounded-lg
                   scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]
                 '
               >
@@ -71,12 +71,12 @@ function Core() {
                 <img
                   src='/pothole.png'
                   alt='Photo of report'
-                  className='w-full h-full object-contain rounded-[15px]'
+                  className='w-full h-full object-cover rounded-[15px]'
                 />
               </div>
 
               {/* Description */}
-              <div className='w-full h-[200px] md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
+              <div className='w-full md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
                   Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
@@ -103,16 +103,16 @@ function Core() {
 
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
+          activeDiv === 'div2' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
         }`}
       >
         <div
           className='
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
-            h-[250px] sm:h-[300px] md:h-[400px]
+            h-[400px] sm:h-[300px] md:h-[500px]
             bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
-            shadow-lg p-5
+            lg:shadow-lg p-5
           '
         >
           {/* Page Titles */}
@@ -130,7 +130,7 @@ function Core() {
             className='
               flex items-center justify-center
               w-full sm:w-[90%] md:w-[80%] lg:w-[950px]
-              h-[500px] sm:h-[600px] md:h-[800px]
+              h-[1000px] sm:h-[600px] md:h-[1400px]
               bg-[#009688] rounded-[25px] text-[#e0e0e0]
             '
           >
@@ -144,12 +144,12 @@ function Core() {
 
       <div
         className={`flex-1 flex min-h-screen items-center justify-center ${
-          activeDiv === "div3" ? "bg-[#009688]" : "hidden"
+          activeDiv === "div3" ? "bg-[#008c7f] lg:bg-[#009688]" : "hidden"
         }`}
       >
-        <div className="flex flex-col w-full h-full items-center justify-center px-5">
+        <div className="flex flex-col w-full h-full items-center justify-center lg:px-5">
           {/* Form Container */}
-          <div className="flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 shadow-lg">
+          <div className="flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg">
             {/* Page Header */}
             <div className="flex flex-col items-center justify-center w-full mb-5 text-center">
               <h1 className="text-[1.75rem] md:text-[2rem] text-[#e0e0e0] font-bold">
@@ -252,7 +252,7 @@ function Core() {
 
       {/* Settings Page Content */}
       <div
-        className={`flex-1 flex min-h-screen items-center justify-center ${
+        className={`flex-1 flex min-h-screen items-center justify-center pt-[75px] pb-[75px] ${
           activeDiv === 'div4' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
