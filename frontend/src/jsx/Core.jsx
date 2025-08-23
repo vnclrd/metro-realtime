@@ -103,20 +103,46 @@ function Core() {
 
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
+          activeDiv === "div2" ? "bg-[#009688]" : "hidden"
         }`}
       >
+        <div
+          className="
+            flex flex-col items-center justify-center
+            w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
+            h-[250px] sm:h-[300px] md:h-[400px]
+            bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
+            shadow-lg p-5
+          "
+        >
+          {/* Page Titles */}
+          <div className="flex flex-col w-full h-full text-center">
+            <h1 className="text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold">
+              Select Location
+            </h1>
+            <p className="text-[0.9rem] md:text-[1rem] text-[#e0e0e0] italic">
+              242 D, A. Bonifacio Street
+            </p>
+          </div>
 
-        {/* Page Titles */}
-        <div className='flex flex-col w-full h-full items-center justify-center mb-5'>
-          <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Select Location</h1>
-          <p className='text-[1rem] text-[#e0e0e0] italic'>242 D, A. Bonifacio Street</p>
+          {/* Maps Container */}
+          <div
+            className="
+              flex items-center justify-center
+              w-full sm:w-[90%] md:w-[80%] lg:w-[950px]
+              h-[500px] sm:h-[600px] md:h-[800px]
+              bg-[#009688] rounded-[25px] text-[#e0e0e0]
+              shadow-lg
+            "
+          >
+            Google Maps API goes here
+          </div>
         </div>
 
-        {/* Maps container */}
-        <div className='flex items-center justify-center w-[1000px] h-[400px] bg-[#008C7F] rounded-[25px] text-[#e0e0e0]'>Google Maps API goes here</div>
+        </div>
+        
 
-      </div>
+        
 
       {/* ================================================== Make Report Page Content ================================================== */}
 
