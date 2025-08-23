@@ -144,95 +144,103 @@ function Core() {
 
       <div
         className={`flex-1 flex min-h-screen items-center justify-center ${
-          activeDiv === 'div3' ? 'bg-[#009688]' : 'hidden'
+          activeDiv === "div3" ? "bg-[#009688]" : "hidden"
         }`}
       >
-        <div className='flex flex-col w-full h-full items-center justify-center px-5'>
-
+        <div className="flex flex-col w-full h-full items-center justify-center px-5">
           {/* Form Container */}
-          <div className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 shadow-lg'>
+          <div className="flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 shadow-lg">
             {/* Page Header */}
-            <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
-              <h1 className='text-[1.75rem] md:text-[2rem] text-[#e0e0e0] font-bold'>
+            <div className="flex flex-col items-center justify-center w-full mb-5 text-center">
+              <h1 className="text-[1.75rem] md:text-[2rem] text-[#e0e0e0] font-bold">
                 Report an Issue
               </h1>
-              <p className='text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0]'>
-                near <span className='italic'>242 D, A. Bonifacio Street</span>
+              <p className="text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0]">
+                near <span className="italic">242 D, A. Bonifacio Street</span>
               </p>
             </div>
-            
+
             {/* Uploaded photo preview */}
-            <div className='flex items-center justify-center w-[400px] h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3'>
+            <div className="flex items-center justify-center w-full sm:w-[80%] md:w-[400px] h-[180px] sm:h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3 text-center px-2">
               Uploaded image preview goes here
             </div>
 
             {/* Uploaded Image Info */}
-            <p className='text-[#e0e0e0] text-xs md:text-sm mb-3 text-center md:text-left'>
-              Image uploaded: <span className='italic'>report.jpg</span>
+            <p className="text-[#e0e0e0] text-xs md:text-sm mb-3 text-center md:text-left">
+              Image uploaded: <span className="italic">report.jpg</span>
             </p>
 
             {/* Upload / Discard Buttons */}
-            <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start mb-4'>
-              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start mb-4">
+              <button className="flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]">
                 <img
-                  src='/upload-photo-icon.png'
-                  alt='Upload Photo Icon'
-                  className='w-[24px] h-[24px] mr-2'
+                  src="/upload-photo-icon.png"
+                  alt="Upload Photo Icon"
+                  className="w-[24px] h-[24px] mr-2"
                 />
                 Upload image
               </button>
 
-              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+              <button className="flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]">
                 <img
-                  src='/discard-icon.png'
-                  alt='Discard Icon'
-                  className='w-[20px] h-[20px] mr-2 filter invert brightness-[200%]'
+                  src="/discard-icon.png"
+                  alt="Discard Icon"
+                  className="w-[20px] h-[20px] mr-2 filter invert brightness-[200%]"
                 />
                 Discard image
               </button>
             </div>
 
             {/* Type of issue selection */}
-            <div className='relative mb-5 w-full sm:w-[350px]'>
+            <div className="relative mb-5 w-full sm:w-[350px]">
               <select
-                name='issues'
-                id='issues'
-                defaultValue=''
-                className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'
+                name="issues"
+                id="issues"
+                defaultValue=""
+                className="w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none"
               >
-                <option value='' disabled>
+                <option value="" disabled>
                   Select type of issue
                 </option>
-                <option value='custom'>Custom Issue</option>
-                <option value='issue-1'>Issue 1</option>
-                <option value='issue-2'>Issue 2</option>
-                <option value='issue-3'>Issue 3</option>
-                <option value='issue-4'>Issue 4</option>
+                <option value="custom">Custom Issue</option>
+                <option value="issue-1">Issue 1</option>
+                <option value="issue-2">Issue 2</option>
+                <option value="issue-3">Issue 3</option>
+                <option value="issue-4">Issue 4</option>
               </select>
 
               {/* Custom arrow */}
-              <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4'>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
                 <img
-                  src='/arrow-down.png'
-                  alt='Arrow Down Icon'
-                  className='w-[18px] h-[18px] md:w-[20px] md:h-[20px]'
+                  src="/arrow-down.png"
+                  alt="Arrow Down Icon"
+                  className="w-[18px] h-[18px] md:w-[20px] md:h-[20px]"
                 />
               </div>
             </div>
 
+            <div className="relative w-full sm:w-[350px]">
+              <textarea
+                name="issues"
+                placeholder='Type custom issue here'
+                className="hidden text-left items-center w-full h-[40px] p-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none"
+              >
+              </textarea>
+            </div>
+
             {/* Description Container */}
             <textarea
-              name='description'
-              placeholder='Write a short description about the issue'
-              className='w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner'
+              name="description"
+              placeholder="Write a short description about the issue"
+              className="w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner"
             />
 
             {/* Submit Button */}
-            <button className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
+            <button className="flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer">
               <img
-                src='/upload-icon.png'
-                alt='Upload Icon'
-                className='w-[24px] h-[24px] mr-3 filter invert brightness-[200%]'
+                src="/upload-icon.png"
+                alt="Upload Icon"
+                className="w-[24px] h-[24px] mr-3 filter invert brightness-[200%]"
               />
               Submit report!
             </button>
