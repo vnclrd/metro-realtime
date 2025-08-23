@@ -12,7 +12,7 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
-        <img src='/public/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-5' />
+        <img src='/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-5' />
         <div className='flex flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
@@ -69,7 +69,7 @@ function Core() {
 
               {/* Image Holder */}
               <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
-                <img src='/public/pothole.png' alt='Photo of report' className='w-full h-full object-contain rounded-[15px]' />
+                <img src='/pothole.png' alt='Photo of report' className='w-full h-full object-contain rounded-[15px]' />
               </div>
 
               {/* Description of report */}
@@ -84,7 +84,7 @@ function Core() {
 
               {/* 'I see this too' Button */}
               <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/public/vision-icon.png' alt='Vision Icon' className='w-[40px] h-[40px] filter invert m-3' />
+                <img src='/vision-icon.png' alt='Vision Icon' className='w-[40px] h-[40px] filter invert m-3' />
                 I see this too
               </button>
             </div>
@@ -145,7 +145,7 @@ function Core() {
 
               {/* Custom arrow */}
               <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4'>
-                  <img src='/public/arrow-down.png' alt='Arrow Down Icon' className='w-[20px] h-[20px]' />
+                  <img src='/arrow-down.png' alt='Arrow Down Icon' className='w-[20px] h-[20px]' />
               </div>
 
             </div>
@@ -156,12 +156,12 @@ function Core() {
             <div className='flex gap-3'>
             
               <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-2 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/public/upload-photo-icon.png' alt='Upload Photo Icon' className='w-[26px] h-[26px] mr-2' />
+                <img src='/upload-photo-icon.png' alt='Upload Photo Icon' className='w-[26px] h-[26px] mr-2' />
                 Upload image
               </button>
 
               <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer mb-3 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/public/discard-icon.png' alt='Upload Photo Icon' className='w-[22px] h-[22px] mr-2 filter invert brightness-[200%]' />
+                <img src='/discard-icon.png' alt='Upload Photo Icon' className='w-[22px] h-[22px] mr-2 filter invert brightness-[200%]' />
                 Discard image
               </button>
 
@@ -173,7 +173,7 @@ function Core() {
 
             {/* Make report button */}
             <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
-              <img src='/public/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
+              <img src='/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
               Submit report!
             </button>
 
@@ -202,7 +202,7 @@ function Core() {
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-5'> 
               {/* Icon */}
-              <img src='/public/dark-mode-icon.png' alt='Dark Mode Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
+              <img src='/dark-mode-icon.png' alt='Dark Mode Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
 
               {/* Texts */}
               <div className='flex flex-col leading-tight'>
@@ -226,7 +226,7 @@ function Core() {
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-5'>
               {/* Icon */}
-              <img src='/public/language-icon.png' alt='Language Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
+              <img src='/language-icon.png' alt='Language Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
 
               {/* Texts */}
               <div className='flex flex-col leading-tight'>
@@ -249,7 +249,7 @@ function Core() {
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-5'>
               {/* Icon */}
-              <img src='/public/bug-icon.png' alt='Bug Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
+              <img src='/bug-icon.png' alt='Bug Icon' className='w-[26px] h-[26px] filter invert brightness-[200%]' />
 
               {/* Texts */}
               <div className='flex flex-col leading-tight'>
@@ -272,7 +272,7 @@ function Core() {
             <div className='flex items-center gap-5'>
               {/* Icon */}
               <img
-                src='/public/user-icon.png'
+                src='/user-icon.png'
                 alt='User Icon'
                 className='w-[26px] h-[26px] filter invert brightness-[200%]'
               />
@@ -288,17 +288,17 @@ function Core() {
             <div className='flex items-center gap-5 filter invert brightness-[200%]'>
               {/* GitHub Link */}
               <a href='https://github.com/vnclrd' target='_blank' rel='noopener noreferrer' className='flex items-center justify-center'>
-                <img src='/public/github-logo.png' alt='GitHub Logo' className='w-[40px] h-[40px]' />
+                <img src='/github-logo.png' alt='GitHub Logo' className='w-[40px] h-[40px]' />
               </a>
 
               {/* LinkedIn Link */}
               <a href='https://www.linkedin.com/in/vnclrd/' target='_blank' rel='noopener noreferrer' className='flex items-center justify-center'>
-                <img src='/public/linkedin-logo.png' alt='LinkedIn Logo' className='w-[40px] h-[40px]' />
+                <img src='/linkedin-logo.png' alt='LinkedIn Logo' className='w-[40px] h-[40px]' />
               </a>
 
               {/* Portfolio Website Link */}
               <a href='https://vnclrd.github.io/miguel-portfolio/' target='_blank' rel='noopener noreferrer' className='flex items-center justify-center'>
-                <img src='/public/portfolio-website-icon.png' alt='Portfolio Icon' className='w-[40px] h-[40px]' />
+                <img src='/portfolio-website-icon.png' alt='Portfolio Icon' className='w-[40px] h-[40px]' />
               </a>
 
             </div>
@@ -312,7 +312,7 @@ function Core() {
             <div className='flex items-center gap-5'>
               {/* Icon */}
               <img
-                src='/public/about-icon.png'
+                src='/about-icon.png'
                 alt='User Icon'
                 className='w-[26px] h-[26px] filter invert brightness-[200%]'
               />
@@ -349,7 +349,7 @@ function Core() {
           onClick={() => setActiveDiv('div1')}
         >
 
-          <img src='/public/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
+          <img src='/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Reports</p>
 
         </button>
@@ -364,7 +364,7 @@ function Core() {
           onClick={() => setActiveDiv('div2')}
         >
 
-          <img src='/public/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
+          <img src='/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Location</p>
 
         </button>
@@ -379,7 +379,7 @@ function Core() {
           onClick={() => setActiveDiv('div3')}
         >
 
-          <img src='/public/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
+          <img src='/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Make Report</p>
 
         </button>
@@ -394,7 +394,7 @@ function Core() {
           onClick={() => setActiveDiv('div4')}
         >
 
-          <img src='/public/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
+          <img src='/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Settings</p>
           
         </button>
