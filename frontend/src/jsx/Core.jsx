@@ -11,7 +11,7 @@ function Core() {
       {/* ================================================== Header Content ================================================== */}
 
       {/* Header */}
-      <header className='fixed flex w-full h-[75px] top-0 bg-[#008377]'>
+      <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
         <img src='/ulat-ph-logo.png' alt='Ulat PH Logo 2' className='w-[50px] m-2.5 ml-5' />
         <div className='flex flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
@@ -390,7 +390,7 @@ function Core() {
 
       {/* ================================================== Footer ================================================== */}
 
-      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-5'>
+      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-5 z-1000'>
         
         {/* ========================= Reports Button ========================= */}
         <button
