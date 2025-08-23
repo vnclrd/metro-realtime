@@ -12,8 +12,8 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
+        <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='w-[50px] m-2.5 ml-5' />
         <div className='flex lg:flex-col items-center justify-center'>
-          <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='w-[50px] m-2.5 ml-5' />
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='hidden lg:block text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
         </div>
@@ -262,7 +262,7 @@ function Core() {
           <h1 className="text-white text-2xl md:text-3xl font-bold">Settings</h1>
 
           {/* Dark Mode */}
-          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
+          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
             
             {/* Left Section: Icon + Text */}
             <div className="flex items-center gap-4 sm:gap-5">
@@ -278,7 +278,7 @@ function Core() {
             </div>
 
             {/* Right Section: Toggle Button */}
-            <div className="flex items-center justify-center w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm cursor-pointer">
+            <div className="flex items-center lg:justify-center w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm cursor-pointer">
               <div id="toggleButton" className="w-12 h-6 flex items-center bg-gray-300 rounded-full cursor-pointer">
                 <div className="toggle-circle w-5 h-5 bg-white rounded-full transform duration-300 ease-in-out"></div>
               </div>
@@ -286,7 +286,7 @@ function Core() {
           </div>
 
           {/* Select Language */}
-          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
+          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
             
             {/* Left Section */}
             <div className="flex items-center gap-4 sm:gap-5">
@@ -313,7 +313,7 @@ function Core() {
           </div>
 
           {/* Report Bug */}
-          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
+          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
             
             {/* Left Section */}
             <div className="flex items-center gap-4 sm:gap-5">
@@ -335,7 +335,7 @@ function Core() {
           </div>
 
           {/* Developer */}
-          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
+          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
             
             {/* Left Section */}
             <div className="flex items-center gap-4 sm:gap-5">
@@ -365,7 +365,7 @@ function Core() {
           </div>
           
           {/* About */}
-          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
+          <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
             
             {/* Left Section */}
             <div className="flex items-center gap-4 sm:gap-5">
@@ -378,7 +378,7 @@ function Core() {
             </div>
 
             {/* Right Section */}
-            <div className="flex w-full sm:w-[300px] md:w-[500px] h-auto text-xs md:text-sm text-right">
+            <div className="flex text-left w-full sm:w-[300px] md:w-[500px] h-auto text-xs md:text-sm lg:text-right">
               <p>
                 Ulat PH is a community-driven reporting web app that enables civilians
                 to crowdsource and track local community issues.
