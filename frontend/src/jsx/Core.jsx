@@ -23,40 +23,40 @@ function Core() {
       {/* ================================================== Reports Page Content ================================================== */}
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === "div1" ? "bg-[#009688]" : "hidden"
+          activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
         {/* Panels */}
         <div
-          className="
+          className='
             flex flex-col md:flex-row items-center md:items-start justify-between
             w-full max-w-[1200px] mx-auto gap-5 p-5
-            rounded-[15px] bg-[#008c7f]
-          "
+            rounded-[15px] bg-[#008c7f] shadow-lg
+          '
         >
           {/* Left Panel */}
-          <div className="flex flex-col w-full md:w-[50%] h-auto md:h-[500px]">
-            <div className="flex flex-col items-center text-center md:text-left">
-              <h1 className="text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold">
+          <div className='flex flex-col w-full md:w-[50%] h-auto md:h-[500px]'>
+            <div className='flex flex-col items-center text-center md:text-left'>
+              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
                 Reports
               </h1>
-              <p className="text-[0.9rem] text-[#e0e0e0] mb-5">
-                near <span className="italic">242 D, A. Bonifacio Street</span>
+              <p className='text-[0.9rem] text-[#e0e0e0] mb-5'>
+                near <span className='italic'>242 D, A. Bonifacio Street</span>
               </p>
             </div>
 
             {/* Reports Container */}
-            <div className="flex items-center justify-center">
+            <div className='flex items-center justify-center'>
               <div
-                className="
+                className='
                   flex flex-col w-full h-[300px] md:h-[400px] pr-3 gap-4 overflow-y-scroll rounded-lg
                   scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]
-                "
+                '
               >
                 {[...Array(7)].map((_, i) => (
                   <div
                     key={i}
-                    className="w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0"
+                    className='w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 '
                   ></div>
                 ))}
               </div>
@@ -64,19 +64,19 @@ function Core() {
           </div>
 
           {/* Right Panel */}
-          <div className="flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]">
-            <div className="flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5">
+          <div className='flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]'>
+            <div className='flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5'>
               {/* Image Holder */}
-              <div className="w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688]">
+              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688]'>
                 <img
-                  src="/pothole.png"
-                  alt="Photo of report"
-                  className="w-full h-full object-contain rounded-[15px]"
+                  src='/pothole.png'
+                  alt='Photo of report'
+                  className='w-full h-full object-contain rounded-[15px]'
                 />
               </div>
 
               {/* Description */}
-              <div className="w-full h-[200px] md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4">
+              <div className='w-full h-[200px] md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
                   Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
@@ -86,11 +86,11 @@ function Core() {
               </div>
 
               {/* Button */}
-              <button className="flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]">
+              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
                 <img
-                  src="/vision-icon.png"
-                  alt="Vision Icon"
-                  className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2 md:m-3"
+                  src='/vision-icon.png'
+                  alt='Vision Icon'
+                  className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2 md:m-3'
                 />
                 I see this too
               </button>
@@ -103,37 +103,36 @@ function Core() {
 
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === "div2" ? "bg-[#009688]" : "hidden"
+          activeDiv === 'div2' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
         <div
-          className="
+          className='
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
             h-[250px] sm:h-[300px] md:h-[400px]
             bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
             shadow-lg p-5
-          "
+          '
         >
           {/* Page Titles */}
-          <div className="flex flex-col w-full h-full text-center">
-            <h1 className="text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold">
+          <div className='flex flex-col w-full h-full text-center'>
+            <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
               Select Location
             </h1>
-            <p className="text-[0.9rem] md:text-[1rem] text-[#e0e0e0] italic">
+            <p className='text-[0.9rem] md:text-[1rem] text-[#e0e0e0] italic'>
               242 D, A. Bonifacio Street
             </p>
           </div>
 
           {/* Maps Container */}
           <div
-            className="
+            className='
               flex items-center justify-center
               w-full sm:w-[90%] md:w-[80%] lg:w-[950px]
               h-[500px] sm:h-[600px] md:h-[800px]
               bg-[#009688] rounded-[25px] text-[#e0e0e0]
-              shadow-lg
-            "
+            '
           >
             Google Maps API goes here
           </div>
@@ -141,9 +140,6 @@ function Core() {
 
         </div>
         
-
-        
-
       {/* ================================================== Make Report Page Content ================================================== */}
 
       <div
@@ -151,66 +147,97 @@ function Core() {
           activeDiv === 'div3' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
-        
-        <div className='flex flex-col w-full h-full items-center justify-center'>
+        <div className='flex flex-col w-full h-full items-center justify-center px-5'>
 
-          <div className='flex flex-col items-center justify-center w-[100%] mb-5'>
-            <h1 className='text-[2rem] text-[#e0e0e0] font-bold'>Report an Issue</h1>
-            <p className='text-[0.8rem] text-[#e0e0e0]'>near <span className='italic'>242 D, A. Bonifacio Street</span></p>
-          </div>
+          {/* Form Container */}
+          <div className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 shadow-lg'>
+            {/* Page Header */}
+            <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
+              <h1 className='text-[1.75rem] md:text-[2rem] text-[#e0e0e0] font-bold'>
+                Report an Issue
+              </h1>
+              <p className='text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0]'>
+                near <span className='italic'>242 D, A. Bonifacio Street</span>
+              </p>
+            </div>
+            
+            {/* Uploaded photo preview */}
+            <div className='flex items-center justify-center w-[400px] h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3'>
+              Uploaded image preview goes here
+            </div>
 
-          <div className='flex flex-col items-center w-[700px] rounded-[15px] bg-[#008c7f] pt-3 pb-5'>
+            {/* Uploaded Image Info */}
+            <p className='text-[#e0e0e0] text-xs md:text-sm mb-3 text-center md:text-left'>
+              Image uploaded: <span className='italic'>report.jpg</span>
+            </p>
+
+            {/* Upload / Discard Buttons */}
+            <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start mb-4'>
+              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+                <img
+                  src='/upload-photo-icon.png'
+                  alt='Upload Photo Icon'
+                  className='w-[24px] h-[24px] mr-2'
+                />
+                Upload image
+              </button>
+
+              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+                <img
+                  src='/discard-icon.png'
+                  alt='Discard Icon'
+                  className='w-[20px] h-[20px] mr-2 filter invert brightness-[200%]'
+                />
+                Discard image
+              </button>
+            </div>
 
             {/* Type of issue selection */}
-            <label htmlFor='issues' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Type of issue</label>
-            <div className='relative mb-5'>
-
-              <select name='issues' id='issues' defaultValue='' className='w-[350px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] pl-5 pr-10 appearance-none cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                  <option value='' disabled>Select type of issue</option>
-                  <option value='issue-1'>Issue 1</option>
-                  <option value='issue-2'>Issue 2</option>
-                  <option value='issue-3'>Issue 3</option>
-                  <option value='issue-4'>Issue 4</option>
+            <div className='relative mb-5 w-full sm:w-[350px]'>
+              <select
+                name='issues'
+                id='issues'
+                defaultValue=''
+                className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'
+              >
+                <option value='' disabled>
+                  Select type of issue
+                </option>
+                <option value='custom'>Custom Issue</option>
+                <option value='issue-1'>Issue 1</option>
+                <option value='issue-2'>Issue 2</option>
+                <option value='issue-3'>Issue 3</option>
+                <option value='issue-4'>Issue 4</option>
               </select>
 
               {/* Custom arrow */}
               <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4'>
-                  <img src='/arrow-down.png' alt='Arrow Down Icon' className='w-[20px] h-[20px]' />
+                <img
+                  src='/arrow-down.png'
+                  alt='Arrow Down Icon'
+                  className='w-[18px] h-[18px] md:w-[20px] md:h-[20px]'
+                />
               </div>
-
             </div>
 
-            <p className='text-[#e0e0e0] text-[0.75rem] mb-3'>Image uploaded: <span className='italic'>report.jpg</span></p>
+            {/* Description Container */}
+            <textarea
+              name='description'
+              placeholder='Write a short description about the issue'
+              className='w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner'
+            />
 
-            {/* Upload/Discard image buttons */}
-            <div className='flex gap-3'>
-            
-              <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] bg-[#e0e0e0] cursor-pointer mb-2 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/upload-photo-icon.png' alt='Upload Photo Icon' className='w-[26px] h-[26px] mr-2' />
-                Upload image
-              </button>
-
-              <button className='flex items-center justify-center w-[150px] h-[40px] rounded-[15px] text-[0.8rem] text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer mb-3 shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/discard-icon.png' alt='Upload Photo Icon' className='w-[22px] h-[22px] mr-2 filter invert brightness-[200%]' />
-                Discard image
-              </button>
-
-            </div>
-
-            {/* Description container */}
-            <label for='description' className='text-[1.25rem] text-[#e0e0e0] mb-2'>Description</label>
-            <textarea type='text' placeholder='Write a short description about the issue' className='flex w-[600px] h-[100px] align-text-top resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-5' />
-
-            {/* Make report button */}
-            <button className='flex items-center justify-center w-[600px] h-[50px] rounded-[15px] text-[1.25rem] bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
-              <img src='/upload-icon.png' alt='Upload Icon' className='w-[26px] h-[26px] mr-3 filter invert brightness-[200%]' />
+            {/* Submit Button */}
+            <button className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
+              <img
+                src='/upload-icon.png'
+                alt='Upload Icon'
+                className='w-[24px] h-[24px] mr-3 filter invert brightness-[200%]'
+              />
               Submit report!
             </button>
-
           </div>
-
         </div>
-
       </div>
 
       {/* ================================================== Settings Page Content ================================================== */}
