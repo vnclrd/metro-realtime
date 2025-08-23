@@ -152,7 +152,7 @@ function Core() {
           <div className="flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg">
             {/* Page Header */}
             <div className="flex flex-col items-center justify-center w-full mb-5 text-center">
-              <h1 className="text-[1.75rem] md:text-[2rem] text-[#e0e0e0] font-bold">
+              <h1 className="text-[1.75rem] md:text-[2.5rem] text-[#e0e0e0] font-bold">
                 Report an Issue
               </h1>
               <p className="text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0]">
@@ -256,10 +256,10 @@ function Core() {
           activeDiv === 'div4' ? 'bg-[#009688]' : 'hidden'
         }`}
       >
-        <div className="flex flex-col w-full h-full items-center justify-center p-5 gap-5">
+        <div className="flex flex-col w-full h-full lg:h-90 items-center justify-center p-5 gap-5">
           
           {/* Title */}
-          <h1 className="text-white text-2xl md:text-3xl font-bold">Settings</h1>
+          <h1 className="text-white text-2xl md:text-[2.5rem] font-bold">Settings</h1>
 
           {/* Dark Mode */}
           <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg">
