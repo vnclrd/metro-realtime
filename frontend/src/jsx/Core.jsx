@@ -21,78 +21,82 @@ function Core() {
       </header>
 
       {/* ================================================== Reports Page Content ================================================== */}
-
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === 'div1' ? 'bg-[#009688]' : 'hidden'
+          activeDiv === "div1" ? "bg-[#009688]" : "hidden"
         }`}
       >
-
         {/* Panels */}
-        <div className='
-          flex items-center justify-between w-auto ml-5 mr-5 gap-5 rounded-[15px] bg-[#008c7f] p-5
-          
-          '
+        <div
+          className="
+            flex flex-col md:flex-row items-center md:items-start justify-between
+            w-full max-w-[1200px] mx-auto gap-5 p-5
+            rounded-[15px] bg-[#008c7f]
+          "
         >
-
           {/* Left Panel */}
-          <div className='flex flex-col w-[50%] h-[500px]'>
-
-            <div className='flex flex-col items-center'>
-              <h1 className='text-[2.5rem] text-[#e0e0e0] font-bold'>Reports</h1>
-
-              <p className='text-[0.85rem] text-[#e0e0e0] mb-5'>
-                near <span className='italic'>242 D, A. Bonifacio Street</span>
+          <div className="flex flex-col w-full md:w-[50%] h-auto md:h-[500px]">
+            <div className="flex flex-col items-center text-center md:text-left">
+              <h1 className="text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold">
+                Reports
+              </h1>
+              <p className="text-[0.9rem] text-[#e0e0e0] mb-5">
+                near <span className="italic">242 D, A. Bonifacio Street</span>
               </p>
             </div>
 
             {/* Reports Container */}
-            <div className='flex items-center justify-center'>
-              <div className='flex flex-col w-[100%] h-[400px] pr-5 gap-5 overflow-y-scroll rounded-lg
-              scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]'>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
-                <div className='w-full h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0'></div>
+            <div className="flex items-center justify-center">
+              <div
+                className="
+                  flex flex-col w-full h-[300px] md:h-[400px] pr-3 gap-4 overflow-y-scroll rounded-lg
+                  scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]
+                "
+              >
+                {[...Array(7)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0"
+                  ></div>
+                ))}
               </div>
             </div>
-
           </div>
 
           {/* Right Panel */}
-          <div className='flex items-center justify-center w-[50%] h-[500px]'>
-
-            <div className='flex flex-col w-[100%] h-full bg-[#008c7f] rounded-[15px] gap-5'>
-
+          <div className="flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]">
+            <div className="flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5">
               {/* Image Holder */}
-              <div className='w-full h-[50%] rounded-[15px] bg-[#009688]'>
-                <img src='/pothole.png' alt='Photo of report' className='w-full h-full object-contain rounded-[15px]' />
+              <div className="w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688]">
+                <img
+                  src="/pothole.png"
+                  alt="Photo of report"
+                  className="w-full h-full object-contain rounded-[15px]"
+                />
               </div>
 
-              {/* Description of report */}
-              <div className='w-full h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll pl-5 pr-5 pt-3 pb-3'>
+              {/* Description */}
+              <div className="w-full h-[200px] md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4">
                 <p>
                   Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
                   Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
                   Araw-araw may nadadapa o muntik maaksidente dahil dito. Hindi na po ito ligtas!
-                  Sana naman po ay may kumilos na agad bago may masaktan nang seryoso
+                  Sana naman po ay may kumilos na agad bago may masaktan nang seryoso.
                 </p>
               </div>
 
-              {/* 'I see this too' Button */}
-              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
-                <img src='/vision-icon.png' alt='Vision Icon' className='w-[40px] h-[40px] filter invert m-3' />
+              {/* Button */}
+              <button className="flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]">
+                <img
+                  src="/vision-icon.png"
+                  alt="Vision Icon"
+                  className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2 md:m-3"
+                />
                 I see this too
               </button>
             </div>
-
           </div>
-
         </div>
-
       </div>
 
       {/* ================================================== Location Page Content ================================================== */}
