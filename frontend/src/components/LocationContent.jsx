@@ -71,57 +71,77 @@ function MapResizer({ center }) {
 
 export default function LocationContent({ location, setLocation }) {
   const [markerPos, setMarkerPos] = useState(
-    location && location.lat && location.lng ? [location.lat, location.lng] : null
+    location?.lat && location?.lng ? [location.lat, location.lng] : null
   );
 
   const [currentZoom, setCurrentZoom] = useState(13);
+  const [locationName, setLocationName] = useState(
+    location?.name || "Fetching your location..."
+  );
 
-  // Detect user's current location on mount
+  // Get current location on mount
   useEffect(() => {
-    if (!location || !location.lat || !location.lng) {
+    if (!location?.lat || !location?.lng) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const { latitude, longitude } = pos.coords;
-            const userLocation = {
-              lat: latitude,
-              lng: longitude,
-              name: "My Current Location",
-            };
+          async (pos) => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            setMarkerPos([lat, lng]);
 
-            setMarkerPos([latitude, longitude]);
-            setCurrentZoom(15);
+            // Get readable name using OpenStreetMap Nominatim API
+            try {
+              const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+              );
+              const data = await res.json();
+              const name =
+                data.display_name || `Lat: ${lat}, Lng: ${lng}`;
+              setLocationName(name);
 
-            if (setLocation) {
-              setLocation(userLocation);
+              if (setLocation) {
+                setLocation({ lat, lng, name });
+              }
+            } catch (err) {
+              console.error("Error fetching location name:", err);
+              setLocationName(`Lat: ${lat}, Lng: ${lng}`);
             }
           },
-          () => {
-            console.warn("Geolocation denied. No default location set.");
+          (err) => {
+            console.error("Geolocation error:", err);
+            setLocationName("Unable to fetch your location.");
           }
         );
+      } else {
+        setLocationName("Geolocation is not supported by your browser.");
       }
     }
   }, []);
 
-  // Update marker when location changes from parent
-  useEffect(() => {
-    if (location && location.lat && location.lng) {
-      setMarkerPos([location.lat, location.lng]);
-    }
-  }, [location]);
-
   // When dragging the marker manually
-  const handleDragEnd = (e) => {
+  const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
     setMarkerPos([newLatLng.lat, newLatLng.lng]);
 
-    if (setLocation) {
-      setLocation({
-        lat: newLatLng.lat,
-        lng: newLatLng.lng,
-        name: "Pinned Location",
-      });
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${newLatLng.lat}&lon=${newLatLng.lng}`
+      );
+      const data = await res.json();
+      const name =
+        data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
+      setLocationName(name);
+
+      if (setLocation) {
+        setLocation({
+          lat: newLatLng.lat,
+          lng: newLatLng.lng,
+          name,
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching location name:", err);
+      setLocationName(`Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`);
     }
   };
 
@@ -130,11 +150,8 @@ export default function LocationContent({ location, setLocation }) {
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-4 text-center">
         <h1 className="text-[2rem] md:text-[2.5rem] font-bold">Select Location</h1>
-        <p className="text-[0.9rem] md:text-[1rem] italic">
-          {location && location.name
-            ? location.name
-            : "Fetching your location..."}
-        </p>
+        <h1 className="text-xl font-bold">Your Current Location</h1>
+        <p className="text-lg text-[#e0e0e0] mt-2">{locationName}</p>
       </div>
 
       {/* Map Container */}
@@ -164,9 +181,7 @@ export default function LocationContent({ location, setLocation }) {
               }}
             >
               <Popup>
-                {location && location.name
-                  ? location.name
-                  : "Drag marker to change location"}
+                {locationName || "Drag marker to change location"}
               </Popup>
             </Marker>
 

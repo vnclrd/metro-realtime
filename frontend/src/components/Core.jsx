@@ -9,7 +9,10 @@ function Core() {
   const [activeDiv, setActiveDiv] = useState('div1')
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
   
-  const [savedLocationData, setSavedLocationData] = useState(null)
+  const [savedLocationData, setSavedLocationData] = useState(() => {
+    const stored = localStorage.getItem("savedLocation");
+    return stored ? JSON.parse(stored) : {};
+  });
 
   // Detect user's current location automatically
   useEffect(() => {

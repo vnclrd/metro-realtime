@@ -8,24 +8,28 @@ function App() {
   const navigate = useNavigate();
 
   const handleRedirect = async () => {
-    if (!location.trim()) return
-    
+    if (!location.trim()) return;
+
     try {
       setLoading(true);
 
       const response = await fetch('http://127.0.0.1:5000/save-location', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ location }),
       });
 
       const data = await response.json();
-      console.log('Saved Location:', data);
 
-      // Navigate only after successful save
       if (response.ok) {
+        // Save location data to localStorage
+        localStorage.setItem("savedLocation", JSON.stringify({
+          name: data.data.name,
+          lat: data.data.latitude,
+          lng: data.data.longitude
+        }));
+
+        // Navigate to Core.jsx
         navigate('/core');
       } else {
         alert(data.error || 'Something went wrong');
