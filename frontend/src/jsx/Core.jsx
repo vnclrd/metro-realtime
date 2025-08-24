@@ -12,7 +12,7 @@ function Core() {
 
       {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
-        <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='w-[50px] m-2.5 ml-5' />
+        <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='m-2.5 ml-5' />
         <div className='flex lg:flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='hidden lg:block text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
