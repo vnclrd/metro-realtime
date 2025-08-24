@@ -14,40 +14,19 @@ L.Icon.Default.mergeOptions({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Improved MapResizer — keeps refreshing until map is fully drawn
-function MapResizer({ center }) {
+// Simplified MapResizer — only refreshes map size
+function MapResizer() {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
-    let tries = 0;
-    const maxTries = 10;
+    // Force Leaflet to redraw tiles
+    map.invalidateSize();
 
-    function refreshMap() {
-      if (!map) return;
-
-      // Force Leaflet to redraw tiles
-      map.invalidateSize();
-
-      // Smoothly recenter map if center is provided
-      if (center) {
-        map.setView(center, map.getZoom(), { animate: true });
-      }
-
-      // Retry until tiles are fully loaded or max tries reached
-      if (tries < maxTries) {
-        tries++;
-        setTimeout(refreshMap, 300);
-      }
-    }
-
-    refreshMap();
-
-    // Also refresh map on window resize
+    // Refresh map on window resize
     const handleResize = () => {
       map.invalidateSize();
-      if (center) map.setView(center, map.getZoom(), { animate: true });
     };
     window.addEventListener('resize', handleResize);
 
@@ -55,7 +34,6 @@ function MapResizer({ center }) {
     const handleVisibility = () => {
       if (document.visibilityState === 'visible') {
         map.invalidateSize();
-        if (center) map.setView(center, map.getZoom(), { animate: true });
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
@@ -64,7 +42,7 @@ function MapResizer({ center }) {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [map, center]);
+  }, [map]);
 
   return null;
 }
@@ -187,7 +165,7 @@ export default function LocationContent({ location, setLocation }) {
             </Marker>
 
             {/* Force Map Resize */}
-            <MapResizer center={markerPos} />
+            <MapResizer />
           </MapContainer>
         )}
       </div>
