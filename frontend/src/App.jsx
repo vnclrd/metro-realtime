@@ -23,7 +23,7 @@ function App() {
 
       if (response.ok) {
         // Save location data to localStorage
-        localStorage.setItem("savedLocation", JSON.stringify({
+        localStorage.setItem('savedLocation', JSON.stringify({
           name: data.data.name,
           lat: data.data.latitude,
           lng: data.data.longitude
