@@ -1,9 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import LocationContent from './LocationContent.jsx'
 
 function Core() {
   // Use state to track which div is currently active
   const [activeDiv, setActiveDiv] = useState('div1')
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
+  
+  const [savedLocationData, setSavedLocationData] = useState(null)
+
+  // Detect user's current location automatically
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        setSavedLocationData({
+          name: "Your Current Location",
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
+      });
+    }
+  }, []);
+
+  const DefaultIcon = L.icon({
+    iconUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+  });
+  L.Marker.prototype.options.icon = DefaultIcon;
 
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
@@ -41,7 +70,7 @@ function Core() {
                 Reports
               </h1>
               <p className='text-[0.9rem] text-[#e0e0e0] mb-5'>
-                near <span className='italic'>242 D, A. Bonifacio Street</span>
+                near <span className='italic'>**location**</span>
               </p>
             </div>
 
@@ -67,9 +96,9 @@ function Core() {
           <div className='flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]'>
             <div className='flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5'>
               {/* Image Holder */}
-              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688]'>
+              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688] text-[#e0e0e0]'>
                 <img
-                  src='/pothole.png'
+                  src='/'
                   alt='Photo of report'
                   className='w-full h-full object-cover rounded-[15px]'
                 />
@@ -78,10 +107,7 @@ function Core() {
               {/* Description */}
               <div className='w-full md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
-                  Nakakainis na po talaga! Ang dami-dami nang butas dito sa kalsada namin.
-                  Ilang buwan na po naming tiniis ‘to, pero hanggang ngayon wala pa ring ginagawa.
-                  Araw-araw may nadadapa o muntik maaksidente dahil dito. Hindi na po ito ligtas!
-                  Sana naman po ay may kumilos na agad bago may masaktan nang seryoso.
+
                 </p>
               </div>
 
@@ -103,42 +129,25 @@ function Core() {
 
       <div
         className={`flex flex-col min-h-screen items-center justify-center ${
-          activeDiv === 'div2' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
+          activeDiv === "div2" ? "bg-[#008c7f] sm:bg-[#009688]" : "hidden"
         }`}
       >
         <div
-          className='
+          className="
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
             h-[400px] sm:h-[300px] md:h-[500px]
             bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
             lg:shadow-lg p-5
-          '
+          "
         >
-          {/* Page Titles */}
-          <div className='flex flex-col w-full h-full text-center'>
-            <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
-              Select Location
-            </h1>
-            <p className='text-[0.9rem] md:text-[1rem] text-[#e0e0e0] italic'>
-              242 D, A. Bonifacio Street
-            </p>
-          </div>
-
-          {/* Maps Container */}
-          <div
-            className='
-              flex items-center justify-center
-              w-full sm:w-[90%] md:w-[80%] lg:w-[950px]
-              h-[1000px] sm:h-[600px] md:h-[1400px]
-              bg-[#009688] rounded-[25px] text-[#e0e0e0]
-            '
-          >
-            Google Maps API goes here
-          </div>
+          {/* Location Component */}
+          <LocationContent
+            location={savedLocationData}
+            setlocation={setSavedLocationData}
+          />
         </div>
-
-        </div>
+      </div>
         
       {/* ================================================== Make Report Page Content ================================================== */}
 
