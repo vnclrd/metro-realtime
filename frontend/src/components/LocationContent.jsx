@@ -128,9 +128,7 @@ export default function LocationContent({ location, setLocation }) {
       {/* Header */}
       <div className='flex flex-col items-center justify-center mb-4 text-center'>
         <h1 className='text-[2rem] md:text-[2.5rem] font-bold'>Select Location</h1>
-        <p className='text-md text-[#e0e0e0]'>Your current selected location is:
-          <br />
-          <span className='italic text-[#e0e0e0] text-md'>{locationName}</span></p>
+        <p className='text-md text-[#e0e0e0] italic text-md'>{locationName}</p>
       </div>
 
       {/* Map Container */}
