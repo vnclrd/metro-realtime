@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -79,6 +79,10 @@ export default function LocationContent({ location, setLocation }) {
     location?.name || 'Fetching your location...'
   );
 
+  // Store the last valid position
+  const lastValidPosition = useRef(null);
+  const markerRef = useRef(null);
+
   // Get current location on mount
   useEffect(() => {
     if (!location?.lat || !location?.lng) {
@@ -87,7 +91,9 @@ export default function LocationContent({ location, setLocation }) {
           async (pos) => {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
-            setMarkerPos([lat, lng]);
+            const position = [lat, lng];
+            setMarkerPos(position);
+            lastValidPosition.current = position;
 
             // Get readable name using OpenStreetMap Nominatim API
             try {
@@ -115,33 +121,66 @@ export default function LocationContent({ location, setLocation }) {
       } else {
         setLocationName('Geolocation is not supported by your browser.');
       }
+    } else {
+      // If location is provided, set it as the last valid position
+      lastValidPosition.current = [location.lat, location.lng];
     }
   }, []);
 
   // When dragging the marker manually
   const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
-    setMarkerPos([newLatLng.lat, newLatLng.lng]);
+    const newPosition = [newLatLng.lat, newLatLng.lng];
 
     try {
       const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${newLatLng.lat}&lon=${newLatLng.lng}`
       );
       const data = await res.json();
-      const name =
-        data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
-      setLocationName(name);
+      const name = data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
 
-      if (setLocation) {
-        setLocation({
-          lat: newLatLng.lat,
-          lng: newLatLng.lng,
-          name,
-        });
+      // Check if the location name contains "Metro Manila" (case insensitive)
+      const isValidLocation = name.toLowerCase().includes('metro manila');
+
+      if (isValidLocation) {
+        // Valid location - update everything
+        setMarkerPos(newPosition);
+        setLocationName(name);
+        lastValidPosition.current = newPosition;
+
+        if (setLocation) {
+          setLocation({
+            lat: newLatLng.lat,
+            lng: newLatLng.lng,
+            name,
+          });
+        }
+      } else {
+        // Invalid location - revert to last valid position
+        if (lastValidPosition.current) {
+          // Reset marker position to last valid position
+          setMarkerPos([...lastValidPosition.current]);
+          
+          // If we have a reference to the marker, update its position
+          if (markerRef.current) {
+            markerRef.current.setLatLng(lastValidPosition.current);
+          }
+        }
+        
+        // Optional: Show a brief message to user about invalid location
+        console.log('Invalid location: Must be within Metro Manila');
+        // You could add a toast notification here if desired
       }
     } catch (err) {
       console.error('Error fetching location name:', err);
-      setLocationName(`Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`);
+      
+      // On error, also revert to last valid position
+      if (lastValidPosition.current) {
+        setMarkerPos([...lastValidPosition.current]);
+        if (markerRef.current) {
+          markerRef.current.setLatLng(lastValidPosition.current);
+        }
+      }
     }
   };
 
@@ -175,6 +214,7 @@ export default function LocationContent({ location, setLocation }) {
 
             {/* Draggable Marker */}
             <Marker
+              ref={markerRef}
               position={markerPos}
               draggable={true}
               eventHandlers={{
