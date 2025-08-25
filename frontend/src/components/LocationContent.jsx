@@ -14,40 +14,19 @@ L.Icon.Default.mergeOptions({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Improved MapResizer — keeps refreshing until map is fully drawn
-function MapResizer({ center }) {
+// Simplified MapResizer — only refreshes map size
+function MapResizer() {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
-    let tries = 0;
-    const maxTries = 10;
+    // Force Leaflet to redraw tiles
+    map.invalidateSize();
 
-    function refreshMap() {
-      if (!map) return;
-
-      // Force Leaflet to redraw tiles
-      map.invalidateSize();
-
-      // Smoothly recenter map if center is provided
-      if (center) {
-        map.setView(center, map.getZoom(), { animate: true });
-      }
-
-      // Retry until tiles are fully loaded or max tries reached
-      if (tries < maxTries) {
-        tries++;
-        setTimeout(refreshMap, 300);
-      }
-    }
-
-    refreshMap();
-
-    // Also refresh map on window resize
+    // Refresh map on window resize
     const handleResize = () => {
       map.invalidateSize();
-      if (center) map.setView(center, map.getZoom(), { animate: true });
     };
     window.addEventListener('resize', handleResize);
 
@@ -55,7 +34,6 @@ function MapResizer({ center }) {
     const handleVisibility = () => {
       if (document.visibilityState === 'visible') {
         map.invalidateSize();
-        if (center) map.setView(center, map.getZoom(), { animate: true });
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
@@ -64,7 +42,7 @@ function MapResizer({ center }) {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [map, center]);
+  }, [map]);
 
   return null;
 }
@@ -73,6 +51,8 @@ export default function LocationContent({ location, setLocation }) {
   const [markerPos, setMarkerPos] = useState(
     location?.lat && location?.lng ? [location.lat, location.lng] : null
   );
+  // Store the previous valid position
+  const previousMarkerPosRef = useRef(markerPos);
 
   const [currentZoom, setCurrentZoom] = useState(13);
   const [locationName, setLocationName] = useState(
@@ -91,6 +71,7 @@ export default function LocationContent({ location, setLocation }) {
           async (pos) => {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
+            
             const position = [lat, lng];
             setMarkerPos(position);
             lastValidPosition.current = position;
@@ -103,10 +84,16 @@ export default function LocationContent({ location, setLocation }) {
               const data = await res.json();
               const name =
                 data.display_name || `Lat: ${lat}, Lng: ${lng}`;
-              setLocationName(name);
 
-              if (setLocation) {
-                setLocation({ lat, lng, name });
+              // Check if initial location is in Metro Manila
+              if (name.toLowerCase().includes('metro manila')) {
+                setLocationName(name);
+                if (setLocation) {
+                  setLocation({ lat, lng, name });
+                }
+              } else {
+                console.warn('Initial location is not in Metro Manila.');
+                setLocationName('Initial location is not in Metro Manila.');
               }
             } catch (err) {
               console.error('Error fetching location name:', err);
@@ -130,7 +117,9 @@ export default function LocationContent({ location, setLocation }) {
   // When dragging the marker manually
   const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
+
     const newPosition = [newLatLng.lat, newLatLng.lng];
+
 
     try {
       const res = await fetch(
@@ -189,9 +178,7 @@ export default function LocationContent({ location, setLocation }) {
       {/* Header */}
       <div className='flex flex-col items-center justify-center mb-4 text-center'>
         <h1 className='text-[2rem] md:text-[2.5rem] font-bold'>Select Location</h1>
-        <p className='text-md text-[#e0e0e0]'>Your current selected location is:
-          <br />
-          <span className='italic text-[#e0e0e0] text-md'>{locationName}</span></p>
+        <p className='text-md text-[#e0e0e0] italic text-md'>{locationName}</p>
       </div>
 
       {/* Map Container */}
