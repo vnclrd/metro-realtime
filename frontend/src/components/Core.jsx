@@ -257,14 +257,25 @@ function Core() {
                       }`}
                       onClick={() => setSelectedReport(report)}
                     >
-                      <div className="flex flex-col">
-                        <h3 className="text-[#e0e0e0] font-bold text-base md:text-lg">
-                          {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
-                        </h3>
-                        <p className="text-sm text-[#a0a0a0] truncate mt-[-4px]">
-                          {report.latitude}, {report.longitude}
-                        </p>
-                      </div>
+                      <div className="flex justify-between items-center w-full">
+  <div className="flex flex-col">
+    <h3 className="text-[#e0e0e0] font-bold text-base md:text-lg">
+      {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
+    </h3>
+    <p className="text-sm text-[#a0a0a0] truncate mt-[-4px]">
+      {report.latitude?.toFixed(4)}, {report.longitude?.toFixed(4)}
+    </p>
+  </div>
+  <div className="flex items-center gap-2">
+    {/* Sightings */}
+    <img src="/vision-icon.png" alt="Sightings Icon" className="w-[26px] h-[26px] filter invert" />
+    <span className="text-[#e0e0e0] text-[1.25rem] mr-2">3</span>
+
+    {/* Resolved Votes */}
+    <img src="/resolved-icon.png" alt="Sightings Icon" className="w-[26px] h-[26px] filter invert" />
+    <span className="text-[#e0e0e0] text-[1.25rem]">0</span>
+  </div>
+</div>
                     </div>
                   ))
                 ) : (
