@@ -91,6 +91,7 @@ export default function LocationContent({ location, setLocation }) {
           async (pos) => {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
+
             const position = [lat, lng];
             setMarkerPos(position);
             lastValidPosition.current = position;
