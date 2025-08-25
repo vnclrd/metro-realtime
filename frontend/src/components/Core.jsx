@@ -11,11 +11,25 @@ function Core() {
   
   const [locationName, setLocationName] = useState('Fetching location...')
   
+  const [savedLocationData, setSavedLocationData] = useState(() => {
+    const stored = localStorage.getItem('savedLocation');
+    return stored ? JSON.parse(stored) : {};
+  });
+
+  // Update locationName when savedLocationData changes
+  useEffect(() => {
+    if (savedLocationData.name) {
+      setLocationName(savedLocationData.name)
+    }
+  }, [savedLocationData])
+
+  // Load saved location on mount
   useEffect(() => {
     const saved = localStorage.getItem('savedLocation')
     if(saved) {
       try {
         const parsed = JSON.parse(saved)
+        setSavedLocationData(parsed)
         setLocationName(parsed.name || 'Unknown location')
       } catch (err) {
         console.error('Failed to parse saved location:', err)
@@ -23,23 +37,28 @@ function Core() {
     }
   }, [])
 
-  const [savedLocationData, setSavedLocationData] = useState(() => {
-    const stored = localStorage.getItem('savedLocation');
-    return stored ? JSON.parse(stored) : {};
-  });
-
-  // Detect user's current location automatically
+  // Detect user's current location automatically if no saved location
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (!savedLocationData.lat && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        setSavedLocationData({
+        const newLocation = {
           name: 'Your Current Location',
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        });
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        };
+        setSavedLocationData(newLocation);
+        setLocationName(newLocation.name);
       });
     }
-  }, []);
+  }, [savedLocationData.lat]);
+
+  // Handle location updates from LocationContent
+  const handleLocationUpdate = (newLocationData) => {
+    setSavedLocationData(newLocationData);
+    setLocationName(newLocationData.name);
+    // Save to localStorage
+    localStorage.setItem('savedLocation', JSON.stringify(newLocationData));
+  };
 
   const DefaultIcon = L.icon({
     iconUrl:
@@ -163,7 +182,7 @@ function Core() {
           {/* Location Component */}
           <LocationContent
             location={savedLocationData}
-            setlocation={setSavedLocationData}
+            setLocation={handleLocationUpdate}
           />
         </div>
       </div>

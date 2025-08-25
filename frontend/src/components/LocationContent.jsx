@@ -2,16 +2,15 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { useEffect, useState, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import customPinImage from '/custom-pin.png';
 
-// Fix default Leaflet marker icons
+// Default marker icon
 delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+const customPinIcon = L.icon({
+  iconUrl: customPinImage,
+  iconSize: [60, 60],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38],
 });
 
 // Improved MapResizer — keeps refreshing until map is fully drawn
@@ -67,6 +66,26 @@ function MapResizer({ center }) {
   }, [map, center]);
 
   return null;
+}
+
+// Center marker button
+function CenterButton({ markerPos }) {
+  const map = useMap();
+  
+  const handleCenter = () => {
+    if (map && markerPos) {
+      map.setView(markerPos, map.getZoom(), { animate: true });
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCenter}
+      className='absolute top-4 right-4 z-[1000] p-2 bg-white rounded-full shadow-lg border border-gray-300 cursor-pointer'
+    >
+      <img src='./target-icon.png' alt='Target Icon' className='w-[26px] h-auto' />
+    </button>
+  );
 }
 
 export default function LocationContent({ location, setLocation }) {
@@ -140,7 +159,7 @@ export default function LocationContent({ location, setLocation }) {
       const data = await res.json();
       const name = data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
 
-      // Check if the location name contains "Metro Manila" (case insensitive)
+      // Check if the location name contains 'Metro Manila' (case insensitive)
       const isValidLocation = name.toLowerCase().includes('metro manila');
 
       if (isValidLocation) {
@@ -196,7 +215,7 @@ export default function LocationContent({ location, setLocation }) {
       </div>
 
       {/* Map Container */}
-      <div className='w-full h-[600px] sm:h-[400px] md:h-[500px] bg-[#009688] rounded-[25px] overflow-hidden'>
+      <div className='w-full h-[600px] sm:h-[400px] md:h-[500px] bg-[#009688] rounded-[25px] overflow-hidden relative'> {/* Add `relative` here */}
         {markerPos && (
           <MapContainer
             center={markerPos}
@@ -221,14 +240,16 @@ export default function LocationContent({ location, setLocation }) {
               eventHandlers={{
                 dragend: handleDragEnd,
               }}
+              icon={customPinIcon}
             >
               <Popup>
                 {locationName || 'Drag marker to change location'}
               </Popup>
             </Marker>
-
-            {/* Force Map Resize */}
+            
+            {/* Force Map Resize and Center Button */}
             <MapResizer />
+            <CenterButton markerPos={markerPos} />
           </MapContainer>
         )}
       </div>
