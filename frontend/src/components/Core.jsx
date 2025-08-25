@@ -8,6 +8,12 @@ function Core() {
   // Use state to track which div is currently active
   const [activeDiv, setActiveDiv] = useState('div1')
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
+
+  const [selectedIssue, setSelectedIssue] = useState('')
+
+  const handleIssueChange = (e) => {
+    setSelectedIssue(e.target.value)
+  }
   
   const [locationName, setLocationName] = useState('Fetching location...')
   
@@ -194,12 +200,12 @@ function Core() {
           activeDiv === 'div3' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
         }`}
       >
-        <div className='flex flex-col w-full h-full items-center justify-center lg:px-5'>
+        <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 mt-10 lg:mt-0'>
           {/* Form Container */}
           <div className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg'>
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
-              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold mt-10'>
+              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
                 Report an Issue
               </h1>
               <p className='text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
@@ -237,11 +243,12 @@ function Core() {
             </div>
 
             {/* Type of issue selection */}
-            <div className='relative mb-5 w-full sm:w-[350px]'>
+            <div className='relative mb-4 w-full sm:w-[350px]'>
               <select
                 name='issues'
                 id='issues'
-                defaultValue=''
+                value={selectedIssue} // Use value to control the select component
+                onChange={handleIssueChange} // Add the onChange event handler
                 className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
               >
                 <option value='' disabled>
@@ -263,6 +270,17 @@ function Core() {
                 />
               </div>
             </div>
+
+            {/* The text area is conditionally rendered here */}
+            {selectedIssue === 'custom' && (
+              <div className='relative w-full sm:w-[350px]'>
+                <textarea
+                  name='customIssue' // Changed name to 'customIssue'
+                  placeholder='Type custom issue here'
+                  className='text-left w-full h-[40px] p-2 mb-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
+                ></textarea>
+              </div>
+            )}
 
             <div className='relative w-full sm:w-[350px]'>
               <textarea
