@@ -1,15 +1,5 @@
 [
   {
-    "id": "ac6aa63f-6473-4d27-9719-927de552064b",
-    "timestamp": "2025-08-25T16:40:29.589320",
-    "issue_type": "pothole",
-    "custom_issue": "",
-    "description": "This is a test description for the pothole issue.",
-    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
-    "image_filename": "7f8fb300-7657-4c3b-8c64-1d224d696d70.png",
-    "status": "pending"
-  },
-  {
     "id": "b560558c-556e-42f7-85dd-9bd28acf0e7c",
     "timestamp": "2025-08-25T17:27:18.460592",
     "issue_type": "graffiti",

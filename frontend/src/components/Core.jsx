@@ -14,28 +14,114 @@ function Core() {
 
   // View reports on Reports Page
   const [reports, setReports] = useState([]);
+  const [allReports, setAllReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
 
-  // Fetch reports from backend (reports.json)
+  const [activeDiv, setActiveDiv] = useState('div1');
+  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer';
+
+  const [selectedIssue, setSelectedIssue] = useState('');
+  const [locationName, setLocationName] = useState('Fetching location...');
+
+  const [savedLocationData, setSavedLocationData] = useState(() => {
+    const stored = localStorage.getItem('savedLocation');
+    return stored ? JSON.parse(stored) : {};
+  });
+
+  // Function to calculate distance between two coordinates using Haversine formula
+  const getDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of Earth in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in km
+    return distance;
+  };
+
+  // Function to filter reports based on location
+  const filterReportsByLocation = (allReports, location) => {
+    if (!location || !location.lat || !location.lng) {
+      setReports([]);
+      setSelectedReport(null);
+      return;
+    }
+
+    const filtered = allReports.filter(report => {
+      const distance = getDistance(
+        location.lat,
+        location.lng,
+        report.latitude,
+        report.longitude
+      );
+      return distance <= 1; // Filter for reports within 1 km
+    });
+    
+    setReports(filtered);
+    if (filtered.length > 0) {
+      setSelectedReport(filtered[0]);
+    } else {
+      setSelectedReport(null);
+    }
+  };
+
+  // Fetch reports from backend (reports.json) and filter them based on location
   useEffect(() => {
-    const fetchReports = async () => {
+    const fetchAndFilterReports = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/reports');
         if (!response.ok) {
           throw new Error('Failed to fetch reports');
         }
         const data = await response.json();
-        setReports(data.reports);
-        if (data.reports.length > 0) {
-          setSelectedReport(data.reports[0]);
-        }
+        setAllReports(data.reports);
+        filterReportsByLocation(data.reports, savedLocationData);
       } catch (error) {
         console.error('Error fetching reports:', error);
       }
     };
 
-    fetchReports();
+    fetchAndFilterReports();
+  }, [savedLocationData]);
+
+  // Load saved location on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('savedLocation');
+    if(saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setSavedLocationData(parsed);
+        setLocationName(parsed.name || 'Unknown location');
+      } catch (err) {
+        console.error('Failed to parse saved location:', err);
+      }
+    }
   }, []);
+
+  // Detect user's current location automatically if no saved location
+  useEffect(() => {
+    if (!savedLocationData.lat && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const newLocation = {
+          name: 'Your Current Location',
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        };
+        setSavedLocationData(newLocation);
+        setLocationName(newLocation.name);
+      });
+    }
+  }, [savedLocationData.lat]);
+
+  // Update locationName when savedLocationData changes
+  useEffect(() => {
+    if (savedLocationData.name) {
+      setLocationName(savedLocationData.name);
+    }
+  }, [savedLocationData]);
 
   // Handler functions for image saving
   const handleImageUpload = (e) => {
@@ -127,59 +213,10 @@ function Core() {
     }
   };
 
-  // Use state to track which div is currently active
-  const [activeDiv, setActiveDiv] = useState('div1')
-  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
-
-  const [selectedIssue, setSelectedIssue] = useState('')
-
   const handleIssueChange = (e) => {
-    setSelectedIssue(e.target.value)
-  }
+    setSelectedIssue(e.target.value);
+  };
   
-  const [locationName, setLocationName] = useState('Fetching location...')
-  
-  const [savedLocationData, setSavedLocationData] = useState(() => {
-    const stored = localStorage.getItem('savedLocation');
-    return stored ? JSON.parse(stored) : {};
-  });
-
-  // Update locationName when savedLocationData changes
-  useEffect(() => {
-    if (savedLocationData.name) {
-      setLocationName(savedLocationData.name)
-    }
-  }, [savedLocationData])
-
-  // Load saved location on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('savedLocation')
-    if(saved) {
-      try {
-        const parsed = JSON.parse(saved)
-        setSavedLocationData(parsed)
-        setLocationName(parsed.name || 'Unknown location')
-      } catch (err) {
-        console.error('Failed to parse saved location:', err)
-      }
-    }
-  }, [])
-
-  // Detect user's current location automatically if no saved location
-  useEffect(() => {
-    if (!savedLocationData.lat && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const newLocation = {
-          name: 'Your Current Location',
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        };
-        setSavedLocationData(newLocation);
-        setLocationName(newLocation.name);
-      });
-    }
-  }, [savedLocationData.lat]);
-
   // Handle location updates from LocationContent
   const handleLocationUpdate = (newLocationData) => {
     setSavedLocationData(newLocationData);
