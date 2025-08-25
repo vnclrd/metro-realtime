@@ -262,7 +262,7 @@ function Core() {
                           {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
                         </h3>
                         <p className="text-sm text-[#a0a0a0] truncate mt-[-4px]">
-                          {report.location}
+                          {report.latitude}, {report.longitude}
                         </p>
                       </div>
                     </div>
