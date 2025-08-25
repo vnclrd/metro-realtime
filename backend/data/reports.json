@@ -1,0 +1,48 @@
+[
+  {
+    "id": "ac6aa63f-6473-4d27-9719-927de552064b",
+    "timestamp": "2025-08-25T16:40:29.589320",
+    "issue_type": "pothole",
+    "custom_issue": "",
+    "description": "This is a test description for the pothole issue.",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "image_filename": "7f8fb300-7657-4c3b-8c64-1d224d696d70.png",
+    "status": "pending"
+  },
+  {
+    "id": "b560558c-556e-42f7-85dd-9bd28acf0e7c",
+    "timestamp": "2025-08-25T17:27:18.460592",
+    "issue_type": "graffiti",
+    "custom_issue": "",
+    "description": "Test description",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.6887242,
+    "longitude": 121.0187414,
+    "image_filename": "65f397b9-6c4b-4d59-bab4-a23873227147.jpg",
+    "status": "pending"
+  },
+  {
+    "id": "7eb8595c-24f0-47fb-8b3f-a3b24697d4be",
+    "timestamp": "2025-08-25T20:20:29.918879",
+    "issue_type": "damaged-sidewalk",
+    "custom_issue": "",
+    "description": "test description hehehe",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.6887242,
+    "longitude": 121.0187414,
+    "image_filename": "8bf2e465-93c1-447d-b8bf-5088329de4db.jpg",
+    "status": "pending"
+  },
+  {
+    "id": "de5a3c28-3781-49ff-9586-648862d1ac9f",
+    "timestamp": "2025-08-25T20:22:57.722295",
+    "issue_type": "custom",
+    "custom_issue": "pogi",
+    "description": "12121212121",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.6887242,
+    "longitude": 121.0187414,
+    "image_filename": "49d36694-d140-4ee4-8e8e-a4d1183a533e.jpg",
+    "status": "pending"
+  }
+]

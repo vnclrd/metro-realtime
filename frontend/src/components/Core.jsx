@@ -1,10 +1,132 @@
 import React, { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import LocationContent from './LocationContent.jsx'
 
 function Core() {
+  // FILE SAVING COMPONENTS
+  const [customIssue, setCustomIssue] = useState('');
+  const [description, setDescription] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  // View reports on Reports Page
+  const [reports, setReports] = useState([]);
+  const [selectedReport, setSelectedReport] = useState(null);
+
+  // Fetch reports from backend (reports.json)
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/reports');
+        if (!response.ok) {
+          throw new Error('Failed to fetch reports');
+        }
+        const data = await response.json();
+        setReports(data.reports);
+        if (data.reports.length > 0) {
+          setSelectedReport(data.reports[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching reports:', error);
+      }
+    };
+
+    fetchReports();
+  }, []);
+
+  // Handler functions for image saving
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadedImage(file);
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handler function for uploaded image discarding
+  const handleDiscardImage = () => {
+    setUploadedImage(null);
+    setImagePreview('');
+    // Reset file input
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) fileInput.value = '';
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Validation
+      if (!selectedIssue) {
+        throw new Error('Please select an issue type');
+      }
+      
+      if (selectedIssue === 'custom' && !customIssue.trim()) {
+        throw new Error('Please describe the custom issue');
+      }
+      
+      if (!description.trim()) {
+        throw new Error('Please provide a description');
+      }
+
+      // Prepare form data
+      const formData = new FormData();
+      
+      if (uploadedImage) {
+        formData.append('image', uploadedImage);
+      }
+      
+      formData.append('issueType', selectedIssue);
+      formData.append('customIssue', customIssue);
+      formData.append('description', description);
+      formData.append('location', locationName);
+      formData.append('latitude', savedLocationData.lat);
+      formData.append('longitude', savedLocationData.lng);
+
+      // Submit to backend
+      const response = await fetch('http://localhost:5000/api/reports', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Report submitted successfully!'
+        });
+        
+        // Reset form
+        setSelectedIssue('');
+        setCustomIssue('');
+        setDescription('');
+        handleDiscardImage();
+      } else {
+        throw new Error(result.message || 'Failed to submit report');
+      }
+
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: error.message
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Use state to track which div is currently active
   const [activeDiv, setActiveDiv] = useState('div1')
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
@@ -126,12 +248,28 @@ function Core() {
                   scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]
                 '
               >
-                {[...Array(7)].map((_, i) => (
-                  <div
-                    key={i}
-                    className='w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 '
-                  ></div>
-                ))}
+                {reports.length > 0 ? (
+                  reports.map((report) => (
+                    <div
+                      key={report.id}
+                      className={`w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 cursor-pointer p-4 transition-all duration-200 ease-in-out ${
+                        selectedReport?.id === report.id ? 'border-2 border-white' : ''
+                      }`}
+                      onClick={() => setSelectedReport(report)}
+                    >
+                      <div className="flex flex-col">
+                        <h3 className="text-[#e0e0e0] font-bold text-base md:text-lg">
+                          {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
+                        </h3>
+                        <p className="text-sm text-[#a0a0a0] truncate mt-[-4px]">
+                          {report.location}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-[#e0e0e0] text-center italic mt-10">No reports found.</div>
+                )}
               </div>
             </div>
           </div>
@@ -140,18 +278,22 @@ function Core() {
           <div className='flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]'>
             <div className='flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5'>
               {/* Image Holder */}
-              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688] text-[#e0e0e0]'>
-                <img
-                  src='/'
-                  alt='Photo of report'
-                  className='w-full h-full object-cover rounded-[15px]'
-                />
+              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688] text-[#e0e0e0] flex items-center justify-center'>
+                {selectedReport && selectedReport.image_filename ? (
+                  <img
+                    src={`http://localhost:5000/api/images/${selectedReport.image_filename}`}
+                    alt='Photo of report'
+                    className='w-full h-full object-cover rounded-[15px]'
+                  />
+                ) : (
+                  <span className="italic">No image available</span>
+                )}
               </div>
 
               {/* Description */}
               <div className='w-full md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
-
+                  {selectedReport?.description || 'Select a report to view its details.'}
                 </p>
               </div>
 
@@ -202,7 +344,7 @@ function Core() {
       >
         <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 mt-10 lg:mt-0'>
           {/* Form Container */}
-          <div className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg'>
+          <form onSubmit={handleSubmit} className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg'>
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
@@ -211,28 +353,62 @@ function Core() {
               <p className='text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
             </div>
 
+            {/* Status Message */}
+            {submitStatus && (
+              <div className={`w-full sm:w-[90%] md:w-[600px] p-3 rounded-lg mb-4 text-center ${
+                submitStatus.type === 'success' 
+                  ? 'bg-green-600 text-white' 
+                  : 'bg-red-600 text-white'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
             {/* Uploaded photo preview */}
-            <div className='flex items-center justify-center w-full sm:w-[80%] md:w-[400px] h-[180px] sm:h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3 text-center px-2'>
-              Uploaded image preview goes here
+            <div className='flex items-center justify-center w-full sm:w-[80%] md:w-[400px] h-[180px] sm:h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3 text-center px-2 overflow-hidden'>
+              {imagePreview ? (
+                <img 
+                  src={imagePreview} 
+                  alt="Preview" 
+                  className="max-w-full max-h-full object-contain"
+                />
+              ) : (
+                "Uploaded image preview goes here"
+              )}
             </div>
 
             {/* Uploaded Image Info */}
             <p className='text-[#e0e0e0] text-xs md:text-sm mb-3 text-center md:text-left'>
-              Image uploaded: <span className='italic'>report.jpg</span>
+              {uploadedImage ? (
+                <>Image uploaded: <span className='italic'>{uploadedImage.name}</span></>
+              ) : (
+                "No image selected"
+              )}
             </p>
 
             {/* Upload / Discard Buttons */}
             <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start mb-4'>
-              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+              <label className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
                 <img
                   src='/upload-photo-icon.png'
                   alt='Upload Photo Icon'
                   className='w-[24px] h-[24px] mr-2'
                 />
                 Upload image
-              </button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </label>
 
-              <button className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+              <button 
+                type="button"
+                onClick={handleDiscardImage}
+                disabled={!uploadedImage}
+                className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)] disabled:opacity-50 disabled:cursor-not-allowed'
+              >
                 <img
                   src='/discard-icon.png'
                   alt='Discard Icon'
@@ -247,18 +423,20 @@ function Core() {
               <select
                 name='issues'
                 id='issues'
-                value={selectedIssue} // Use value to control the select component
-                onChange={handleIssueChange} // Add the onChange event handler
+                value={selectedIssue}
+                onChange={handleIssueChange}
                 className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
+                required
               >
                 <option value='' disabled>
                   Select type of issue
                 </option>
                 <option value='custom'>Custom Issue</option>
-                <option value='issue-1'>Issue 1</option>
-                <option value='issue-2'>Issue 2</option>
-                <option value='issue-3'>Issue 3</option>
-                <option value='issue-4'>Issue 4</option>
+                <option value='pothole'>Pothole</option>
+                <option value='broken-streetlight'>Broken Streetlight</option>
+                <option value='graffiti'>Graffiti</option>
+                <option value='garbage'>Garbage/Litter</option>
+                <option value='damaged-sidewalk'>Damaged Sidewalk</option>
               </select>
 
               {/* Custom arrow */}
@@ -271,43 +449,44 @@ function Core() {
               </div>
             </div>
 
-            {/* The text area is conditionally rendered here */}
+            {/* Custom issue text area */}
             {selectedIssue === 'custom' && (
-              <div className='relative w-full sm:w-[350px]'>
+              <div className='relative w-full sm:w-[350px] mb-4'>
                 <textarea
-                  name='customIssue' // Changed name to 'customIssue'
-                  placeholder='Type custom issue here'
-                  className='text-left w-full h-[40px] p-2 mb-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
-                ></textarea>
+                  name='customIssue'
+                  placeholder='Describe your custom issue'
+                  value={customIssue}
+                  onChange={(e) => setCustomIssue(e.target.value)}
+                  className='text-left w-full h-[40px] pl-5 pt-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] appearance-none'
+                  required={selectedIssue === 'custom'}
+                />
               </div>
             )}
-
-            <div className='relative w-full sm:w-[350px]'>
-              <textarea
-                name='issues'
-                placeholder='Type custom issue here'
-                className='hidden text-left items-center w-full h-[40px] p-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
-              >
-              </textarea>
-            </div>
 
             {/* Description Container */}
             <textarea
               name='description'
               placeholder='Write a short description about the issue'
-              className='w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className='w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#a0a0a0]'
+              required
             />
 
             {/* Submit Button */}
-            <button className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer'>
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#006b61] transition-colors'
+            >
               <img
                 src='/upload-icon.png'
                 alt='Upload Icon'
                 className='w-[24px] h-[24px] mr-3 filter invert brightness-[200%]'
               />
-              Submit report!
+              {isSubmitting ? 'Submitting...' : 'Submit report!'}
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
