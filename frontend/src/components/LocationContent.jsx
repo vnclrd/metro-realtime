@@ -225,6 +225,7 @@ export default function LocationContent({ location, setLocation }) {
               width: '100%',
               borderRadius: '20px',
             }}
+            zoomControl={false}
           >
             {/* Tile Layer */}
             <TileLayer
