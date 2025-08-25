@@ -59,6 +59,10 @@ export default function LocationContent({ location, setLocation }) {
     location?.name || 'Fetching your location...'
   );
 
+  // Store the last valid position
+  const lastValidPosition = useRef(null);
+  const markerRef = useRef(null);
+
   // Get current location on mount
   useEffect(() => {
     if (!location?.lat || !location?.lng) {
@@ -67,8 +71,10 @@ export default function LocationContent({ location, setLocation }) {
           async (pos) => {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
-            setMarkerPos([lat, lng]);
-            previousMarkerPosRef.current = [lat, lng]; // Initialize ref
+            
+            const position = [lat, lng];
+            setMarkerPos(position);
+            lastValidPosition.current = position;
 
             // Get readable name using OpenStreetMap Nominatim API
             try {
@@ -102,12 +108,18 @@ export default function LocationContent({ location, setLocation }) {
       } else {
         setLocationName('Geolocation is not supported by your browser.');
       }
+    } else {
+      // If location is provided, set it as the last valid position
+      lastValidPosition.current = [location.lat, location.lng];
     }
   }, []);
 
   // When dragging the marker manually
   const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
+
+    const newPosition = [newLatLng.lat, newLatLng.lng];
+
 
     try {
       const res = await fetch(
@@ -116,12 +128,14 @@ export default function LocationContent({ location, setLocation }) {
       const data = await res.json();
       const name = data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
 
-      // Check if the new location is in Metro Manila (case-insensitive)
-      if (name.toLowerCase().includes('metro manila')) {
-        // New location is valid
+      // Check if the location name contains "Metro Manila" (case insensitive)
+      const isValidLocation = name.toLowerCase().includes('metro manila');
+
+      if (isValidLocation) {
+        // Valid location - update everything
+        setMarkerPos(newPosition);
         setLocationName(name);
-        setMarkerPos([newLatLng.lat, newLatLng.lng]);
-        previousMarkerPosRef.current = [newLatLng.lat, newLatLng.lng]; // Update the previous valid position
+        lastValidPosition.current = newPosition;
 
         if (setLocation) {
           setLocation({
@@ -131,18 +145,31 @@ export default function LocationContent({ location, setLocation }) {
           });
         }
       } else {
-        // New location is invalid, revert the marker to its last valid position
-        console.warn('Marker cannot be dropped outside Metro Manila.');
-        setLocationName(`Invalid location: ${name}. Reverting to previous valid position.`);
+        // Invalid location - revert to last valid position
+        if (lastValidPosition.current) {
+          // Reset marker position to last valid position
+          setMarkerPos([...lastValidPosition.current]);
+          
+          // If we have a reference to the marker, update its position
+          if (markerRef.current) {
+            markerRef.current.setLatLng(lastValidPosition.current);
+          }
+        }
         
-        // This will cause the marker to snap back
-        setMarkerPos(previousMarkerPosRef.current);
+        // Optional: Show a brief message to user about invalid location
+        console.log('Invalid location: Must be within Metro Manila');
+        // You could add a toast notification here if desired
       }
     } catch (err) {
       console.error('Error fetching location name:', err);
-      // Revert on API error as well
-      setLocationName('Error fetching location name. Reverting position.');
-      setMarkerPos(previousMarkerPosRef.current);
+      
+      // On error, also revert to last valid position
+      if (lastValidPosition.current) {
+        setMarkerPos([...lastValidPosition.current]);
+        if (markerRef.current) {
+          markerRef.current.setLatLng(lastValidPosition.current);
+        }
+      }
     }
   };
 
@@ -174,6 +201,7 @@ export default function LocationContent({ location, setLocation }) {
 
             {/* Draggable Marker */}
             <Marker
+              ref={markerRef}
               position={markerPos}
               draggable={true}
               eventHandlers={{

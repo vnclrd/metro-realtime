@@ -155,7 +155,7 @@ function Core() {
           className='
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
-            h-[400px] sm:h-[300px] md:h-[500px]
+            h-[400px] sm:h-[500px] md:h-[500px]
             bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
             lg:shadow-lg p-5
           '
