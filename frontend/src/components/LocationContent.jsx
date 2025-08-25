@@ -187,7 +187,7 @@ export default function LocationContent({ location, setLocation }) {
             </Marker>
 
             {/* Force Map Resize */}
-            <MapResizer center={markerPos} />
+            <MapResizer />
           </MapContainer>
         )}
       </div>
