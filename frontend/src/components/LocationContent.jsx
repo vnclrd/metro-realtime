@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -51,6 +51,8 @@ export default function LocationContent({ location, setLocation }) {
   const [markerPos, setMarkerPos] = useState(
     location?.lat && location?.lng ? [location.lat, location.lng] : null
   );
+  // Store the previous valid position
+  const previousMarkerPosRef = useRef(markerPos);
 
   const [currentZoom, setCurrentZoom] = useState(13);
   const [locationName, setLocationName] = useState(
@@ -66,6 +68,7 @@ export default function LocationContent({ location, setLocation }) {
             const lat = pos.coords.latitude;
             const lng = pos.coords.longitude;
             setMarkerPos([lat, lng]);
+            previousMarkerPosRef.current = [lat, lng]; // Initialize ref
 
             // Get readable name using OpenStreetMap Nominatim API
             try {
@@ -75,10 +78,16 @@ export default function LocationContent({ location, setLocation }) {
               const data = await res.json();
               const name =
                 data.display_name || `Lat: ${lat}, Lng: ${lng}`;
-              setLocationName(name);
 
-              if (setLocation) {
-                setLocation({ lat, lng, name });
+              // Check if initial location is in Metro Manila
+              if (name.toLowerCase().includes('metro manila')) {
+                setLocationName(name);
+                if (setLocation) {
+                  setLocation({ lat, lng, name });
+                }
+              } else {
+                console.warn('Initial location is not in Metro Manila.');
+                setLocationName('Initial location is not in Metro Manila.');
               }
             } catch (err) {
               console.error('Error fetching location name:', err);
@@ -99,27 +108,41 @@ export default function LocationContent({ location, setLocation }) {
   // When dragging the marker manually
   const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
-    setMarkerPos([newLatLng.lat, newLatLng.lng]);
 
     try {
       const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${newLatLng.lat}&lon=${newLatLng.lng}`
       );
       const data = await res.json();
-      const name =
-        data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
-      setLocationName(name);
+      const name = data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
 
-      if (setLocation) {
-        setLocation({
-          lat: newLatLng.lat,
-          lng: newLatLng.lng,
-          name,
-        });
+      // Check if the new location is in Metro Manila (case-insensitive)
+      if (name.toLowerCase().includes('metro manila')) {
+        // New location is valid
+        setLocationName(name);
+        setMarkerPos([newLatLng.lat, newLatLng.lng]);
+        previousMarkerPosRef.current = [newLatLng.lat, newLatLng.lng]; // Update the previous valid position
+
+        if (setLocation) {
+          setLocation({
+            lat: newLatLng.lat,
+            lng: newLatLng.lng,
+            name,
+          });
+        }
+      } else {
+        // New location is invalid, revert the marker to its last valid position
+        console.warn('Marker cannot be dropped outside Metro Manila.');
+        setLocationName(`Invalid location: ${name}. Reverting to previous valid position.`);
+        
+        // This will cause the marker to snap back
+        setMarkerPos(previousMarkerPosRef.current);
       }
     } catch (err) {
       console.error('Error fetching location name:', err);
-      setLocationName(`Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`);
+      // Revert on API error as well
+      setLocationName('Error fetching location name. Reverting position.');
+      setMarkerPos(previousMarkerPosRef.current);
     }
   };
 
