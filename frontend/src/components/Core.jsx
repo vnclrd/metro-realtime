@@ -143,7 +143,7 @@ function Core() {
     setUploadedImage(null);
     setImagePreview('');
     // Reset file input
-    const fileInput = document.querySelector('input[type="file"]');
+    const fileInput = document.querySelector("input[type='file']");
     if (fileInput) fileInput.value = '';
   };
 
@@ -294,29 +294,29 @@ function Core() {
                       }`}
                       onClick={() => setSelectedReport(report)}
                     >
-                      <div className="flex justify-between items-center w-full">
-  <div className="flex flex-col">
-    <h3 className="text-[#e0e0e0] font-bold text-base md:text-lg">
-      {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
-    </h3>
-    <p className="text-sm text-[#a0a0a0] truncate mt-[-4px]">
-      {report.latitude?.toFixed(4)}, {report.longitude?.toFixed(4)}
-    </p>
-  </div>
-  <div className="flex items-center gap-2">
-    {/* Sightings */}
-    <img src="/vision-icon.png" alt="Sightings Icon" className="w-[26px] h-[26px] filter invert" />
-    <span className="text-[#e0e0e0] text-[1.25rem] mr-2">3</span>
+                      <div className='flex justify-between items-center w-full'>
+                        <div className='flex flex-col'>
+                          <h3 className='text-[#e0e0e0] font-bold text-base md:text-lg'>
+                            {report.issue_type === 'custom' ? report.custom_issue : report.issue_type}
+                          </h3>
+                          <p className='text-sm text-[#a0a0a0] truncate mt-[-4px]'>
+                            {report.latitude?.toFixed(4)}, {report.longitude?.toFixed(4)}
+                          </p>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                          {/* Sightings */}
+                          <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                          <span className='text-[#e0e0e0] text-[1.25rem] mr-2'>3</span>
 
-    {/* Resolved Votes */}
-    <img src="/resolved-icon.png" alt="Sightings Icon" className="w-[26px] h-[26px] filter invert" />
-    <span className="text-[#e0e0e0] text-[1.25rem]">0</span>
-  </div>
-</div>
+                          {/* Resolved Votes */}
+                          <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                          <span className='text-[#e0e0e0] text-[1.25rem]'>0</span>
+                        </div>
+                      </div>
                     </div>
                   ))
                 ) : (
-                  <div className="text-[#e0e0e0] text-center italic mt-10">No reports found.</div>
+                  <div className='text-[#e0e0e0] text-center italic mt-10'>No reports found.</div>
                 )}
               </div>
             </div>
@@ -334,12 +334,18 @@ function Core() {
                     className='w-full h-full object-cover rounded-[15px]'
                   />
                 ) : (
-                  <span className="italic">No image available</span>
+                  <span className='italic'>No image available</span>
                 )}
               </div>
 
               {/* Description */}
-              <div className='w-full md:h-[50%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
+              <div className='flex items-center justify-center w-full h-auto gap-2 text-[#e0e0e0] text-sm md:text-[1rem]'>
+                <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                <p className='mr-2'>3 others also see this</p>
+                <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                <p>0 others saying it has been resolved</p>
+              </div>
+              <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
                   {selectedReport?.description || 'Select a report to view its details.'}
                 </p>
@@ -417,11 +423,11 @@ function Core() {
               {imagePreview ? (
                 <img 
                   src={imagePreview} 
-                  alt="Preview" 
-                  className="max-w-full max-h-full object-contain"
+                  alt='Preview' 
+                  className='max-w-full max-h-full object-contain'
                 />
               ) : (
-                "Uploaded image preview goes here"
+                'Uploaded image preview goes here'
               )}
             </div>
 
@@ -430,7 +436,7 @@ function Core() {
               {uploadedImage ? (
                 <>Image uploaded: <span className='italic'>{uploadedImage.name}</span></>
               ) : (
-                "No image selected"
+                'No image selected'
               )}
             </p>
 
@@ -444,15 +450,15 @@ function Core() {
                 />
                 Upload image
                 <input
-                  type="file"
-                  accept="image/*"
+                  type='file'
+                  accept='image/*'
                   onChange={handleImageUpload}
-                  className="hidden"
+                  className='hidden'
                 />
               </label>
 
               <button 
-                type="button"
+                type='button'
                 onClick={handleDiscardImage}
                 disabled={!uploadedImage}
                 className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)] disabled:opacity-50 disabled:cursor-not-allowed'
@@ -523,7 +529,7 @@ function Core() {
 
             {/* Submit Button */}
             <button 
-              type="submit"
+              type='submit'
               disabled={isSubmitting}
               className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#006b61] transition-colors'
             >
