@@ -380,8 +380,6 @@ function Core() {
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
 
       {/* ================================================== Header Content ================================================== */}
-
-      {/* Header */}
       <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
         <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='m-2.5 ml-5' />
         <div className='flex lg:flex-col items-center justify-center'>
@@ -497,9 +495,9 @@ function Core() {
               {/* Description */}
               <div className='flex items-center justify-center w-full h-auto gap-2 text-[#e0e0e0] text-sm md:text-[1rem]'>
                 <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
-                <p className='mr-2'>{selectedReport?.sightings?.count || 0} others also see this</p>
+                <p className='mr-2'>{selectedReport?.sightings?.count || 0} people saw this issue</p>
                 <img src='/resolved-icon.png' alt='Resolved Icon' className='w-[26px] h-[26px]' />
-                <p>{selectedReport?.resolved?.count || 0} others saying it has been resolved</p>
+                <p>{selectedReport?.resolved?.count || 0} people said it has been resolved</p>
               </div>
               
               <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
@@ -514,7 +512,7 @@ function Core() {
                 <button 
                   onClick={() => handleSightingsClick(selectedReport?.id)}
                   disabled={!selectedReport || buttonLoading[`sightings-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_sightings`]}
-                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] rounded-[15px] transition-colors ${
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] rounded-[15px] transition-colors ${
                     userClickedButtons[`${selectedReport?.id}_sightings`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
                       : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
@@ -523,12 +521,12 @@ function Core() {
                   <img
                     src='/vision-icon.png'
                     alt='Vision Icon'
-                    className={`w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter m-2 ${
+                    className={`w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter mr-2 ${
                       userClickedButtons[`${selectedReport?.id}_sightings`] ? 'invert opacity-60' : 'invert'
                     }`}
                   />
                   {userClickedButtons[`${selectedReport?.id}_sightings`] 
-                    ? 'Already clicked' 
+                    ? "You've seen this" 
                     : buttonLoading[`sightings-${selectedReport?.id}`] 
                       ? 'Loading...' 
                       : 'I see this too'
@@ -539,7 +537,7 @@ function Core() {
                 <button 
                   onClick={() => handleResolvedClick(selectedReport?.id)}
                   disabled={!selectedReport || buttonLoading[`resolved-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_resolved`]}
-                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.9rem] md:text-[1rem] rounded-[15px] transition-colors ${
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors ${
                     userClickedButtons[`${selectedReport?.id}_resolved`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
                       : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
@@ -548,15 +546,15 @@ function Core() {
                   <img
                     src='/resolved-icon.png'
                     alt='Vision Icon'
-                    className={`w-[30px] md:w-[30px] h-[30px] md:h-[30px] m-2 ${
+                    className={`w-[30px] md:w-[30px] h-[30px] md:h-[30px] mr-1 ${
                       userClickedButtons[`${selectedReport?.id}_resolved`] ? 'opacity-60' : ''
                     }`}
                   />
                   {userClickedButtons[`${selectedReport?.id}_resolved`] 
-                    ? 'Already clicked' 
+                    ? 'Has been resolved' 
                     : buttonLoading[`resolved-${selectedReport?.id}`] 
                       ? 'Loading...' 
-                      : 'This has been resolved'
+                      : 'Has been resolved'
                   }
                 </button>
               </div>
@@ -566,7 +564,6 @@ function Core() {
       </div>
 
       {/* ================================================== Location Page Content ================================================== */}
-
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
           activeDiv === 'div2' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
@@ -590,7 +587,6 @@ function Core() {
       </div>
         
       {/* ================================================== Make Report Page Content ================================================== */}
-
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
           activeDiv === 'div3' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
@@ -746,8 +742,6 @@ function Core() {
       </div>
 
       {/* ================================================== Settings Page Content ================================================== */}
-
-      {/* Settings Page Content */}
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[75px] pb-[75px] ${
           activeDiv === 'div4' ? 'bg-[#008c7f]' : 'hidden'
@@ -886,7 +880,6 @@ function Core() {
       </div>
 
       {/* ================================================== Footer ================================================== */}
-
       <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000'>
         
         {/* ========================= Reports Button ========================= */}
