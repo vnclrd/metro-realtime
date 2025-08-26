@@ -17,16 +17,43 @@ function Core() {
   const [allReports, setAllReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
 
+  // Button click tracking states
+  const [buttonLoading, setButtonLoading] = useState({});
+  const [buttonStatus, setButtonStatus] = useState(null);
+
   const [activeDiv, setActiveDiv] = useState('div1');
   const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer';
 
   const [selectedIssue, setSelectedIssue] = useState('');
   const [locationName, setLocationName] = useState('Fetching location...');
 
+  // For already clicked verification
+  const [userClickedButtons, setUserClickedButtons] = useState({});
+
   const [savedLocationData, setSavedLocationData] = useState(() => {
     const stored = localStorage.getItem('savedLocation');
     return stored ? JSON.parse(stored) : {};
   });
+
+  // For already clicked verification
+  const checkUserButtonStatus = async (reportId) => {
+    if (!reportId) return;
+    
+    try {
+      const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/user-status`);
+      const result = await response.json();
+      
+      if (result.success) {
+        setUserClickedButtons(prev => ({
+          ...prev,
+          [`${reportId}_sightings`]: result.has_sighting_click,
+          [`${reportId}_resolved`]: result.has_resolved_click
+        }));
+      }
+    } catch (error) {
+      console.error('Error checking user button status:', error);
+    }
+  };
 
   // Function to calculate distance between two coordinates using Haversine formula
   const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -68,23 +95,134 @@ function Core() {
     }
   };
 
+  // Function to refresh reports data
+  const fetchReports = async () => {
+    try {
+      const response = await fetch('http://192.168.1.3:5000/api/reports');
+      if (!response.ok) {
+        throw new Error('Failed to fetch reports');
+      }
+      const data = await response.json();
+      setAllReports(data.reports);
+      filterReportsByLocation(data.reports, savedLocationData);
+    } catch (error) {
+      console.error('Error fetching reports:', error);
+    }
+  };
+
+  // Function to handle sightings button click
+  const handleSightingsClick = async (reportId) => {
+    if (!reportId || buttonLoading[`sightings-${reportId}`] || userClickedButtons[`${reportId}_sightings`]) return;
+
+    setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: true }));
+    setButtonStatus(null);
+
+    try {
+      const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/sightings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setButtonStatus({
+          type: 'success',
+          message: result.message
+        });
+        
+        // Mark button as clicked
+        setUserClickedButtons(prev => ({
+          ...prev,
+          [`${reportId}_sightings`]: true
+        }));
+        
+        // Refresh reports data to get updated counts
+        await fetchReports();
+      } else {
+        setButtonStatus({
+          type: 'error',
+          message: result.message
+        });
+      }
+    } catch (error) {
+      setButtonStatus({
+        type: 'error',
+        message: 'Failed to record sighting'
+      });
+    } finally {
+      setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: false }));
+      // Clear status message after 3 seconds
+      setTimeout(() => setButtonStatus(null), 3000);
+    }
+  };
+
+  // Function to handle resolved button click
+  const handleResolvedClick = async (reportId) => {
+    if (!reportId || buttonLoading[`resolved-${reportId}`] || userClickedButtons[`${reportId}_resolved`]) return;
+
+    setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: true }));
+    setButtonStatus(null);
+
+    try {
+      const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/resolved`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setButtonStatus({
+          type: 'success',
+          message: result.message
+        });
+
+        // Mark button as clicked
+        setUserClickedButtons(prev => ({
+          ...prev,
+          [`${reportId}_resolved`]: true
+        }));
+        
+        // If report was deleted, clear selection
+        if (result.report_deleted) {
+          setSelectedReport(null);
+        }
+        
+        // Refresh reports data to get updated counts
+        await fetchReports();
+      } else {
+        setButtonStatus({
+          type: 'error',
+          message: result.message
+        });
+      }
+    } catch (error) {
+      setButtonStatus({
+        type: 'error',
+        message: 'Failed to record resolution'
+      });
+    } finally {
+      setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: false }));
+      // Clear status message after 3 seconds
+      setTimeout(() => setButtonStatus(null), 3000);
+    }
+  };
+
+  // Update your selectedReport useEffect or add this
+  useEffect(() => {
+    if (selectedReport?.id) {
+      checkUserButtonStatus(selectedReport.id);
+    }
+  }, [selectedReport?.id]);
+
   // Fetch reports from backend (reports.json) and filter them based on location
   useEffect(() => {
-    const fetchAndFilterReports = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/reports');
-        if (!response.ok) {
-          throw new Error('Failed to fetch reports');
-        }
-        const data = await response.json();
-        setAllReports(data.reports);
-        filterReportsByLocation(data.reports, savedLocationData);
-      } catch (error) {
-        console.error('Error fetching reports:', error);
-      }
-    };
-
-    fetchAndFilterReports();
+    fetchReports();
   }, [savedLocationData]);
 
   // Load saved location on mount
@@ -181,7 +319,7 @@ function Core() {
       formData.append('longitude', savedLocationData.lng);
 
       // Submit to backend
-      const response = await fetch('http://localhost:5000/api/reports', {
+      const response = await fetch('http://192.168.1.3:5000/api/reports', {
         method: 'POST',
         body: formData
       });
@@ -199,6 +337,9 @@ function Core() {
         setCustomIssue('');
         setDescription('');
         handleDiscardImage();
+
+        // Refresh reports data
+        await fetchReports();
       } else {
         throw new Error(result.message || 'Failed to submit report');
       }
@@ -306,11 +447,15 @@ function Core() {
                         <div className='flex items-center gap-2'>
                           {/* Sightings */}
                           <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
-                          <span className='text-[#e0e0e0] text-[1.25rem] mr-2'>3</span>
+                          <span className='text-[#e0e0e0] text-[1.25rem] mr-2'>
+                            {report.sightings?.count || 0}
+                          </span>
 
                           {/* Resolved Votes */}
-                          <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px]' />
-                          <span className='text-[#e0e0e0] text-[1.25rem]'>0</span>
+                          <img src='/resolved-icon.png' alt='Resolved Icon' className='w-[26px] h-[26px]' />
+                          <span className='text-[#e0e0e0] text-[1.25rem]'>
+                            {report.resolved?.count || 0}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -325,11 +470,22 @@ function Core() {
           {/* Right Panel */}
           <div className='flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]'>
             <div className='flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5'>
+              {/* Status Message for Button Actions */}
+              {buttonStatus && (
+                <div className={`p-3 rounded-lg text-center text-sm ${
+                  buttonStatus.type === 'success' 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-red-600 text-white'
+                }`}>
+                  {buttonStatus.message}
+                </div>
+              )}
+
               {/* Image Holder */}
               <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688] text-[#e0e0e0] flex items-center justify-center'>
                 {selectedReport && selectedReport.image_filename ? (
                   <img
-                    src={`http://localhost:5000/api/images/${selectedReport.image_filename}`}
+                    src={`http://192.168.1.3:5000/api/images/${selectedReport.image_filename}`}
                     alt='Photo of report'
                     className='w-full h-full object-cover rounded-[15px]'
                   />
@@ -341,10 +497,11 @@ function Core() {
               {/* Description */}
               <div className='flex items-center justify-center w-full h-auto gap-2 text-[#e0e0e0] text-sm md:text-[1rem]'>
                 <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
-                <p className='mr-2'>3 others also see this</p>
-                <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px]' />
-                <p>0 others saying it has been resolved</p>
+                <p className='mr-2'>{selectedReport?.sightings?.count || 0} others also see this</p>
+                <img src='/resolved-icon.png' alt='Resolved Icon' className='w-[26px] h-[26px]' />
+                <p>{selectedReport?.resolved?.count || 0} others saying it has been resolved</p>
               </div>
+              
               <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
                 <p>
                   {selectedReport?.description || 'Select a report to view its details.'}
@@ -354,25 +511,55 @@ function Core() {
               {/* Buttons */}
               <div className='flex gap-3'>
                 {/* Sightings Button */}
-                <button className='flex items-center justify-center w-[50%] h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
+                <button 
+                  onClick={() => handleSightingsClick(selectedReport?.id)}
+                  disabled={!selectedReport || buttonLoading[`sightings-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_sightings`]}
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] rounded-[15px] transition-colors ${
+                    userClickedButtons[`${selectedReport?.id}_sightings`]
+                      ? 'bg-gray-500 cursor-not-allowed opacity-60'
+                      : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
+                  }`}
+                >
                   <img
                     src='/vision-icon.png'
                     alt='Vision Icon'
-                    className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2'
+                    className={`w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter m-2 ${
+                      userClickedButtons[`${selectedReport?.id}_sightings`] ? 'invert opacity-60' : 'invert'
+                    }`}
                   />
-                  I see this too
+                  {userClickedButtons[`${selectedReport?.id}_sightings`] 
+                    ? 'Already clicked' 
+                    : buttonLoading[`sightings-${selectedReport?.id}`] 
+                      ? 'Loading...' 
+                      : 'I see this too'
+                  }
                 </button>
+
                 {/* Resolved Button */}
-                <button className='flex items-center justify-center w-[50%] h-[50px] bg-[#00786d] text-[#e0e0e0] text-[0.9rem] md:text-[1rem] rounded-[15px] cursor-pointer'>
+                <button 
+                  onClick={() => handleResolvedClick(selectedReport?.id)}
+                  disabled={!selectedReport || buttonLoading[`resolved-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_resolved`]}
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.9rem] md:text-[1rem] rounded-[15px] transition-colors ${
+                    userClickedButtons[`${selectedReport?.id}_resolved`]
+                      ? 'bg-gray-500 cursor-not-allowed opacity-60'
+                      : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
+                  }`}
+                >
                   <img
                     src='/resolved-icon.png'
                     alt='Vision Icon'
-                    className='w-[30px] md:w-[30px] h-[30px] md:h-[30px] m-2'
+                    className={`w-[30px] md:w-[30px] h-[30px] md:h-[30px] m-2 ${
+                      userClickedButtons[`${selectedReport?.id}_resolved`] ? 'opacity-60' : ''
+                    }`}
                   />
-                  This has been resolved
+                  {userClickedButtons[`${selectedReport?.id}_resolved`] 
+                    ? 'Already clicked' 
+                    : buttonLoading[`resolved-${selectedReport?.id}`] 
+                      ? 'Loading...' 
+                      : 'This has been resolved'
+                  }
                 </button>
               </div>
-
             </div>
           </div>
         </div>

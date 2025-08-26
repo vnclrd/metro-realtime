@@ -24,6 +24,14 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs('data', exist_ok=True)
 
+def get_client_ip():
+    """Get the client's IP address"""
+    if request.headers.getlist("X-Forwarded-For"):
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        ip = request.remote_addr
+    return ip
+
 @app.route('/')
 def home():
     return 'Hello, World!'
@@ -94,6 +102,13 @@ def save_reports(reports):
     with open(DATA_FILE, 'w') as f:
         json.dump(reports, f, indent=2)
 
+def delete_report_files(report):
+    """Delete associated image file for a report"""
+    if report.get('image_filename'):
+        image_path = os.path.join(UPLOAD_FOLDER, report['image_filename'])
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
 # FILE SAVING COMPONENTS
 @app.route('/api/reports', methods=['POST'])
 def create_report():
@@ -127,7 +142,15 @@ def create_report():
             'latitude': float(location_lat) if location_lat else None,
             'longitude': float(location_lng) if location_lng else None,
             'image_filename': image_filename,
-            'status': 'pending'
+            'status': 'pending',
+            'sightings': {
+                'count': 0,
+                'user_ips': []
+            },
+            'resolved': {
+                'count': 0,
+                'user_ips': []
+            }
         }
 
         # Load existing reports and add new one
@@ -197,6 +220,146 @@ def get_report(report_id):
             'message': f'Error fetching report: {str(e)}'
         }), 500
 
+@app.route('/api/reports/<report_id>/sightings', methods=['POST'])
+def add_sighting(report_id):
+    """Add a sighting click for a report"""
+    try:
+        client_ip = get_client_ip()
+        reports = load_reports()
+        report = next((r for r in reports if r['id'] == report_id), None)
+        
+        if not report:
+            return jsonify({
+                'success': False,
+                'message': 'Report not found'
+            }), 404
+        
+        # Initialize sightings structure if it doesn't exist (for backward compatibility)
+        if 'sightings' not in report:
+            report['sightings'] = {'count': 0, 'user_ips': []}
+        
+        # Check if user has already clicked
+        if client_ip in report['sightings']['user_ips']:
+            return jsonify({
+                'success': False,
+                'message': 'You have already reported seeing this issue'
+            }), 400
+        
+        # Add the click
+        report['sightings']['count'] += 1
+        report['sightings']['user_ips'].append(client_ip)
+        report['updated_at'] = datetime.now().isoformat()
+        
+        save_reports(reports)
+        
+        return jsonify({
+            'success': True,
+            'message': 'Sighting recorded successfully',
+            'sightings_count': report['sightings']['count']
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error recording sighting: {str(e)}'
+        }), 500
+
+@app.route('/api/reports/<report_id>/resolved', methods=['POST'])
+def add_resolved(report_id):
+    """Add a resolved click for a report"""
+    try:
+        client_ip = get_client_ip()
+        reports = load_reports()
+        report_index = next((i for i, r in enumerate(reports) if r['id'] == report_id), None)
+        
+        if report_index is None:
+            return jsonify({
+                'success': False,
+                'message': 'Report not found'
+            }), 404
+        
+        report = reports[report_index]
+        
+        # Initialize resolved structure if it doesn't exist (for backward compatibility)
+        if 'resolved' not in report:
+            report['resolved'] = {'count': 0, 'user_ips': []}
+        
+        # Check if user has already clicked
+        if client_ip in report['resolved']['user_ips']:
+            return jsonify({
+                'success': False,
+                'message': 'You have already marked this issue as resolved'
+            }), 400
+        
+        # Add the click
+        report['resolved']['count'] += 1
+        report['resolved']['user_ips'].append(client_ip)
+        report['updated_at'] = datetime.now().isoformat()
+        
+        # Check if resolved count reached 10 - delete the report
+        if report['resolved']['count'] >= 10:
+            # Delete associated image file
+            delete_report_files(report)
+            
+            # Remove report from list
+            reports.pop(report_index)
+            save_reports(reports)
+            
+            return jsonify({
+                'success': True,
+                'message': 'Report marked as resolved and removed (10 confirmations reached)',
+                'report_deleted': True
+            })
+        else:
+            save_reports(reports)
+            return jsonify({
+                'success': True,
+                'message': 'Resolution vote recorded successfully',
+                'resolved_count': report['resolved']['count']
+            })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error recording resolution: {str(e)}'
+        }), 500
+
+# For already clicked verification
+@app.route('/api/reports/<report_id>/user-status', methods=['GET'])
+def get_user_report_status(report_id):
+    """Check if current user has already clicked buttons for this report"""
+    try:
+        client_ip = get_client_ip()
+        reports = load_reports()
+        report = next((r for r in reports if r['id'] == report_id), None)
+        
+        if not report:
+            return jsonify({
+                'success': False,
+                'message': 'Report not found'
+            }), 404
+        
+        # Initialize structures if they don't exist (backward compatibility)
+        if 'sightings' not in report:
+            report['sightings'] = {'count': 0, 'user_ips': []}
+        if 'resolved' not in report:
+            report['resolved'] = {'count': 0, 'user_ips': []}
+        
+        has_sighting_click = client_ip in report['sightings']['user_ips']
+        has_resolved_click = client_ip in report['resolved']['user_ips']
+        
+        return jsonify({
+            'success': True,
+            'has_sighting_click': has_sighting_click,
+            'has_resolved_click': has_resolved_click
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error checking user status: {str(e)}'
+        }), 500
+    
 @app.route('/api/reports/<report_id>', methods=['PUT'])
 def update_report_status(report_id):
     """Update report status"""
@@ -248,10 +411,7 @@ def delete_report(report_id):
             }), 404
         
         # Delete associated image file
-        if report.get('image_filename'):
-            image_path = os.path.join(UPLOAD_FOLDER, report['image_filename'])
-            if os.path.exists(image_path):
-                os.remove(image_path)
+        delete_report_files(report)
         
         # Remove report from list
         reports = [r for r in reports if r['id'] != report_id]
@@ -274,4 +434,4 @@ def serve_image(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', debug=True, port=5000)

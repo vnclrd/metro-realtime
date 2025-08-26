@@ -9,7 +9,20 @@
     "latitude": 14.6887242,
     "longitude": 121.0187414,
     "image_filename": "65f397b9-6c4b-4d59-bab4-a23873227147.jpg",
-    "status": "pending"
+    "status": "pending",
+    "sightings": {
+      "count": 1,
+      "user_ips": [
+        "127.0.0.1"
+      ]
+    },
+    "updated_at": "2025-08-26T14:40:42.192492",
+    "resolved": {
+      "count": 1,
+      "user_ips": [
+        "127.0.0.1"
+      ]
+    }
   },
   {
     "id": "7eb8595c-24f0-47fb-8b3f-a3b24697d4be",
@@ -21,7 +34,21 @@
     "latitude": 14.6887242,
     "longitude": 121.0187414,
     "image_filename": "8bf2e465-93c1-447d-b8bf-5088329de4db.jpg",
-    "status": "pending"
+    "status": "pending",
+    "resolved": {
+      "count": 1,
+      "user_ips": [
+        "127.0.0.1"
+      ]
+    },
+    "updated_at": "2025-08-26T15:16:31.482582",
+    "sightings": {
+      "count": 2,
+      "user_ips": [
+        "127.0.0.1",
+        "192.168.1.20"
+      ]
+    }
   },
   {
     "id": "de5a3c28-3781-49ff-9586-648862d1ac9f",
@@ -33,6 +60,21 @@
     "latitude": 14.6887242,
     "longitude": 121.0187414,
     "image_filename": "49d36694-d140-4ee4-8e8e-a4d1183a533e.jpg",
-    "status": "pending"
+    "status": "pending",
+    "sightings": {
+      "count": 2,
+      "user_ips": [
+        "127.0.0.1",
+        "192.168.1.8"
+      ]
+    },
+    "updated_at": "2025-08-26T15:18:58.573539",
+    "resolved": {
+      "count": 2,
+      "user_ips": [
+        "127.0.0.1",
+        "192.168.1.8"
+      ]
+    }
   }
 ]
