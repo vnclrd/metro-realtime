@@ -309,7 +309,7 @@ function Core() {
                           <span className='text-[#e0e0e0] text-[1.25rem] mr-2'>3</span>
 
                           {/* Resolved Votes */}
-                          <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                          <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px]' />
                           <span className='text-[#e0e0e0] text-[1.25rem]'>0</span>
                         </div>
                       </div>
@@ -342,7 +342,7 @@ function Core() {
               <div className='flex items-center justify-center w-full h-auto gap-2 text-[#e0e0e0] text-sm md:text-[1rem]'>
                 <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
                 <p className='mr-2'>3 others also see this</p>
-                <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
+                <img src='/resolved-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px]' />
                 <p>0 others saying it has been resolved</p>
               </div>
               <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
@@ -351,15 +351,28 @@ function Core() {
                 </p>
               </div>
 
-              {/* Button */}
-              <button className='flex items-center justify-center w-full h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
-                <img
-                  src='/vision-icon.png'
-                  alt='Vision Icon'
-                  className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2 md:m-3'
-                />
-                I see this too
-              </button>
+              {/* Buttons */}
+              <div className='flex gap-3'>
+                {/* Sightings Button */}
+                <button className='flex items-center justify-center w-[50%] h-[50px] bg-[#00786d] text-[#e0e0e0] rounded-[15px] cursor-pointer'>
+                  <img
+                    src='/vision-icon.png'
+                    alt='Vision Icon'
+                    className='w-[30px] md:w-[40px] h-[30px] md:h-[40px] filter invert m-2'
+                  />
+                  I see this too
+                </button>
+                {/* Resolved Button */}
+                <button className='flex items-center justify-center w-[50%] h-[50px] bg-[#00786d] text-[#e0e0e0] text-[0.9rem] md:text-[1rem] rounded-[15px] cursor-pointer'>
+                  <img
+                    src='/resolved-icon.png'
+                    alt='Vision Icon'
+                    className='w-[30px] md:w-[30px] h-[30px] md:h-[30px] m-2'
+                  />
+                  This has been resolved
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
