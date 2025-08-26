@@ -11,16 +11,18 @@
     "image_filename": "65f397b9-6c4b-4d59-bab4-a23873227147.jpg",
     "status": "pending",
     "sightings": {
-      "count": 1,
+      "count": 2,
       "user_ips": [
-        "127.0.0.1"
+        "127.0.0.1",
+        "192.168.1.3"
       ]
     },
-    "updated_at": "2025-08-26T14:40:42.192492",
+    "updated_at": "2025-08-26T16:41:56.117346",
     "resolved": {
-      "count": 1,
+      "count": 2,
       "user_ips": [
-        "127.0.0.1"
+        "127.0.0.1",
+        "192.168.1.3"
       ]
     }
   },
@@ -36,17 +38,19 @@
     "image_filename": "8bf2e465-93c1-447d-b8bf-5088329de4db.jpg",
     "status": "pending",
     "resolved": {
-      "count": 1,
-      "user_ips": [
-        "127.0.0.1"
-      ]
-    },
-    "updated_at": "2025-08-26T15:16:31.482582",
-    "sightings": {
       "count": 2,
       "user_ips": [
         "127.0.0.1",
-        "192.168.1.20"
+        "192.168.1.3"
+      ]
+    },
+    "updated_at": "2025-08-26T16:41:53.250763",
+    "sightings": {
+      "count": 3,
+      "user_ips": [
+        "127.0.0.1",
+        "192.168.1.20",
+        "192.168.1.3"
       ]
     }
   },
@@ -62,19 +66,46 @@
     "image_filename": "49d36694-d140-4ee4-8e8e-a4d1183a533e.jpg",
     "status": "pending",
     "sightings": {
-      "count": 2,
+      "count": 3,
       "user_ips": [
         "127.0.0.1",
-        "192.168.1.8"
+        "192.168.1.8",
+        "192.168.1.3"
       ]
     },
-    "updated_at": "2025-08-26T15:18:58.573539",
+    "updated_at": "2025-08-26T16:41:41.645967",
     "resolved": {
-      "count": 2,
+      "count": 3,
       "user_ips": [
         "127.0.0.1",
-        "192.168.1.8"
+        "192.168.1.8",
+        "192.168.1.3"
       ]
     }
+  },
+  {
+    "id": "99c0e134-1f68-4371-a7a0-1f224b153c1e",
+    "timestamp": "2025-08-26T16:43:36.192626",
+    "issue_type": "damaged-sidewalk",
+    "custom_issue": "",
+    "description": "The sidewalk is damaged.",
+    "location": "BNJ Tire Supply, Mindanao Avenue, Jem 7, Talipapa, 6th District, Quezon City, Eastern Manila District, Metro Manila, 1440, Philippines",
+    "latitude": 14.688283127555415,
+    "longitude": 121.03054046630861,
+    "image_filename": "cbc7345f-01a3-4159-93f7-db6046ae2753.jpg",
+    "status": "pending",
+    "sightings": {
+      "count": 1,
+      "user_ips": [
+        "192.168.1.3"
+      ]
+    },
+    "resolved": {
+      "count": 1,
+      "user_ips": [
+        "192.168.1.3"
+      ]
+    },
+    "updated_at": "2025-08-26T16:43:53.457185"
   }
 ]

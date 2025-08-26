@@ -84,10 +84,11 @@ function App() {
   return (
     <div className='flex w-full min-h-screen bg-[#009688] items-center justify-center p-4'>
       <div className='flex flex-col items-center justify-center w-full max-w-lg'>
-        <h1 className='text-3xl sm:text-3xl lg:text-[2.5rem] mb-5 text-[#e0e0e0] text-center'>
+        <h1 className='text-[1.75rem] sm:text-2xl lg:text-4xl mb-5 text-[#e0e0e0] text-center'>
           Where are you located?
         </h1>
-        <div className='flex w-full max-w-md items-center'>
+        <div className='flex w-full max-w-md items-center justify-center'>
+          {/* Detect Location Button */}
           <button
             onClick={handleDetectLocation}
             disabled={detecting}
@@ -99,13 +100,15 @@ function App() {
           >
             <img src='/navigation-icon.png' alt='Target Icon' className='w-6 h-6' />
           </button>
+          {/* Type Location Here */}
           <input
             type='text'
             placeholder='Enter your location'
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className='flex-1 h-12 bg-[#e0e0e0] rounded-full pl-4 pr-4 mr-2.5 focus:outline-none focus:ring-2 focus:ring-[#00796b] shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'
+            className='flex w-[225px] sm:w-[350px] md:w-[350px] lg:w-[350px] h-12 bg-[#e0e0e0] rounded-full pl-4 pr-4 mr-2.5 focus:outline-none focus:ring-2 focus:ring-[#00796b] shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'
           />
+          {/* Submit Button */}
           <button
             onClick={handleRedirect}
             disabled={!location.trim() || loading}
@@ -118,6 +121,7 @@ function App() {
             <img src='/arrow-icon.png' alt='Arrow Icon' className='w-5 h-5' />
           </button>
         </div>
+        <p className='text-[#e0e0e0] text-xs mt-3 italic'>Tip: You can pin your exact location later.</p>
       </div>
     </div>
   );
