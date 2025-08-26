@@ -891,10 +891,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div1')}
         >
-
           <img src='/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Reports</p>
-
         </button>
 
         {/* ========================= Location Button ========================= */}
@@ -906,10 +904,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div2')}
         >
-
           <img src='/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Location</p>
-
         </button>
 
         {/* ========================= Make Report Button ========================= */}
@@ -921,10 +917,8 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div3')}
         >
-
           <img src='/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-xs sm:text-sm md:text-sm lg:text-sm mt-[1px]'>Make Report</p>
-
         </button>
 
         {/* ========================= Settings Button ========================= */}
@@ -936,14 +930,10 @@ function Core() {
           }`}
           onClick={() => setActiveDiv('div4')}
         >
-
           <img src='/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
           <p className='font-light text-sm mt-[1px]'>Settings</p>
-          
         </button>
-
       </footer>
-
     </div>
   )
 }
