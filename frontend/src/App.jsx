@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const [location, setLocation] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [detecting, setDetecting] = useState(false)
+  const [location, setLocation] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [detecting, setDetecting] = useState(false);
   const navigate = useNavigate();
 
   const handleRedirect = async () => {
@@ -22,14 +22,12 @@ function App() {
       const data = await response.json();
 
       if (response.ok) {
-        // Save location data to localStorage
         localStorage.setItem('savedLocation', JSON.stringify({
           name: data.data.name,
           lat: data.data.latitude,
           lng: data.data.longitude
         }));
 
-        // Navigate to Core.jsx
         navigate('/core');
       } else {
         alert(data.error || 'Something went wrong');
@@ -44,11 +42,11 @@ function App() {
 
   const handleDetectLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.')
-      return
+      alert('Geolocation is not supported by your browser.');
+      return;
     }
-    
-    setDetecting(true)
+
+    setDetecting(true);
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -78,23 +76,18 @@ function App() {
       (error) => {
         console.error(error);
         setDetecting(false);
-        alert('Unable to retrieve your location. Please check your browser permissions.')
+        alert('Unable to retrieve your location. Please check your browser permissions.');
       }
-    )
-  }
+    );
+  };
 
   return (
     <div className='flex w-full min-h-screen bg-[#009688] items-center justify-center p-4'>
       <div className='flex flex-col items-center justify-center w-full max-w-lg'>
-        {/* Title */}
         <h1 className='text-3xl sm:text-3xl lg:text-[2.5rem] mb-5 text-[#e0e0e0] text-center'>
           Where are you located?
         </h1>
-
-        {/* Input & Buttons */}
         <div className='flex w-full max-w-md items-center'>
-          
-          {/* Target Button */}
           <button
             onClick={handleDetectLocation}
             disabled={detecting}
@@ -104,10 +97,8 @@ function App() {
                 : 'bg-[#e0e0e0] hover:bg-gray-200'
             }`}
           >
-            <img src='/target-icon.png' alt='Target Icon' className='w-6 h-6' />
+            <img src='/navigation-icon.png' alt='Target Icon' className='w-6 h-6' />
           </button>
-
-          {/* Input Field */}
           <input
             type='text'
             placeholder='Enter your location'
@@ -115,8 +106,6 @@ function App() {
             onChange={(e) => setLocation(e.target.value)}
             className='flex-1 h-12 bg-[#e0e0e0] rounded-full pl-4 pr-4 mr-2.5 focus:outline-none focus:ring-2 focus:ring-[#00796b] shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'
           />
-
-          {/* Arrow Button */}
           <button
             onClick={handleRedirect}
             disabled={!location.trim() || loading}

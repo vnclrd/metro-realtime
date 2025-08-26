@@ -63,7 +63,7 @@ function MapResizer({ center }) {
 
     let timeoutId;
     let tries = 0;
-    const maxTries = 5; // Reduced from 10
+    const maxTries = 5;
 
     function refreshMap() {
       if (!map) return;
@@ -74,20 +74,19 @@ function MapResizer({ center }) {
         if (center) {
           map.setView(center, map.getZoom(), { 
             animate: true,
-            duration: 0.5 // Faster animation
+            duration: 0.5
           });
         }
 
         if (tries < maxTries) {
           tries++;
-          timeoutId = setTimeout(refreshMap, 200); // Reduced from 300ms
+          timeoutId = setTimeout(refreshMap, 200);
         }
       } catch (error) {
         console.error('Map refresh error:', error);
       }
     }
 
-    // Use requestAnimationFrame for better performance
     requestAnimationFrame(refreshMap);
 
     const handleResize = () => {
@@ -125,7 +124,7 @@ function MapResizer({ center }) {
 }
 
 // Optimized Center button
-function CenterButton({ markerPos }) {
+function CenterButton({ markerPos, handleDetectLocation }) {
   const map = useMap();
   
   const handleCenter = () => {
@@ -138,22 +137,35 @@ function CenterButton({ markerPos }) {
   };
 
   return (
-    <button
-      onClick={handleCenter}
-      className='absolute top-4 right-4 z-[1000] p-2 bg-white rounded-full shadow-lg border border-gray-300 cursor-pointer hover:bg-gray-50 transition-colors duration-200'
-    >
-      <img 
-        src='./target-icon.png' 
-        alt='Target Icon' 
-        className='w-[26px] h-auto'
-        loading='lazy'
-      />
-    </button>
+    <>
+      <button
+        onClick={handleCenter}
+        className='absolute top-4 right-4 z-[1000] p-2 bg-white rounded-full shadow-lg border border-gray-300 cursor-pointer hover:bg-gray-50 transition-colors duration-200'
+      >
+        <img 
+          src='./target-icon.png' 
+          alt='Target Icon' 
+          className='w-[26px] h-auto'
+          loading='lazy'
+        />
+      </button>
+      <button
+        onClick={handleDetectLocation}
+        className='absolute top-4 right-16 z-[1000] p-2 bg-white rounded-full shadow-lg border cursor-pointer'
+      >
+        <img 
+          src='./navigation-icon.png' 
+          alt='Target Icon' 
+          className='w-[26px] h-auto'
+          loading='lazy'
+        />
+      </button>
+    </>
   );
 }
 
 // Memoized Map Component for better performance
-const OptimizedMap = ({ markerPos, currentZoom, handleDragEnd, locationName, markerRef }) => (
+const OptimizedMap = ({ markerPos, currentZoom, handleDragEnd, locationName, markerRef, handleDetectLocation }) => (
   <MapContainer
     center={markerPos}
     zoom={currentZoom}
@@ -163,29 +175,25 @@ const OptimizedMap = ({ markerPos, currentZoom, handleDragEnd, locationName, mar
       borderRadius: '20px',
     }}
     zoomControl={false}
-    preferCanvas={true} // Use canvas for better performance
-    updateWhenIdle={false} // Update continuously for smoother experience
+    preferCanvas={true}
+    updateWhenIdle={false}
     updateWhenZooming={false}
     keepInView={true}
     whenReady={(map) => {
-      // Preload tiles when map is ready
       const center = map.target.getCenter();
       preloadTiles(center.lat, center.lng, currentZoom);
     }}
   >
-    {/* Tile Layer with performance optimizations */}
     <TileLayer
       url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OSM</a>"
       maxZoom={18}
       minZoom={10}
-      keepBuffer={2} // Keep extra tiles in memory
+      keepBuffer={2}
       updateWhenIdle={false}
       updateWhenZooming={false}
       crossOrigin={true}
     />
-
-    {/* Draggable Marker */}
     <Marker
       ref={markerRef}
       position={markerPos}
@@ -199,10 +207,8 @@ const OptimizedMap = ({ markerPos, currentZoom, handleDragEnd, locationName, mar
         {locationName || 'Drag marker to change location'}
       </Popup>
     </Marker>
-    
-    {/* Force Map Resize and Center Button */}
     <MapResizer center={markerPos} />
-    <CenterButton markerPos={markerPos} />
+    <CenterButton markerPos={markerPos} handleDetectLocation={handleDetectLocation} />
   </MapContainer>
 );
 
@@ -215,17 +221,70 @@ export default function LocationContent({ location, setLocation }) {
   const [locationName, setLocationName] = useState(
     location?.name || 'Fetching your location...'
   );
+  const [detecting, setDetecting] = useState(false);
 
-  // Store the last valid position
   const lastValidPosition = useRef(null);
   const markerRef = useRef(null);
 
-  // Preload location and tiles
+  const handleDetectLocation = () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setDetecting(true);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        try {
+          const response = await fetch('http://127.0.0.1:5000/reverse-geocode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ latitude, longitude }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setLocation({
+              lat: latitude,
+              lng: longitude,
+              name: data.address
+            });
+            setMarkerPos([latitude, longitude]);
+            setLocationName(data.address);
+            lastValidPosition.current = [latitude, longitude];
+          } else {
+            alert(data.error || 'Failed to get address');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Failed to detect location. Please try again.');
+        } finally {
+          setDetecting(false);
+        }
+      },
+      (error) => {
+        console.error(error);
+        setDetecting(false);
+        alert('Unable to retrieve your location. Please check your browser permissions.');
+      }
+    );
+  };
+
   useEffect(() => {
     let isMounted = true;
 
     const initializeLocation = async () => {
-      if (!location?.lat || !location?.lng) {
+      if (location?.lat && location?.lng) {
+        setMarkerPos([location.lat, location.lng]);
+        setLocationName(location.name);
+        lastValidPosition.current = [location.lat, location.lng];
+        preloadTiles(location.lat, location.lng, 13);
+        setIsMapReady(true);
+      } else {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             async (pos) => {
@@ -235,18 +294,16 @@ export default function LocationContent({ location, setLocation }) {
               const lng = pos.coords.longitude;
               const position = [lat, lng];
               
-              // Preload tiles immediately
               preloadTiles(lat, lng, 13);
               
               setMarkerPos(position);
               lastValidPosition.current = position;
 
-              // Get readable name using OpenStreetMap Nominatim API
               try {
                 const res = await fetch(
                   `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`,
                   {
-                    signal: AbortSignal.timeout(5000) // 5 second timeout
+                    signal: AbortSignal.timeout(5000)
                   }
                 );
                 
@@ -275,20 +332,15 @@ export default function LocationContent({ location, setLocation }) {
               setIsMapReady(true);
             },
             {
-              timeout: 10000, // 10 second timeout
-              enableHighAccuracy: false, // Faster but less accurate
-              maximumAge: 60000 // Cache for 1 minute
+              timeout: 10000,
+              enableHighAccuracy: false,
+              maximumAge: 60000
             }
           );
         } else {
           setLocationName('Geolocation is not supported by your browser.');
           setIsMapReady(true);
         }
-      } else {
-        // If location is provided, preload tiles and set ready
-        preloadTiles(location.lat, location.lng, 13);
-        lastValidPosition.current = [location.lat, location.lng];
-        setIsMapReady(true);
       }
     };
 
@@ -299,29 +351,25 @@ export default function LocationContent({ location, setLocation }) {
     };
   }, [location, setLocation]);
 
-  // Optimized drag end handler with debouncing
   const handleDragEnd = async (e) => {
     const newLatLng = e.target.getLatLng();
     const newPosition = [newLatLng.lat, newLatLng.lng];
 
     try {
-      // Preload tiles for new position
       preloadTiles(newLatLng.lat, newLatLng.lng, currentZoom);
       
       const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${newLatLng.lat}&lon=${newLatLng.lng}`,
         {
-          signal: AbortSignal.timeout(3000) // 3 second timeout
+          signal: AbortSignal.timeout(3000)
         }
       );
       const data = await res.json();
       const name = data.display_name || `Lat: ${newLatLng.lat}, Lng: ${newLatLng.lng}`;
 
-      // Check if the location name contains 'Metro Manila' (case insensitive)
       const isValidLocation = name.toLowerCase().includes('metro manila');
 
       if (isValidLocation) {
-        // Valid location - update everything
         setMarkerPos(newPosition);
         setLocationName(name);
         lastValidPosition.current = newPosition;
@@ -334,21 +382,16 @@ export default function LocationContent({ location, setLocation }) {
           });
         }
       } else {
-        // Invalid location - revert to last valid position
         if (lastValidPosition.current) {
           setMarkerPos([...lastValidPosition.current]);
-          
           if (markerRef.current) {
             markerRef.current.setLatLng(lastValidPosition.current);
           }
         }
-        
         console.log('Invalid location: Must be within Metro Manila');
       }
     } catch (err) {
       console.error('Error fetching location name:', err);
-      
-      // On error, also revert to last valid position
       if (lastValidPosition.current) {
         setMarkerPos([...lastValidPosition.current]);
         if (markerRef.current) {
@@ -360,7 +403,6 @@ export default function LocationContent({ location, setLocation }) {
 
   return (
     <div className='flex flex-col w-full h-full'>
-      {/* Header */}
       <div className='flex flex-col items-center justify-center mb-4 text-center'>
         <h1 className='text-[2rem] md:text-[2.5rem] font-bold'>Select Location</h1>
         <p className='text-md text-[#e0e0e0]'>
@@ -369,8 +411,6 @@ export default function LocationContent({ location, setLocation }) {
           <span className='italic text-[#e0e0e0] text-md'>{locationName}</span>
         </p>
       </div>
-
-      {/* Map Container with loading state */}
       <div className='w-full h-[600px] sm:h-[400px] md:h-[500px] bg-[#009688] rounded-[25px] overflow-hidden relative'>
         {!isMapReady || !markerPos ? (
           <MapLoader />
@@ -382,6 +422,7 @@ export default function LocationContent({ location, setLocation }) {
               handleDragEnd={handleDragEnd}
               locationName={locationName}
               markerRef={markerRef}
+              handleDetectLocation={handleDetectLocation}
             />
           </Suspense>
         )}
