@@ -598,7 +598,7 @@ function Core() {
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
-                Report an Issue
+                Make a Report
               </h1>
               <p className='text-sm md:text-[0.9rem] text-[#e0e0e0]'>near your location:</p>
               <p className='text-sm md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
@@ -744,7 +744,7 @@ function Core() {
       {/* ================================================== Settings Page Content ================================================== */}
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[75px] pb-[75px] ${
-          activeDiv === 'div4' ? 'bg-[#008c7f]' : 'hidden'
+          activeDiv === 'div4' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
         }`}
       >
         <div className='flex flex-col w-full h-full lg:h-90 items-center justify-center pl-5 pr-5 gap-5 p-3'>
@@ -753,7 +753,7 @@ function Core() {
           <h1 className='text-[#e0e0e0] text-[2rem] md:text-[2.5rem] font-bold mb-[-10px]'>Settings</h1>
 
           {/* Dark Mode */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -777,7 +777,7 @@ function Core() {
           </div>
 
           {/* Select Language */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -804,7 +804,7 @@ function Core() {
           </div>
 
           {/* Report Bug */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -826,7 +826,7 @@ function Core() {
           </div>
 
           {/* Developer */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -856,7 +856,7 @@ function Core() {
           </div>
           
           {/* About */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
