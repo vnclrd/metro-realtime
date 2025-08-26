@@ -46,7 +46,7 @@ const preloadTiles = (lat, lng, zoom = 13) => {
 
 // Loading component
 const MapLoader = () => (
-  <div className='flex items-center justify-center w-full h-full bg-[#009688] rounded-[25px]'>
+  <div className='flex items-center justify-center w-full h-full'>
     <div className='flex flex-col items-center gap-4 text-[#e0e0e0]'>
       <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-white'></div>
       <p className='text-lg'>Loading map...</p>
@@ -221,7 +221,7 @@ export default function LocationContent({ location, setLocation }) {
   const [locationName, setLocationName] = useState(
     location?.name || 'Fetching your location...'
   );
-  const [detecting, setDetecting] = useState(false);
+  const [isDetecting, setIsDetecting] = useState(false);
 
   const lastValidPosition = useRef(null);
   const markerRef = useRef(null);
@@ -232,7 +232,7 @@ export default function LocationContent({ location, setLocation }) {
       return;
     }
 
-    setDetecting(true);
+    setIsDetecting(true);
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -263,12 +263,12 @@ export default function LocationContent({ location, setLocation }) {
           console.error(error);
           alert('Failed to detect location. Please try again.');
         } finally {
-          setDetecting(false);
+          setIsDetecting(false);
         }
       },
       (error) => {
         console.error(error);
-        setDetecting(false);
+        setIsDetecting(false);
         alert('Unable to retrieve your location. Please check your browser permissions.');
       }
     );
@@ -411,21 +411,31 @@ export default function LocationContent({ location, setLocation }) {
           <span className='italic text-[#e0e0e0] text-md'>{locationName}</span>
         </p>
       </div>
-      <div className='w-full h-[600px] sm:h-[400px] md:h-[500px] bg-[#009688] rounded-[25px] overflow-hidden relative'>
-        {!isMapReady || !markerPos ? (
-          <MapLoader />
-        ) : (
-          <Suspense fallback={<MapLoader />}>
-            <OptimizedMap
-              markerPos={markerPos}
-              currentZoom={currentZoom}
-              handleDragEnd={handleDragEnd}
-              locationName={locationName}
-              markerRef={markerRef}
-              handleDetectLocation={handleDetectLocation}
-            />
-          </Suspense>
+      <div className='relative w-full h-[600px] sm:h-[400px] md:h-[500px] rounded-[25px] overflow-hidden'>
+        {isDetecting && (
+          <div className='absolute inset-0 z-10 flex items-center justify-center bg-transparent'>
+            <div className='flex flex-col items-center gap-4 text-white'>
+              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-white'></div>
+              <p className='text-lg'>Finding location...</p>
+            </div>
+          </div>
         )}
+        <div className={`w-full h-full transition-opacity duration-300 ${isDetecting ? 'opacity-50' : 'opacity-100'}`}>
+          {(isMapReady && markerPos) ? (
+            <Suspense fallback={<MapLoader />}>
+              <OptimizedMap
+                markerPos={markerPos}
+                currentZoom={currentZoom}
+                handleDragEnd={handleDragEnd}
+                locationName={locationName}
+                markerRef={markerRef}
+                handleDetectLocation={handleDetectLocation}
+              />
+            </Suspense>
+          ) : (
+            <MapLoader />
+          )}
+        </div>
       </div>
     </div>
   );
