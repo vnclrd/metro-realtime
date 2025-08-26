@@ -393,7 +393,7 @@ function Core() {
 
       {/* ================================================== Reports Page Content ================================================== */}
       <div
-        className={`flex flex-col min-h-screen items-center justify-center pt-[75px] pb-[75px] ${
+        className={`flex flex-col min-h-screen items-center justify-center pt-[65px] pb-[75px] ${
           activeDiv === 'div1' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
         }`}
       >
@@ -411,7 +411,7 @@ function Core() {
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
                 Reports
               </h1>
-              <p className='text-[0.9rem] text-[#e0e0e0] mb-5 text-center'>
+              <p className='text-sm text-[#e0e0e0] mb-5 text-center'>
                 near your location:
                 <br />
                 <span className='italic text-[#e0e0e0]'>{locationName}</span>
@@ -568,7 +568,7 @@ function Core() {
       {/* ================================================== Location Page Content ================================================== */}
 
       <div
-        className={`flex flex-col min-h-screen items-center justify-center ${
+        className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
           activeDiv === 'div2' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
         }`}
       >
@@ -576,7 +576,7 @@ function Core() {
           className='
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
-            h-[400px] sm:h-[500px] md:h-[500px]
+            h-[500px] sm:h-[500px] md:h-[500px]
             bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
             lg:shadow-lg p-5
           '
@@ -592,11 +592,11 @@ function Core() {
       {/* ================================================== Make Report Page Content ================================================== */}
 
       <div
-        className={`flex-1 flex min-h-screen items-center justify-center ${
+        className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
           activeDiv === 'div3' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
         }`}
       >
-        <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 mt-10 lg:mt-0'>
+        <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 lg:mt-0'>
           {/* Form Container */}
           <form onSubmit={handleSubmit} className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg'>
             {/* Page Header */}
@@ -604,7 +604,8 @@ function Core() {
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
                 Report an Issue
               </h1>
-              <p className='text-[0.85rem] md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
+              <p className='text-sm md:text-[0.9rem] text-[#e0e0e0]'>near your location:</p>
+              <p className='text-sm md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
             </div>
 
             {/* Status Message */}
@@ -708,10 +709,10 @@ function Core() {
               <div className='relative w-full sm:w-[350px] mb-4'>
                 <textarea
                   name='customIssue'
-                  placeholder='Describe your custom issue'
+                  placeholder='Describe your issue'
                   value={customIssue}
                   onChange={(e) => setCustomIssue(e.target.value)}
-                  className='text-left w-full h-[40px] pl-5 pt-2 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] appearance-none'
+                  className='text-left w-full h-[40px] pl-5 pt-2.5 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] appearance-none'
                   required={selectedIssue === 'custom'}
                 />
               </div>
@@ -748,17 +749,17 @@ function Core() {
 
       {/* Settings Page Content */}
       <div
-        className={`flex-1 flex min-h-screen items-center justify-center pt-[75px] pb-[75px] ${
-          activeDiv === 'div4' ? 'bg-[#009688]' : 'hidden'
+        className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[75px] pb-[75px] ${
+          activeDiv === 'div4' ? 'bg-[#008c7f]' : 'hidden'
         }`}
       >
-        <div className='flex flex-col w-full h-full lg:h-90 items-center justify-center p-5 gap-5'>
+        <div className='flex flex-col w-full h-full lg:h-90 items-center justify-center pl-5 pr-5 gap-5 p-3'>
           
           {/* Title */}
-          <h1 className='text-white text-[2rem] md:text-[2.5rem] font-bold'>Settings</h1>
+          <h1 className='text-[#e0e0e0] text-[2rem] md:text-[2.5rem] font-bold mb-[-10px]'>Settings</h1>
 
           {/* Dark Mode */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -782,7 +783,7 @@ function Core() {
           </div>
 
           {/* Select Language */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -801,7 +802,7 @@ function Core() {
             <select
               name='lang'
               id='lang'
-              className='w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-[#008c7f] text-center bg-white focus:outline-none'
+              className='w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-[#009688] text-center bg-white focus:outline-none'
             >
               <option value='english'>English</option>
               <option value='filipino'>Filipino</option>
@@ -809,7 +810,7 @@ function Core() {
           </div>
 
           {/* Report Bug */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -831,7 +832,7 @@ function Core() {
           </div>
 
           {/* Developer */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -861,7 +862,7 @@ function Core() {
           </div>
           
           {/* About */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#009688] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -886,7 +887,7 @@ function Core() {
 
       {/* ================================================== Footer ================================================== */}
 
-      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-5 z-1000'>
+      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000'>
         
         {/* ========================= Reports Button ========================= */}
         <button
@@ -929,7 +930,7 @@ function Core() {
         >
 
           <img src='/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
-          <p className='font-light text-sm mt-[1px]'>Make Report</p>
+          <p className='font-light text-xs sm:text-sm md:text-sm lg:text-sm mt-[1px]'>Make Report</p>
 
         </button>
 

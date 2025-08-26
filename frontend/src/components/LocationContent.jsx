@@ -405,10 +405,10 @@ export default function LocationContent({ location, setLocation }) {
     <div className='flex flex-col w-full h-full'>
       <div className='flex flex-col items-center justify-center mb-4 text-center'>
         <h1 className='text-[2rem] md:text-[2.5rem] font-bold'>Select Location</h1>
-        <p className='text-md text-[#e0e0e0]'>
+        <p className='text-sm text-[#e0e0e0] font-b'>
           Your current selected location is:
           <br />
-          <span className='italic text-[#e0e0e0] text-md'>{locationName}</span>
+          <span className='italic text-[#e0e0e0] text-lg'>{locationName}</span>
         </p>
       </div>
       <div className='relative w-full h-[600px] sm:h-[400px] md:h-[500px] rounded-[25px] overflow-hidden'>
@@ -420,6 +420,8 @@ export default function LocationContent({ location, setLocation }) {
             </div>
           </div>
         )}
+
+        {/* Map */}
         <div className={`w-full h-full transition-opacity duration-300 ${isDetecting ? 'opacity-50' : 'opacity-100'}`}>
           {(isMapReady && markerPos) ? (
             <Suspense fallback={<MapLoader />}>
