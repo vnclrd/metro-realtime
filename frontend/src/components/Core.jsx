@@ -7,91 +7,150 @@ import { Moon, Sun } from 'lucide-react'
 function Core() {
   // Dark Mode (remember user's choice)
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('isDarkMode');
-    return savedMode === 'true' ? true : false;
-  });
+    const savedMode = localStorage.getItem('isDarkMode')
+    return savedMode === 'true' ? true : false
+  })
 
   useEffect(() => {
-    localStorage.setItem('isDarkMode', isDarkMode);
-  }, [isDarkMode]);
+    localStorage.setItem('isDarkMode', isDarkMode)
+  }, [isDarkMode])
 
   // This function handles the toggle action. It flips the boolean state
   // of isDarkMode, triggering a re-render of the component.
   const handleToggle = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode(!isDarkMode)
+  }
+
+  // Change Language
+  const [isFilipino, setIsFilipino] = useState(() => {
+    const savedLang = localStorage.getItem('isFilipino')
+    return savedLang === 'true' ? true : false
+  })
+
+  useEffect(() => {
+    localStorage.setItem('isFilipino', isFilipino)
+  }, [isFilipino])
+
+  const changeLang = () => {
+    setIsFilipino(!isFilipino)
+  }
+
+  const translations = {
+    en: {
+      reports: 'Reports',
+      reports_desc: 'near your location:',
+      reports_none: 'No reports found.',
+      ulat_ph: 'Ulat PH',
+      iulat_mo_na: 'iulat mo na!',
+      make_report: 'Make a Report',
+      make_report_desc: 'near your location:',
+      issue_type_placeholder: 'Please select an issue type',
+      custom_issue_placeholder: 'Please describe the custom issue',
+      description_placeholder: 'Please provide a description',
+      submit_button: 'Submit Report',
+      submit_success: 'Report submitted successfully!',
+      submit_error: 'Failed to submit report',
+      sightings: 'I see this too',
+      sightings_disabled: "You've seen this",
+      resolved: 'Has been resolved',
+      resolved_disabled: 'Has been resolved',
+      change_lang: 'Change Language',
+      select_lang_desc: 'Select your preferred language'
+    },
+    fil: {
+      reports: 'Mga Ulat',
+      reports_desc: 'malapit sa iyong lokasyon:',
+      reports_none: 'Walang nahanap na ulat.',
+      ulat_ph: 'Ulat PH',
+      iulat_mo_na: 'iulat mo na!',
+      make_report: 'Gumawa ng Ulat',
+      make_report_desc: 'malapit sa iyong lokasyon:',
+      issue_type_placeholder: 'Pumili ng uri ng isyu',
+      custom_issue_placeholder: 'Ilarawan ang isyu',
+      description_placeholder: 'Magbigay ng paglalarawan',
+      submit_button: 'Isumite ang Ulat',
+      submit_success: 'Matagumpay na naisumite ang ulat!',
+      submit_error: 'Nabigo ang pagsumite ng ulat',
+      sightings: 'Nakita ko rin ito',
+      sightings_disabled: 'Nakita mo na ito',
+      resolved: 'Naresolba na',
+      resolved_disabled: 'Naresolba na',
+      change_lang: 'Baguhin ang Wika',
+      select_lang_desc: 'Piliin ang iyong gustong wika'
+    },
   };
 
   // FILE SAVING COMPONENTS
-  const [customIssue, setCustomIssue] = useState('');
-  const [description, setDescription] = useState('');
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const [customIssue, setCustomIssue] = useState('')
+  const [description, setDescription] = useState('')
+  const [uploadedImage, setUploadedImage] = useState(null)
+  const [imagePreview, setImagePreview] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   // View reports on Reports Page
-  const [reports, setReports] = useState([]);
-  const [allReports, setAllReports] = useState([]);
-  const [selectedReport, setSelectedReport] = useState(null);
+  const [reports, setReports] = useState([])
+  const [allReports, setAllReports] = useState([])
+  const [selectedReport, setSelectedReport] = useState(null)
 
   // Button click tracking states
-  const [buttonLoading, setButtonLoading] = useState({});
-  const [buttonStatus, setButtonStatus] = useState(null);
+  const [buttonLoading, setButtonLoading] = useState({})
+  const [buttonStatus, setButtonStatus] = useState(null)
 
-  const [activeDiv, setActiveDiv] = useState('div1');
-  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer';
+  const [activeDiv, setActiveDiv] = useState('div1')
+  const baseButtonClassesFooter = 'flex flex-col items-center justify-center w-[25%] h-[60px] cursor-pointer'
 
-  const [selectedIssue, setSelectedIssue] = useState('');
-  const [locationName, setLocationName] = useState('Fetching location...');
+  const [selectedIssue, setSelectedIssue] = useState('')
+  const [locationName, setLocationName] = useState('Fetching location...')
 
   // For already clicked verification
-  const [userClickedButtons, setUserClickedButtons] = useState({});
+  const [userClickedButtons, setUserClickedButtons] = useState({})
 
   const [savedLocationData, setSavedLocationData] = useState(() => {
-    const stored = localStorage.getItem('savedLocation');
-    return stored ? JSON.parse(stored) : {};
-  });
+    const stored = localStorage.getItem('savedLocation')
+    return stored ? JSON.parse(stored) : {}
+  })
 
   // For already clicked verification
   const checkUserButtonStatus = async (reportId) => {
-    if (!reportId) return;
+    if (!reportId) return
     
     try {
-      const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/user-status`);
-      const result = await response.json();
+      const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/user-status`)
+      const result = await response.json()
       
       if (result.success) {
         setUserClickedButtons(prev => ({
           ...prev,
           [`${reportId}_sightings`]: result.has_sighting_click,
           [`${reportId}_resolved`]: result.has_resolved_click
-        }));
+        }))
       }
     } catch (error) {
-      console.error('Error checking user button status:', error);
+      console.error('Error checking user button status:', error)
     }
-  };
+  }
 
   // Function to calculate distance between two coordinates using Haversine formula
   const getDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of Earth in kilometers
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const R = 6371 // Radius of Earth in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180
+    const dLon = (lon2 - lon1) * Math.PI / 180
     const a = 
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in km
-    return distance;
-  };
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const distance = R * c // Distance in km
+    return distance
+  }
 
   // Function to filter reports based on location
   const filterReportsByLocation = (allReports, location) => {
     if (!location || !location.lat || !location.lng) {
-      setReports([]);
-      setSelectedReport(null);
-      return;
+      setReports([])
+      setSelectedReport(null)
+      return
     }
 
     const filtered = allReports.filter(report => {
@@ -100,39 +159,39 @@ function Core() {
         location.lng,
         report.latitude,
         report.longitude
-      );
-      return distance <= 1; // Filter for reports within 1 km
-    });
+      )
+      return distance <= 1 // Filter for reports within 1 km
+    })
     
-    setReports(filtered);
+    setReports(filtered)
     if (filtered.length > 0) {
-      setSelectedReport(filtered[0]);
+      setSelectedReport(filtered[0])
     } else {
-      setSelectedReport(null);
+      setSelectedReport(null)
     }
-  };
+  }
 
   // Function to refresh reports data
   const fetchReports = async () => {
     try {
-      const response = await fetch('http://192.168.1.3:5000/api/reports');
+      const response = await fetch('http://192.168.1.3:5000/api/reports')
       if (!response.ok) {
-        throw new Error('Failed to fetch reports');
+        throw new Error('Failed to fetch reports')
       }
-      const data = await response.json();
-      setAllReports(data.reports);
-      filterReportsByLocation(data.reports, savedLocationData);
+      const data = await response.json()
+      setAllReports(data.reports)
+      filterReportsByLocation(data.reports, savedLocationData)
     } catch (error) {
-      console.error('Error fetching reports:', error);
+      console.error('Error fetching reports:', error)
     }
-  };
+  }
 
   // Function to handle sightings button click
   const handleSightingsClick = async (reportId) => {
-    if (!reportId || buttonLoading[`sightings-${reportId}`] || userClickedButtons[`${reportId}_sightings`]) return;
+    if (!reportId || buttonLoading[`sightings-${reportId}`] || userClickedButtons[`${reportId}_sightings`]) return
 
-    setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: true }));
-    setButtonStatus(null);
+    setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: true }))
+    setButtonStatus(null)
 
     try {
       const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/sightings`, {
@@ -140,48 +199,48 @@ function Core() {
         headers: {
           'Content-Type': 'application/json',
         }
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (result.success) {
         setButtonStatus({
           type: 'success',
           message: result.message
-        });
+        })
         
         // Mark button as clicked
         setUserClickedButtons(prev => ({
           ...prev,
           [`${reportId}_sightings`]: true
-        }));
+        }))
         
         // Refresh reports data to get updated counts
-        await fetchReports();
+        await fetchReports()
       } else {
         setButtonStatus({
           type: 'error',
           message: result.message
-        });
+        })
       }
     } catch (error) {
       setButtonStatus({
         type: 'error',
         message: 'Failed to record sighting'
-      });
+      })
     } finally {
-      setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: false }));
+      setButtonLoading(prev => ({ ...prev, [`sightings-${reportId}`]: false }))
       // Clear status message after 3 seconds
-      setTimeout(() => setButtonStatus(null), 3000);
+      setTimeout(() => setButtonStatus(null), 3000)
     }
-  };
+  }
 
   // Function to handle resolved button click
   const handleResolvedClick = async (reportId) => {
-    if (!reportId || buttonLoading[`resolved-${reportId}`] || userClickedButtons[`${reportId}_resolved`]) return;
+    if (!reportId || buttonLoading[`resolved-${reportId}`] || userClickedButtons[`${reportId}_resolved`]) return
 
-    setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: true }));
-    setButtonStatus(null);
+    setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: true }))
+    setButtonStatus(null)
 
     try {
       const response = await fetch(`http://192.168.1.3:5000/api/reports/${reportId}/resolved`, {
@@ -189,72 +248,72 @@ function Core() {
         headers: {
           'Content-Type': 'application/json',
         }
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (result.success) {
         setButtonStatus({
           type: 'success',
           message: result.message
-        });
+        })
 
         // Mark button as clicked
         setUserClickedButtons(prev => ({
           ...prev,
           [`${reportId}_resolved`]: true
-        }));
+        }))
         
         // If report was deleted, clear selection
         if (result.report_deleted) {
-          setSelectedReport(null);
+          setSelectedReport(null)
         }
         
         // Refresh reports data to get updated counts
-        await fetchReports();
+        await fetchReports()
       } else {
         setButtonStatus({
           type: 'error',
           message: result.message
-        });
+        })
       }
     } catch (error) {
       setButtonStatus({
         type: 'error',
         message: 'Failed to record resolution'
-      });
+      })
     } finally {
-      setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: false }));
+      setButtonLoading(prev => ({ ...prev, [`resolved-${reportId}`]: false }))
       // Clear status message after 3 seconds
-      setTimeout(() => setButtonStatus(null), 3000);
+      setTimeout(() => setButtonStatus(null), 3000)
     }
-  };
+  }
 
   // Update your selectedReport useEffect or add this
   useEffect(() => {
     if (selectedReport?.id) {
-      checkUserButtonStatus(selectedReport.id);
+      checkUserButtonStatus(selectedReport.id)
     }
-  }, [selectedReport?.id]);
+  }, [selectedReport?.id])
 
   // Fetch reports from backend (reports.json) and filter them based on location
   useEffect(() => {
-    fetchReports();
-  }, [savedLocationData]);
+    fetchReports()
+  }, [savedLocationData])
 
   // Load saved location on mount
   useEffect(() => {
-    const saved = localStorage.getItem('savedLocation');
+    const saved = localStorage.getItem('savedLocation')
     if(saved) {
       try {
-        const parsed = JSON.parse(saved);
-        setSavedLocationData(parsed);
-        setLocationName(parsed.name || 'Unknown location');
+        const parsed = JSON.parse(saved)
+        setSavedLocationData(parsed)
+        setLocationName(parsed.name || 'Unknown location')
       } catch (err) {
-        console.error('Failed to parse saved location:', err);
+        console.error('Failed to parse saved location:', err)
       }
     }
-  }, []);
+  }, [])
 
   // Detect user's current location automatically if no saved location
   useEffect(() => {
@@ -264,124 +323,124 @@ function Core() {
           name: 'Your Current Location',
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
-        };
-        setSavedLocationData(newLocation);
-        setLocationName(newLocation.name);
-      });
+        }
+        setSavedLocationData(newLocation)
+        setLocationName(newLocation.name)
+      })
     }
-  }, [savedLocationData.lat]);
+  }, [savedLocationData.lat])
 
   // Update locationName when savedLocationData changes
   useEffect(() => {
     if (savedLocationData.name) {
-      setLocationName(savedLocationData.name);
+      setLocationName(savedLocationData.name)
     }
-  }, [savedLocationData]);
+  }, [savedLocationData])
 
   // Handler functions for image saving
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      setUploadedImage(file);
+      setUploadedImage(file)
       
       // Create preview
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
+        setImagePreview(e.target.result)
+      }
+      reader.readAsDataURL(file)
     }
-  };
+  }
 
   // Handler function for uploaded image discarding
   const handleDiscardImage = () => {
-    setUploadedImage(null);
-    setImagePreview('');
+    setUploadedImage(null)
+    setImagePreview('')
     // Reset file input
-    const fileInput = document.querySelector("input[type='file']");
-    if (fileInput) fileInput.value = '';
-  };
+    const fileInput = document.querySelector("input[type='file']")
+    if (fileInput) fileInput.value = ''
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus(null)
 
     try {
       // Validation
       if (!selectedIssue) {
-        throw new Error('Please select an issue type');
+        throw new Error('Please select an issue type')
       }
       
       if (selectedIssue === 'custom' && !customIssue.trim()) {
-        throw new Error('Please describe the custom issue');
+        throw new Error('Please describe the custom issue')
       }
       
       if (!description.trim()) {
-        throw new Error('Please provide a description');
+        throw new Error('Please provide a description')
       }
 
       // Prepare form data
-      const formData = new FormData();
+      const formData = new FormData()
       
       if (uploadedImage) {
-        formData.append('image', uploadedImage);
+        formData.append('image', uploadedImage)
       }
       
-      formData.append('issueType', selectedIssue);
-      formData.append('customIssue', customIssue);
-      formData.append('description', description);
-      formData.append('location', locationName);
-      formData.append('latitude', savedLocationData.lat);
-      formData.append('longitude', savedLocationData.lng);
+      formData.append('issueType', selectedIssue)
+      formData.append('customIssue', customIssue)
+      formData.append('description', description)
+      formData.append('location', locationName)
+      formData.append('latitude', savedLocationData.lat)
+      formData.append('longitude', savedLocationData.lng)
 
       // Submit to backend
       const response = await fetch('http://192.168.1.3:5000/api/reports', {
         method: 'POST',
         body: formData
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (result.success) {
         setSubmitStatus({
           type: 'success',
           message: 'Report submitted successfully!'
-        });
+        })
         
         // Reset form
-        setSelectedIssue('');
-        setCustomIssue('');
-        setDescription('');
-        handleDiscardImage();
+        setSelectedIssue('')
+        setCustomIssue('')
+        setDescription('')
+        handleDiscardImage()
 
         // Refresh reports data
-        await fetchReports();
+        await fetchReports()
       } else {
-        throw new Error(result.message || 'Failed to submit report');
+        throw new Error(result.message || 'Failed to submit report')
       }
 
     } catch (error) {
       setSubmitStatus({
         type: 'error',
         message: error.message
-      });
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleIssueChange = (e) => {
-    setSelectedIssue(e.target.value);
-  };
+    setSelectedIssue(e.target.value)
+  }
   
   // Handle location updates from LocationContent
   const handleLocationUpdate = (newLocationData) => {
-    setSavedLocationData(newLocationData);
-    setLocationName(newLocationData.name);
+    setSavedLocationData(newLocationData)
+    setLocationName(newLocationData.name)
     // Save to localStorage
-    localStorage.setItem('savedLocation', JSON.stringify(newLocationData));
-  };
+    localStorage.setItem('savedLocation', JSON.stringify(newLocationData))
+  }
 
   const DefaultIcon = L.icon({
     iconUrl:
@@ -390,8 +449,8 @@ function Core() {
       'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
-  });
-  L.Marker.prototype.options.icon = DefaultIcon;
+  })
+  L.Marker.prototype.options.icon = DefaultIcon
 
   return (
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
@@ -428,11 +487,15 @@ function Core() {
           {/* Left Panel */}
           <div className='flex flex-col w-full md:w-[50%] h-auto md:h-[500px]'>
             <div className='flex flex-col items-center text-center md:text-left'>
-              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
-                Reports
+              <h1
+                className={`
+                  text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold
+                `}
+              >
+                {isFilipino ? translations.fil.reports : translations.en.reports}
               </h1>
               <p className='text-sm text-[#e0e0e0] mb-5 text-center'>
-                near your location:
+                {isFilipino ? translations.fil.reports_desc : translations.en.reports_desc}
                 <br />
                 <span className='italic text-[#e0e0e0]'>{locationName}</span>
               </p>
@@ -848,7 +911,7 @@ function Core() {
               <div 
                 className={`
                   w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ease-in-out p-0.5
-                  ${isDarkMode ? 'bg-[#e0e0e0]' : 'bg-gray-400'}
+                  ${isDarkMode ? 'bg-[#e0e0e0]' : 'bg-gray-500'}
                 `}
               >
                 {/* The inner circle of the toggle button. Its position is controlled by the 'isDarkMode' state. */}
@@ -878,8 +941,12 @@ function Core() {
                 className='w-6 h-6 md:w-7 md:h-7 filter invert brightness-[200%]'
               />
               <div className='flex flex-col leading-tight'>
-                <h1 className='text-base md:text-lg font-bold'>Change Language</h1>
-                <p className='text-xs md:text-sm'>Select your preferred language</p>
+                <h1 className='text-base md:text-lg font-bold'>
+                  {isFilipino ? translations.fil.change_lang : translations.en.change_lang}
+                </h1>
+                <p className='text-xs md:text-sm'>
+                  {isFilipino ? translations.fil.select_lang_desc : translations.en.select_lang_desc}
+                </p>
               </div>
             </div>
 
@@ -887,7 +954,9 @@ function Core() {
             <select
               name='lang'
               id='lang'
-              className='bg-[#e0e0e0] text-[#000] w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-center focus:outline-none transition-colors duration-500 ease-in-out'
+              value={isFilipino ? 'filipino' : 'english'}
+              onChange={e => setIsFilipino(e.target.value === 'filipino')}
+              className='bg-[#e0e0e0] text-[#1e1e1e] w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-center focus:outline-none transition-colors duration-500 ease-in-out'
             >
               <option value='english'>English</option>
               <option value='filipino'>Filipino</option>
@@ -912,7 +981,7 @@ function Core() {
               />
               <div className='flex flex-col leading-tight'>
                 <h1 className='text-base md:text-lg font-bold'>Report Bug</h1>
-                <p className='text-xs md:text-sm'>Help us improve Ulat PH by reporting issues</p>
+                <p className='text-xs md:text-sm'>Help me improve Ulat PH by reporting issues</p>
               </div>
             </div>
 
