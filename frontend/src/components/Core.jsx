@@ -40,8 +40,10 @@ function Core() {
       reports: 'Reports',
       reports_desc: 'near your location:',
       reports_none: 'No reports found.',
-      ulat_ph: 'Ulat PH',
-      iulat_mo_na: 'iulat mo na!',
+      reports_sightings: 'people saw this issue',
+      reports_resolved: 'people say it has been resolved',
+      reports_seen: "You've seen this",
+      reports_beenResolved: 'Has been resolved',
       make_report: 'Make a Report',
       make_report_desc: 'near your location:',
       issue_type_placeholder: 'Please select an issue type',
@@ -61,8 +63,10 @@ function Core() {
       reports: 'Mga Ulat',
       reports_desc: 'malapit sa iyong lokasyon:',
       reports_none: 'Walang nahanap na ulat.',
-      ulat_ph: 'Ulat PH',
-      iulat_mo_na: 'iulat mo na!',
+      reports_sightings: 'na tao ang nakakita nito',
+      reports_resolved: 'na tao na nagsasabing ito ay nalutas na',
+      reports_seen: "Nakita mo ito",
+      reports_beenResolved: 'Nautas na',
       make_report: 'Gumawa ng Ulat',
       make_report_desc: 'malapit sa iyong lokasyon:',
       issue_type_placeholder: 'Pumili ng uri ng isyu',
@@ -78,7 +82,7 @@ function Core() {
       change_lang: 'Baguhin ang Wika',
       select_lang_desc: 'Piliin ang iyong gustong wika'
     },
-  };
+  }
 
   // FILE SAVING COMPONENTS
   const [customIssue, setCustomIssue] = useState('')
@@ -583,9 +587,9 @@ function Core() {
               {/* Description */}
               <div className='flex items-center justify-center w-full h-auto gap-2 text-[#e0e0e0] text-sm md:text-[1rem]'>
                 <img src='/vision-icon.png' alt='Sightings Icon' className='w-[26px] h-[26px] filter invert' />
-                <p className='mr-2'>{selectedReport?.sightings?.count || 0} people saw this issue</p>
+                <p className='mr-2'>{selectedReport?.sightings?.count || 0} {isFilipino ? translations.fil.reports_sightings : translations.en.reports_sightings}</p>
                 <img src='/resolved-icon.png' alt='Resolved Icon' className='w-[26px] h-[26px]' />
-                <p>{selectedReport?.resolved?.count || 0} people said it has been resolved</p>
+                <p>{selectedReport?.resolved?.count || 0} {isFilipino ? translations.fil.reports_resolved : translations.en.reports_resolved}</p>
               </div>
               
               <div 
@@ -622,7 +626,7 @@ function Core() {
                     }`}
                   />
                   {userClickedButtons[`${selectedReport?.id}_sightings`] 
-                    ? "You've seen this" 
+                    ? (isFilipino ? translations.fil.reports_seen : translations.en.reports_seen)
                     : buttonLoading[`sightings-${selectedReport?.id}`] 
                       ? 'Loading...' 
                       : 'I see this too'
@@ -650,7 +654,7 @@ function Core() {
                     }`}
                   />
                   {userClickedButtons[`${selectedReport?.id}_resolved`] 
-                    ? 'Has been resolved' 
+                    ? (isFilipino ? translations.fil.reports_beenResolved : translations.en.reports_beenResolved)
                     : buttonLoading[`resolved-${selectedReport?.id}`] 
                       ? 'Loading...' 
                       : 'Has been resolved'
