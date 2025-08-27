@@ -604,13 +604,19 @@ function Core() {
         
       {/* ================================================== Make Report Page Content ================================================== */}
       <div
-        className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
-          activeDiv === 'div3' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
+        className={`flex flex-col sm:items-center sm:justify-center min-h-screen pt-[75px] pb-[75px] transition-colors duration-500 ease-in-out ${
+          activeDiv === 'div3' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
         }`}
       >
         <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 lg:mt-0'>
           {/* Form Container */}
-          <form onSubmit={handleSubmit} className='flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg'>
+          <form
+            onSubmit={handleSubmit}
+            className={`
+              flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg
+              ${isDarkMode ? 'bg-transparent md:bg-[#11161f]' : 'bg-[#008c7f]'
+            }`}
+          >
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
@@ -632,7 +638,13 @@ function Core() {
             )}
 
             {/* Uploaded photo preview */}
-            <div className='flex items-center justify-center w-full sm:w-[80%] md:w-[400px] h-[180px] sm:h-[200px] rounded-xl text-[#e0e0e0] bg-[#009688] mb-3 text-center px-2 overflow-hidden'>
+            <div
+              className={`
+                flex items-center justify-center w-full sm:w-[80%] md:w-[400px] h-[180px] sm:h-[200px]
+                rounded-xl text-[#e0e0e0] bg-[#009688] mb-3 text-center px-2 overflow-hidden
+                ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'
+              }`}
+            >
               {imagePreview ? (
                 <img 
                   src={imagePreview} 
@@ -724,7 +736,10 @@ function Core() {
                   placeholder='Describe your issue'
                   value={customIssue}
                   onChange={(e) => setCustomIssue(e.target.value)}
-                  className='text-left w-full h-[40px] pl-5 pt-2.5 resize-none rounded-[15px] text-sm md:text-base bg-[#e0e0e0] appearance-none'
+                  className='
+                    text-left w-full h-[40px] pl-5 pt-2.5 resize-none rounded-[15px] text-sm md:text-base
+                   bg-[#e0e0e0] appearance-none
+                   '
                   required={selectedIssue === 'custom'}
                 />
               </div>
@@ -736,7 +751,11 @@ function Core() {
               placeholder='Write a short description about the issue'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className='w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#00786d] text-[#e0e0e0] rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#a0a0a0]'
+              className={`
+                w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#009688] text-[#e0e0e0]
+                rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#e0e0e0]
+                ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'}
+                `}
               required
             />
 
@@ -744,7 +763,12 @@ function Core() {
             <button 
               type='submit'
               disabled={isSubmitting}
-              className='flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px] rounded-[15px] text-base md:text-lg bg-[#00786d] text-[#e0e0e0] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#006b61] transition-colors'
+              className={`
+                flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px]
+                rounded-[15px] text-base md:text-lg bg-[#009688] text-[#e0e0e0]
+                cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#006b61] transition-color
+                ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'}
+              `}
             >
               <img
                 src='/upload-icon.png'
@@ -772,7 +796,7 @@ function Core() {
             className={`
               flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
               transition-colors duration-500 ease-in-out cursor-pointer text-[#e0e0e0]
-              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
             onClick={handleToggle}
           >
@@ -823,7 +847,7 @@ function Core() {
             className={`
               flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
               transition-colors duration-500 ease-in-out text-[#e0e0e0]
-              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
           >
             {/* Left Section */}
@@ -855,7 +879,7 @@ function Core() {
             className={`
               flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
               transition-colors duration-500 ease-in-out text-[#e0e0e0]
-              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
           >
           
@@ -885,7 +909,7 @@ function Core() {
             className={`
               flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
               transition-colors duration-500 ease-in-out text-[#e0e0e0]
-              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
           >
             
@@ -921,7 +945,7 @@ function Core() {
             className={`
               flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
               transition-colors duration-500 ease-in-out text-[#e0e0e0]
-              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
           >
             
