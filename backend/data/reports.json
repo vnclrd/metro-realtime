@@ -12,8 +12,7 @@
     "status": "pending",
     "sightings": {
       "count": 2,
-      "user_ips": [
-      ]
+      "user_ips": []
     },
     "updated_at": "2025-08-26T20:51:18.157979",
     "resolved": {
@@ -110,5 +109,51 @@
       ]
     },
     "updated_at": "2025-08-26T16:43:53.457185"
+  },
+  {
+    "id": "4f512a29-22d6-4110-8c4a-fb9c45d043ff",
+    "timestamp": "2025-08-27T16:47:37.266931",
+    "issue_type": "pothole",
+    "custom_issue": "",
+    "description": "asdasd",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.6887242,
+    "longitude": 121.0187414,
+    "image_filename": null,
+    "status": "pending",
+    "sightings": {
+      "count": 0,
+      "user_ips": []
+    },
+    "resolved": {
+      "count": 1,
+      "user_ips": [
+        "192.168.1.3"
+      ]
+    },
+    "updated_at": "2025-08-27T16:54:14.305353"
+  },
+  {
+    "id": "1c570ba4-aa5d-4c51-bd42-6c5e18ee91ff",
+    "timestamp": "2025-08-27T16:48:11.337848",
+    "issue_type": "custom",
+    "custom_issue": "Test Issue",
+    "description": "Test Issue description.",
+    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.6887242,
+    "longitude": 121.0187414,
+    "image_filename": "260d0a9f-5bae-4657-9c91-670b2c77faab.jpg",
+    "status": "pending",
+    "sightings": {
+      "count": 0,
+      "user_ips": []
+    },
+    "resolved": {
+      "count": 1,
+      "user_ips": [
+        "192.168.1.3"
+      ]
+    },
+    "updated_at": "2025-08-27T16:54:23.657350"
   }
 ]

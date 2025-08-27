@@ -40,10 +40,14 @@ function Core() {
       reports: 'Reports',
       reports_desc: 'near your location:',
       reports_none: 'No reports found.',
+      reports_no_image: 'No image available',
+      reports_details: 'Select a report to view its details.',
       reports_sightings: 'people saw this issue',
       reports_resolved: 'people say it has been resolved',
+      reports_see: 'I see this too',
       reports_seen: "You've seen this",
-      reports_has_been_resolved: 'Has been resolved',
+      reports_has_been_already_resolved: 'Already resolved',
+      reports_has_been_resolved: 'Resolved',
       make_report: 'Make a Report',
       make_report_desc: 'near your location:',
       make_report_upload_preview: 'Uploaded image preview',
@@ -62,10 +66,6 @@ function Core() {
       issue_pothole: 'Pothole',
       issue_broken_streetlight: 'Broken Streetlight',
 
-      sightings: 'I see this too',
-      sightings_disabled: "You've seen this",
-      resolved: 'Has been resolved',
-      resolved_disabled: 'Has been resolved',
       change_lang: 'Change Language',
       select_lang_desc: 'Select your preferred language'
     },
@@ -73,9 +73,13 @@ function Core() {
       reports: 'Mga Ulat',
       reports_desc: 'malapit sa iyong lokasyon:',
       reports_none: 'Walang nahanap na ulat.',
+      reports_no_image: 'Walang imahe',
+      reports_details: 'Pumili ng ulat para tingnan ang mga detalye nito',
       reports_sightings: 'na tao ang nakakita nito',
       reports_resolved: 'na tao na nagsasabing ito ay nalutas na',
+      reports_see: 'Nakita ko rin ito',
       reports_seen: "Nakita mo ito",
+      reports_has_been_already_resolved: 'Nautas na ito',
       reports_has_been_resolved: 'Nautas na',
       make_report: 'Gumawa ng Ulat',
       make_report_desc: 'malapit sa iyong lokasyon:',
@@ -95,12 +99,6 @@ function Core() {
       issue_pothole: 'Lubak',
       issue_broken_streetlight: 'Sirang Poste ng Ilaw',
 
-
-
-      sightings: 'Nakita ko rin ito',
-      sightings_disabled: 'Nakita mo na ito',
-      resolved: 'Naresolba na',
-      resolved_disabled: 'Naresolba na',
       change_lang: 'Baguhin ang Wika',
       select_lang_desc: 'Piliin ang iyong gustong wika'
     },
@@ -573,7 +571,7 @@ function Core() {
                     </div>
                   ))
                 ) : (
-                  <div className='text-[#e0e0e0] text-center italic mt-10'>No reports found.</div>
+                  <div className='text-[#e0e0e0] text-center italic mt-10'>{isFilipino ? translations.fil.reports_none : translations.en.reports_none}</div>
                 )}
               </div>
             </div>
@@ -599,10 +597,10 @@ function Core() {
                   <img
                     src={`http://192.168.1.3:5000/api/images/${selectedReport.image_filename}`}
                     alt='Photo of report'
-                    className='w-full h-full object-cover rounded-[15px]'
+                    className='w-full h-full object-contain rounded-[15px]'
                   />
                 ) : (
-                  <span className='italic'>No image available</span>
+                  <span className='italic'>{isFilipino ? translations.fil.reports_no_image : translations.en.reports_no_image}</span>
                 )}
               </div>
 
@@ -621,7 +619,7 @@ function Core() {
                   `}
               >
                 <p>
-                  {selectedReport?.description || 'Select a report to view its details.'}
+                  {selectedReport?.description || (isFilipino ? translations.fil.reports_details : translations.en.reports__details)}
                 </p>
               </div>
 
@@ -651,7 +649,7 @@ function Core() {
                     ? (isFilipino ? translations.fil.reports_seen : translations.en.reports_seen)
                     : buttonLoading[`sightings-${selectedReport?.id}`] 
                       ? 'Loading...' 
-                      : 'I see this too'
+                      : (isFilipino ? translations.fil.reports_see : translations.en.reports_see)
                   }
                 </button>
 
@@ -679,7 +677,7 @@ function Core() {
                     ? (isFilipino ? translations.fil.reports_has_been_resolved : translations.en.reports_has_been_resolved)
                     : buttonLoading[`resolved-${selectedReport?.id}`] 
                       ? 'Loading...' 
-                      : 'Has been resolved'
+                      : (isFilipino ? translations.fil.reports_has_been_already_resolved : translations.en.reports_has_been_already_resolved)
                   }
                 </button>
               </div>
@@ -860,7 +858,7 @@ function Core() {
               onChange={(e) => setDescription(e.target.value)}
               className={`
                 w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#009688] text-[#e0e0e0]
-                rounded-[15px] mb-5 pl-5 pr-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#e0e0e07c]
+                rounded-[15px] mb-5 pl-5 pr-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#e0e0e0]
                 ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'}
                 `}
               required
@@ -874,7 +872,7 @@ function Core() {
                 flex items-center justify-center w-full sm:w-[90%] md:w-[600px] h-[50px]
                 rounded-[15px] text-base md:text-lg bg-[#009688] text-[#e0e0e0]
                 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#006b61] transition-color
-                ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'}
+                ${isDarkMode ? 'bg-[#19202b] hover:bg-[#212730]' : 'bg-[#008c7f]'}
               `}
             >
               <img
