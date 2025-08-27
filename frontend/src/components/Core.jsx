@@ -2,8 +2,20 @@ import React, { useEffect, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import LocationContent from './LocationContent.jsx'
+import { Moon, Sun } from 'lucide-react'
 
 function Core() {
+  // Dark Mode
+  // Use a state variable to track whether dark mode is enabled or not.
+  // The initial state is set to false (light mode).
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // This function handles the toggle action. It flips the boolean state
+  // of isDarkMode, triggering a re-render of the component.
+  const handleToggle = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   // FILE SAVING COMPONENTS
   const [customIssue, setCustomIssue] = useState('');
   const [description, setDescription] = useState('');
@@ -743,42 +755,73 @@ function Core() {
 
       {/* ================================================== Settings Page Content ================================================== */}
       <div
-        className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[75px] pb-[75px] ${
-          activeDiv === 'div4' ? 'bg-[#008c7f] lg:bg-[#009688]' : 'hidden'
+        className={`flex flex-col sm:items-center sm:justify-center min-h-screen pt-[75px] pb-[75px] transition-colors duration-500 ease-in-out ${
+          activeDiv === 'div4' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
         }`}
       >
         <div className='flex flex-col w-full h-full lg:h-90 items-center justify-center pl-5 pr-5 gap-5 p-3'>
-          
           {/* Title */}
-          <h1 className='text-[#e0e0e0] text-[2rem] md:text-[2.5rem] font-bold mb-[-10px]'>Settings</h1>
+          <h1 className='text-[2rem] text-[#e0e0e0] md:text-[2.5rem] font-bold mb-[-10px]'>Settings</h1>
 
           {/* Dark Mode */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div 
+            className={`
+              flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
+              transition-colors duration-500 ease-in-out cursor-pointer text-[#e0e0e0]
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+            }`}
+            onClick={handleToggle}
+          >
             
             {/* Left Section: Icon + Text */}
             <div className='flex items-center gap-4 sm:gap-5'>
-              <img
-                src='/dark-mode-icon.png'
-                alt='Dark Mode Icon'
-                className='w-6 h-6 md:w-7 md:h-7 filter invert brightness-[200%]'
-              />
+              {isDarkMode ? (
+                <Sun className="w-6 h-6 md:w-7 md:h-7" />
+              ) : (
+                <Moon className="w-6 h-6 md:w-7 md:h-7" />
+              )}
+              
               <div className='flex flex-col leading-tight'>
-                <h1 className='text-base md:text-lg font-bold'>Dark Mode</h1>
-                <p className='text-xs md:text-sm'>Press/Click to enable dark mode</p>
+                <h1 className='text-base md:text-lg font-bold'>
+                  {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                </h1>
+                <p className='text-xs md:text-sm'>
+                  {isDarkMode ? 'Press/Click to enable light mode' : 'Press/Click to enable dark mode'}
+                </p>
               </div>
             </div>
 
             {/* Right Section: Toggle Button */}
-            <div className='flex items-center lg:justify-center w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm cursor-pointer'>
-              <div id='toggleButton' className='w-12 h-6 flex items-center bg-gray-300 rounded-full cursor-pointer'>
-                <div className='toggle-circle w-5 h-5 bg-white rounded-full transform duration-300 ease-in-out'></div>
+            <div 
+              className='flex items-center lg:justify-center w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm'
+            >
+              {/* The outer container for the toggle button. */}
+              <div 
+                className={`
+                  w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ease-in-out
+                  ${isDarkMode ? 'bg-[#e0e0e0] justify-end' : 'bg-gray-400 justify-start'
+
+                }`}
+              >
+                {/* The inner circle of the toggle button. Its position is controlled by the 'isDarkMode' state. */}
+                <div 
+                  className={`
+                    w-5 h-5 rounded-full transform transition-transform duration-300 ease-in-out
+                    ${isDarkMode ? 'bg-[#191970] -translate-x-1' : 'bg-[#e0e0e0] translate-x-1'
+                  }`}
+                ></div>
               </div>
             </div>
           </div>
 
           {/* Select Language */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
-            
+          <div 
+            className={`
+              flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
+              transition-colors duration-500 ease-in-out text-[#e0e0e0]
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+            }`}
+          >
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
               <img
@@ -796,7 +839,7 @@ function Core() {
             <select
               name='lang'
               id='lang'
-              className='w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-[#009688] text-center bg-white focus:outline-none'
+              className='bg-[#e0e0e0] text-[#000] w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-center focus:outline-none transition-colors duration-500 ease-in-out'
             >
               <option value='english'>English</option>
               <option value='filipino'>Filipino</option>
@@ -804,8 +847,14 @@ function Core() {
           </div>
 
           {/* Report Bug */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
-            
+          <div 
+            className={`
+              flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
+              transition-colors duration-500 ease-in-out text-[#e0e0e0]
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+            }`}
+          >
+          
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
               <img
@@ -820,13 +869,21 @@ function Core() {
             </div>
 
             {/* Right Section: Button */}
-            <button className='flex items-center justify-center w-[100px] md:w-[125px] h-[40px] font-bold bg-[#ff2c2c] rounded-xl text-xs md:text-sm cursor-pointer shadow-[0_2px_2px_rgba(0,0,0,0.5)] gap-1'>
+            <button 
+              className='flex items-center justify-center w-[100px] md:w-[125px] h-[40px] font-bold bg-[#ff2c2c] rounded-xl text-xs md:text-sm cursor-pointer shadow-[0_2px_2px_rgba(0,0,0,0.5)] gap-1'
+            >
               Report a Bug
             </button>
           </div>
 
           {/* Developer */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div 
+            className={`
+              flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
+              transition-colors duration-500 ease-in-out text-[#e0e0e0]
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+            }`}
+          >
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
@@ -856,7 +913,13 @@ function Core() {
           </div>
           
           {/* About */}
-          <div className='flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between bg-[#008c7f] rounded-2xl text-base md:text-lg text-[#e0e0e0] p-5 gap-3 shadow-lg'>
+          <div 
+            className={`
+              flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] h-auto min-h-[75px] flex-col sm:flex-row lg:items-center justify-between rounded-2xl text-base md:text-lg p-5 gap-3 shadow-lg 
+              transition-colors duration-500 ease-in-out text-[#e0e0e0]
+              ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+            }`}
+          >
             
             {/* Left Section */}
             <div className='flex items-center gap-4 sm:gap-5'>
