@@ -899,7 +899,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div2')}
@@ -912,7 +912,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div3')}
@@ -925,7 +925,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div4')}
