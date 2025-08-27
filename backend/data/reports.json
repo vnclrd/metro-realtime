@@ -31,12 +31,15 @@
     "image_filename": "4bc1fac6-a4bc-40f7-b617-ecfb3c6dfe34.jpeg",
     "status": "pending",
     "sightings": {
-      "count": 0,
-      "user_ips": []
+      "count": 1,
+      "user_ips": [
+        "192.168.1.11"
+      ]
     },
     "resolved": {
       "count": 0,
       "user_ips": []
-    }
+    },
+    "updated_at": "2025-08-27T19:36:31.368744"
   }
 ]

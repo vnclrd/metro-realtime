@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDarkMode } from './components/DarkModeContext';
 
 function App() {
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
   const [detecting, setDetecting] = useState(false);
   const navigate = useNavigate();
+  const { isDarkMode } = useDarkMode();
 
   const handleRedirect = async () => {
     if (!location.trim()) return;
@@ -82,7 +84,9 @@ function App() {
   };
 
   return (
-    <div className='flex w-full min-h-screen bg-[#009688] items-center justify-center p-4'>
+    <div className={`flex w-full min-h-screen items-center justify-center p-4 transition-colors duration-500 ease-in-out ${
+      isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]'
+    }`}>
       <div className='flex flex-col items-center justify-center w-full max-w-lg'>
         <h1 className='text-[1.75rem] sm:text-2xl lg:text-4xl mb-5 text-[#e0e0e0] text-center'>
           Where are you located?

@@ -3,9 +3,10 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import LocationContent from './LocationContent.jsx'
 import { Moon, Sun } from 'lucide-react'
+import { useDarkMode } from './DarkModeContext.jsx'
 
 function Core() {
-  // Dark Mode (remember user's choice)
+  /* // Dark Mode (remember user's choice)
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('isDarkMode')
     return savedMode === 'true' ? true : false
@@ -19,6 +20,13 @@ function Core() {
   // of isDarkMode, triggering a re-render of the component.
   const handleToggle = () => {
     setIsDarkMode(!isDarkMode)
+  } */
+
+  // Toggle Dark Mode
+  const {isDarkMode, toggleDarkMode} = useDarkMode()
+
+  const handleToggle = () => {
+    toggleDarkMode()
   }
 
   // Change Language
