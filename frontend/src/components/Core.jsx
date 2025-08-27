@@ -582,17 +582,18 @@ function Core() {
       {/* ================================================== Location Page Content ================================================== */}
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
-          activeDiv === 'div2' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
+          activeDiv === 'div2' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
         }`}
       >
         <div
-          className='
+          className={`
             flex flex-col items-center justify-center
             w-full sm:w-[90%] md:w-[80%] lg:w-[1000px]
             h-[500px] sm:h-[500px] md:h-[500px]
-            bg-[#008C7F] rounded-[25px] text-[#e0e0e0]
+            bg-[#008c7f] rounded-[25px] text-[#e0e0e0]
             lg:shadow-lg p-5
-          '
+            ${isDarkMode ? 'bg-transparent md:bg-[#11161f]' : 'bg-[#008c7f]'
+            }`}
         >
           {/* Location Component */}
           <LocationContent
