@@ -408,16 +408,17 @@ function Core() {
       {/* ================================================== Reports Page Content ================================================== */}
       <div
         className={`flex flex-col min-h-screen items-center justify-center pt-[65px] pb-[75px] ${
-          activeDiv === 'div1' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
+          activeDiv === 'div1' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
         }`}
       >
         {/* Panels */}
         <div
-          className='
+          className={`
             flex flex-col md:flex-row items-center md:items-start justify-between
             w-full max-w-[1200px] mx-auto gap-5 p-5
             rounded-[15px] bg-[#008c7f] lg:shadow-lg
-          '
+            ${isDarkMode ? 'bg-transparent md:bg-[#11161f]' : 'bg-[#008c7f]'}
+          `}
         >
           {/* Left Panel */}
           <div className='flex flex-col w-full md:w-[50%] h-auto md:h-[500px]'>
@@ -444,9 +445,12 @@ function Core() {
                   reports.map((report) => (
                     <div
                       key={report.id}
-                      className={`w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 cursor-pointer p-4 transition-all duration-200 ease-in-out ${
-                        selectedReport?.id === report.id ? 'border-2 border-white' : ''
-                      }`}
+                      className={`
+                        w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0
+                        cursor-pointer p-4
+                        ${selectedReport?.id === report.id ? 'border-2 border-[#e0e0e0]' : ''},
+                        ${isDarkMode ? 'bg-[#040507] border-[#e0e0e0]' : 'bg-[#00786d] border-[#e0e0e0]'}
+                        `}
                       onClick={() => setSelectedReport(report)}
                     >
                       <div className='flex justify-between items-center w-full'>
@@ -488,8 +492,8 @@ function Core() {
               {buttonStatus && (
                 <div className={`p-3 rounded-lg text-center text-sm ${
                   buttonStatus.type === 'success' 
-                    ? 'bg-green-600 text-white' 
-                    : 'bg-red-600 text-white'
+                    ? 'bg-green-600 text-[#e0e0e0]' 
+                    : 'bg-red-600 text-[#e0e0e0]'
                 }`}>
                   {buttonStatus.message}
                 </div>
@@ -516,7 +520,12 @@ function Core() {
                 <p>{selectedReport?.resolved?.count || 0} people said it has been resolved</p>
               </div>
               
-              <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
+              <div 
+                className={`
+                  w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4
+                  ${isDarkMode ? 'bg-[#040507]' : 'bg-[#00786d]'}
+                  `}
+              >
                 <p>
                   {selectedReport?.description || 'Select a report to view its details.'}
                 </p>
@@ -528,11 +537,14 @@ function Core() {
                 <button 
                   onClick={() => handleSightingsClick(selectedReport?.id)}
                   disabled={!selectedReport || buttonLoading[`sightings-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_sightings`]}
-                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors ${
-                    userClickedButtons[`${selectedReport?.id}_sightings`]
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors
+                    ${
+                      userClickedButtons[`${selectedReport?.id}_sightings`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
                       : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
-                  }`}
+                    },
+                    ${isDarkMode ? 'bg-[#040507] hover:bg-[#212730]' : 'bg-[#00786d] hover:bg-[#006b61]'}
+                  `}
                 >
                   <img
                     src='/vision-icon.png'
@@ -553,11 +565,14 @@ function Core() {
                 <button 
                   onClick={() => handleResolvedClick(selectedReport?.id)}
                   disabled={!selectedReport || buttonLoading[`resolved-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_resolved`]}
-                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors ${
-                    userClickedButtons[`${selectedReport?.id}_resolved`]
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors
+                    ${
+                      userClickedButtons[`${selectedReport?.id}_resolved`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
                       : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
-                  }`}
+                    },
+                    ${isDarkMode ? 'bg-[#040507] hover:bg-[#212730]' : 'bg-[#00786d] hover:bg-[#006b61]'}
+                  `}
                 >
                   <img
                     src='/resolved-icon.png'
@@ -631,8 +646,8 @@ function Core() {
             {submitStatus && (
               <div className={`w-full sm:w-[90%] md:w-[600px] p-3 rounded-lg mb-4 text-center ${
                 submitStatus.type === 'success' 
-                  ? 'bg-green-600 text-white' 
-                  : 'bg-red-600 text-white'
+                  ? 'bg-green-600 text-[#e0e0e0]' 
+                  : 'bg-red-600 text-[#e0e0e0]'
               }`}>
                 {submitStatus.message}
               </div>
@@ -985,7 +1000,7 @@ function Core() {
           className={`
             ${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
-              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div1')}
@@ -999,7 +1014,7 @@ function Core() {
           className={`
             ${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
-              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div2')}
@@ -1013,7 +1028,7 @@ function Core() {
           className={`
             ${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
-              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div3')}
@@ -1027,7 +1042,7 @@ function Core() {
           className={`
             ${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
-              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div4')}
