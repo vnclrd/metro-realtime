@@ -605,7 +605,7 @@ function Core() {
               )}
 
               {/* Image Holder */}
-              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] text-[#e0e0e0] flex items-center justify-center'>
+              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] text-[#e0e0e0] bg-[#19202b] flex items-center justify-center'>
                 {selectedReport && selectedReport.image_filename ? (
                   <img
                     src={`http://192.168.1.3:5000/api/images/${selectedReport.image_filename}`}
