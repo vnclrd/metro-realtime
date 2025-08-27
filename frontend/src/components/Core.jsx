@@ -5,10 +5,15 @@ import LocationContent from './LocationContent.jsx'
 import { Moon, Sun } from 'lucide-react'
 
 function Core() {
-  // Dark Mode
-  // Use a state variable to track whether dark mode is enabled or not.
-  // The initial state is set to false (light mode).
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // Dark Mode (remember user's choice)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('isDarkMode');
+    return savedMode === 'true' ? true : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('isDarkMode', isDarkMode);
+  }, [isDarkMode]);
 
   // This function handles the toggle action. It flips the boolean state
   // of isDarkMode, triggering a re-render of the component.
@@ -408,7 +413,7 @@ function Core() {
       {/* ================================================== Reports Page Content ================================================== */}
       <div
         className={`flex flex-col min-h-screen items-center justify-center pt-[65px] pb-[75px] ${
-          activeDiv === 'div1' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
+          activeDiv === 'div1' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#008c7f] md:bg-[#009688]') : 'hidden'
         }`}
       >
         {/* Panels */}
@@ -597,7 +602,7 @@ function Core() {
       {/* ================================================== Location Page Content ================================================== */}
       <div
         className={`flex flex-col sm:items-center sm:justify-center md:items-center md:justify-center lg:items-center lg:justify-center min-h-screen pt-[65px] pb-[75px] ${
-          activeDiv === 'div2' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
+          activeDiv === 'div2' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#008c7f] md:bg-[#009688]') : 'hidden'
         }`}
       >
         <div
@@ -621,7 +626,7 @@ function Core() {
       {/* ================================================== Make Report Page Content ================================================== */}
       <div
         className={`flex flex-col sm:items-center sm:justify-center min-h-screen pt-[75px] pb-[75px] transition-colors duration-500 ease-in-out ${
-          activeDiv === 'div3' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden'
+          activeDiv === 'div3' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#008c7f] md:bg-[#009688]') : 'hidden'
         }`}
       >
         <div className='flex flex-col w-full h-full items-center justify-center lg:px-5 lg:mt-0'>
@@ -629,7 +634,7 @@ function Core() {
           <form
             onSubmit={handleSubmit}
             className={`
-              flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-5 pb-6 px-5 lg:shadow-lg
+              flex flex-col items-center w-full sm:w-[90%] md:w-[700px] rounded-[15px] bg-[#008c7f] pt-2 pb-6 px-5 lg:shadow-lg
               ${isDarkMode ? 'bg-transparent md:bg-[#11161f]' : 'bg-[#008c7f]'
             }`}
           >
