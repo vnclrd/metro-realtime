@@ -162,8 +162,7 @@ function App() {
             <img src="./ulat-ph-logo.png" alt="Ulat PH Logo" className='w-[75px] h-[75px] mb-4' />
             <p className="text-sm text-center mb-4 text-[#e0e0e0] leading-6">
               Join your neighbors in building a better community! With this app, you can easily crowdsource and track local
-              issues—from potholes to broken streetlights—and see how others are making a difference. Your voice helps us
-              improve our shared spaces.
+              issues and see how others are making a difference. Your voice helps us improve our shared spaces.
             </p>
             <input
               type="text"
