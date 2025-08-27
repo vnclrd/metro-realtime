@@ -185,7 +185,7 @@ function App() {
       {/* Hero Container */}
       <div className='flex flex-col items-center justify-center w-full lg:w-[1000px]'>
         <h1 className='text-[2rem] sm:text-3xl lg:text-4xl mb-4 lg:mb-8 text-[#e0e0e0] text-center'>
-          {greeting}, {userName || 'friend'}.
+          {greeting}, {userName || 'friend'}
         </h1>
         {/* Buttons and Text Area Container */}
         <div className='flex w-full lg:w-[600px] items-center justify-center'>

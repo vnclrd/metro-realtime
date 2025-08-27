@@ -1000,16 +1000,33 @@ function Core() {
             </div>
 
             {/* Right Section: Select Box */}
-            <select
-              name='lang'
-              id='lang'
-              value={isFilipino ? 'filipino' : 'english'}
-              onChange={e => setIsFilipino(e.target.value === 'filipino')}
-              className='bg-[#e0e0e0] text-[#1e1e1e] w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-center focus:outline-none transition-colors duration-500 ease-in-out'
-            >
-              <option value='english'>English</option>
-              <option value='filipino'>Taglish</option>
-            </select>
+            <div className='relative w-[100px] md:w-[125px] h-[40px]'>
+              <select
+                name='lang'
+                id='lang'
+                value={isFilipino ? 'filipino' : 'english'}
+                onChange={e => setIsFilipino(e.target.value === 'filipino')}
+                className='bg-[#e0e0e0] text-[#1e1e1e] w-full h-full rounded-xl text-xs md:text-sm appearance-none cursor-pointer focus:outline-none transition-colors duration-500 ease-in-out pl-4 pr-4'
+              >
+                <option value='english'>English</option>
+                <option value='filipino'>Taglish</option>
+              </select>
+              <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-[#1e1e1e]'>
+                <svg
+                  className='h-5 w-5'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                  aria-hidden='true'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </span>
+            </div>
           </div>
 
           {/* Report Bug */}
