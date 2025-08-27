@@ -380,7 +380,7 @@ function Core() {
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
 
       {/* ================================================== Header Content ================================================== */}
-      <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
+      <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000 dark:bg-[#141b2b]'>
         <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='m-2.5 ml-5' />
         <div className='flex lg:flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
@@ -392,7 +392,7 @@ function Core() {
       {/* ================================================== Reports Page Content ================================================== */}
       <div
         className={`flex flex-col min-h-screen items-center justify-center pt-[65px] pb-[75px] ${
-          activeDiv === 'div1' ? 'bg-[#008c7f] sm:bg-[#009688]' : 'hidden'
+          activeDiv === 'div1' ? 'bg-[#008c7f] sm:bg-[#009688] dark dark:bg-[#1b253a]' : 'hidden'
         }`}
       >
         {/* Panels */}
@@ -400,7 +400,7 @@ function Core() {
           className='
             flex flex-col md:flex-row items-center md:items-start justify-between
             w-full max-w-[1200px] mx-auto gap-5 p-5
-            rounded-[15px] bg-[#008c7f] lg:shadow-lg
+            rounded-[15px] bg-[#008c7f] lg:shadow-lg dark md:dark:bg-[#141b2b] dark:bg-[#1b253a]
           '
         >
           {/* Left Panel */}
@@ -421,14 +421,14 @@ function Core() {
               <div
                 className='
                   flex flex-col w-full h-[400px] md:h-[350px] pr-3 gap-4 overflow-y-scroll rounded-lg
-                  scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0]
+                  scrollbar scrollbar-thin scrollbar-thumb-[#008c7f] scrollbar-track-[#e0e0e0] 
                 '
               >
                 {reports.length > 0 ? (
                   reports.map((report) => (
                     <div
                       key={report.id}
-                      className={`w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 cursor-pointer p-4 transition-all duration-200 ease-in-out ${
+                      className={`w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0 cursor-pointer p-4 transition-all duration-200 ease-in-out dark dark:bg-[#11161f] ${
                         selectedReport?.id === report.id ? 'border-2 border-white' : ''
                       }`}
                       onClick={() => setSelectedReport(report)}
@@ -467,7 +467,7 @@ function Core() {
 
           {/* Right Panel */}
           <div className='flex items-center justify-center w-full md:w-[50%] h-auto md:h-[500px]'>
-            <div className='flex flex-col w-full h-full bg-[#008c7f] rounded-[15px] gap-5'>
+            <div className='flex flex-col w-full h-full rounded-[15px] gap-5'>
               {/* Status Message for Button Actions */}
               {buttonStatus && (
                 <div className={`p-3 rounded-lg text-center text-sm ${
@@ -480,7 +480,7 @@ function Core() {
               )}
 
               {/* Image Holder */}
-              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] bg-[#009688] text-[#e0e0e0] flex items-center justify-center'>
+              <div className='w-full h-[200px] md:h-[50%] rounded-[15px] text-[#e0e0e0] flex items-center justify-center'>
                 {selectedReport && selectedReport.image_filename ? (
                   <img
                     src={`http://192.168.1.3:5000/api/images/${selectedReport.image_filename}`}
@@ -500,7 +500,7 @@ function Core() {
                 <p>{selectedReport?.resolved?.count || 0} people said it has been resolved</p>
               </div>
               
-              <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4'>
+              <div className='w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4 dark dark:bg-[#11161f]'>
                 <p>
                   {selectedReport?.description || 'Select a report to view its details.'}
                 </p>
@@ -512,10 +512,10 @@ function Core() {
                 <button 
                   onClick={() => handleSightingsClick(selectedReport?.id)}
                   disabled={!selectedReport || buttonLoading[`sightings-${selectedReport?.id}`] || userClickedButtons[`${selectedReport?.id}_sightings`]}
-                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] rounded-[15px] transition-colors ${
+                  className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors ${
                     userClickedButtons[`${selectedReport?.id}_sightings`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
-                      : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
+                      : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] dark:hover:bg-[#222938] disabled:opacity-50 disabled:cursor-not-allowed dark dark:bg-[#11161f]'
                   }`}
                 >
                   <img
@@ -540,13 +540,13 @@ function Core() {
                   className={`flex items-center justify-center w-[50%] h-[50px] text-[#e0e0e0] text-[0.8rem] md:text-[1rem] rounded-[15px] transition-colors ${
                     userClickedButtons[`${selectedReport?.id}_resolved`]
                       ? 'bg-gray-500 cursor-not-allowed opacity-60'
-                      : 'bg-[#00786d] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed'
+                      : 'bg-[#00786d] dark:bg-[#11161f] cursor-pointer hover:bg-[#006b61] disabled:opacity-50 disabled:cursor-not-allowed dark dark:hover:bg-[#222938]'
                   }`}
                 >
                   <img
                     src='/resolved-icon.png'
                     alt='Vision Icon'
-                    className={`w-[30px] md:w-[30px] h-[30px] md:h-[30px] mr-1 ${
+                    className={`w-[30px] md:w-[30px] h-[30px] md:h-[30px] mr-1 md:mr-2 ${
                       userClickedButtons[`${selectedReport?.id}_resolved`] ? 'opacity-60' : ''
                     }`}
                   />
@@ -880,13 +880,13 @@ function Core() {
       </div>
 
       {/* ================================================== Footer ================================================== */}
-      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000'>
+      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000 dark:bg-[#141b2b]'>
         
         {/* ========================= Reports Button ========================= */}
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div1')}
@@ -899,7 +899,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div2')}
@@ -912,7 +912,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div3')}
@@ -925,7 +925,7 @@ function Core() {
         <button
           className={`${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] dark:bg-[#18233a]' 
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div4')}
