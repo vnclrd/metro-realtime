@@ -392,13 +392,17 @@ function Core() {
     <div className='flex flex-col w-full min-h-screen bg-[#009688]'>
 
       {/* ================================================== Header Content ================================================== */}
-      <header className='fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000'>
+      <header
+        className={`
+          fixed flex w-full h-[75px] top-0 bg-[#008377] z-1000 transition-colors duration-500 ease-in-out
+          ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+        }`}
+      >
         <img src='/ulat-ph-logo.png' alt='Ulat PH Logo' className='m-2.5 ml-5' />
         <div className='flex lg:flex-col items-center justify-center'>
           <h1 className='text-[1.5rem] text-[#e0e0e0] font-bold'>Ulat PH</h1>
           <p className='hidden lg:block text-[0.9rem] text-[#e0e0e0] font-light mt-[-5px]'>iulat mo na!</p>
         </div>
-        
       </header>
 
       {/* ================================================== Reports Page Content ================================================== */}
@@ -943,13 +947,20 @@ function Core() {
       </div>
 
       {/* ================================================== Footer ================================================== */}
-      <footer className='fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000'>
+      <footer
+        className={`
+          fixed flex justify-around items-center w-full h-[75px] bottom-0 bg-[#008377] p-3 sm:p-5 md:p-5 lg:p-5 z-1000 transition-colors duration-500 ease-in-out
+          ${isDarkMode ? 'bg-[#11161f]' : 'bg-[#00786d]'
+        }`}
+      >
         
         {/* ========================= Reports Button ========================= */}
+        {/* activeDiv === 'div4' ? (isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]') : 'hidden' */}
         <button
-          className={`${baseButtonClassesFooter} ${
+          className={`
+            ${baseButtonClassesFooter} ${
             activeDiv === 'div1' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div1')}
@@ -960,9 +971,10 @@ function Core() {
 
         {/* ========================= Location Button ========================= */}
         <button
-          className={`${baseButtonClassesFooter} ${
+          className={`
+            ${baseButtonClassesFooter} ${
             activeDiv === 'div2' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div2')}
@@ -973,9 +985,10 @@ function Core() {
 
         {/* ========================= Make Report Button ========================= */}
         <button
-          className={`${baseButtonClassesFooter} ${
+          className={`
+            ${baseButtonClassesFooter} ${
             activeDiv === 'div3' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div3')}
@@ -986,9 +999,10 @@ function Core() {
 
         {/* ========================= Settings Button ========================= */}
         <button
-          className={`${baseButtonClassesFooter} ${
+          className={`
+            ${baseButtonClassesFooter} ${
             activeDiv === 'div4' 
-              ? 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)]' 
+              ? (isDarkMode ? 'bg-[#1b253a] text-[#e0e0e0] rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out' : 'bg-[#006057] text-white rounded-[15px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25)] transition-colors duration-500 ease-in-out')
               : 'bg-transparent text-[#e0e0e0]'
           }`}
           onClick={() => setActiveDiv('div4')}
