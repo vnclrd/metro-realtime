@@ -847,17 +847,16 @@ function Core() {
               {/* The outer container for the toggle button. */}
               <div 
                 className={`
-                  w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ease-in-out
-                  ${isDarkMode ? 'bg-[#e0e0e0] justify-end' : 'bg-gray-400 justify-start'
-
-                }`}
+                  w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ease-in-out p-0.5
+                  ${isDarkMode ? 'bg-[#e0e0e0]' : 'bg-gray-400'}
+                `}
               >
                 {/* The inner circle of the toggle button. Its position is controlled by the 'isDarkMode' state. */}
                 <div 
                   className={`
-                    w-5 h-5 rounded-full transform transition-transform duration-300 ease-in-out
-                    ${isDarkMode ? 'bg-[#191970] -translate-x-1' : 'bg-[#e0e0e0] translate-x-1'
-                  }`}
+                    w-5 h-5 rounded-full transition-transform duration-300 ease-in-out
+                    ${isDarkMode ? 'bg-[#191970] translate-x-6' : 'bg-[#e0e0e0] translate-x-0'}
+                  `}
                 ></div>
               </div>
             </div>
