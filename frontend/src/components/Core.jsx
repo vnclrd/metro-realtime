@@ -43,15 +43,25 @@ function Core() {
       reports_sightings: 'people saw this issue',
       reports_resolved: 'people say it has been resolved',
       reports_seen: "You've seen this",
-      reports_beenResolved: 'Has been resolved',
+      reports_has_been_resolved: 'Has been resolved',
       make_report: 'Make a Report',
       make_report_desc: 'near your location:',
-      issue_type_placeholder: 'Please select an issue type',
-      custom_issue_placeholder: 'Please describe the custom issue',
-      description_placeholder: 'Please provide a description',
-      submit_button: 'Submit Report',
-      submit_success: 'Report submitted successfully!',
-      submit_error: 'Failed to submit report',
+      make_report_upload_preview: 'Uploaded image preview',
+      make_report_upload: 'Uploaded image preview',
+      make_report_selected_image: 'No image selected',
+      make_report_choose_image: 'Choose image',
+      make_report_discard_image: 'Discard image',
+      make_report_choose_issue: 'Select type of issue',
+      make_report_custom_issue: 'Custom issue',
+      make_report_custom_issue_desc: 'Describe the issue',
+      make_report_short_desc: 'Write a short description about the issue',
+      make_report_submit_report: 'Submit Report!',
+      make_report_submit_success: 'Report submitted successfully!',
+      make_report_submit_error: 'Failed to submit report',
+
+      issue_pothole: 'Pothole',
+      issue_broken_streetlight: 'Broken Streetlight',
+
       sightings: 'I see this too',
       sightings_disabled: "You've seen this",
       resolved: 'Has been resolved',
@@ -66,15 +76,27 @@ function Core() {
       reports_sightings: 'na tao ang nakakita nito',
       reports_resolved: 'na tao na nagsasabing ito ay nalutas na',
       reports_seen: "Nakita mo ito",
-      reports_beenResolved: 'Nautas na',
+      reports_has_been_resolved: 'Nautas na',
       make_report: 'Gumawa ng Ulat',
       make_report_desc: 'malapit sa iyong lokasyon:',
-      issue_type_placeholder: 'Pumili ng uri ng isyu',
-      custom_issue_placeholder: 'Ilarawan ang isyu',
-      description_placeholder: 'Magbigay ng paglalarawan',
-      submit_button: 'Isumite ang Ulat',
-      submit_success: 'Matagumpay na naisumite ang ulat!',
-      submit_error: 'Nabigo ang pagsumite ng ulat',
+      make_report_upload_preview: 'Imahe na pinili mo',
+      make_report_upload: 'Imahe na pinili mo:',
+      make_report_selected_image: 'Wala napiling imahe',
+      make_report_choose_image: 'Pumili ng imahe',
+      make_report_discard_image: 'Alisin ang imahe',
+      make_report_choose_issue: 'Pumili ng isyu',
+      make_report_custom_issue: 'Pasadyang ulat',
+      make_report_custom_issue_desc: 'Ilarawan ang isyu',
+      make_report_short_desc: 'Sumulat ng maikling paglalarawan tungkol sa isyu',
+      make_report_submit_report: 'Isumite and ulat!',
+      make_report_submit_success: 'Naisumite na ang ulat!',
+      make_report_submit_error: 'Hindi naisumite ang ulat',
+
+      issue_pothole: 'Lubak',
+      issue_broken_streetlight: 'Sirang Poste ng Ilaw',
+
+
+
       sightings: 'Nakita ko rin ito',
       sightings_disabled: 'Nakita mo na ito',
       resolved: 'Naresolba na',
@@ -409,7 +431,7 @@ function Core() {
       if (result.success) {
         setSubmitStatus({
           type: 'success',
-          message: 'Report submitted successfully!'
+          message: (isFilipino ? translations.fil.make_report_submit_success : translations.en.make_report_submit_success)
         })
         
         // Reset form
@@ -421,7 +443,7 @@ function Core() {
         // Refresh reports data
         await fetchReports()
       } else {
-        throw new Error(result.message || 'Failed to submit report')
+        throw new Error(result.message || (isFilipino ? translations.fil.make_report_submit_error : translations.en.make_report_submit_error))
       }
 
     } catch (error) {
@@ -521,7 +543,7 @@ function Core() {
                         w-full h-[70px] md:h-[75px] rounded-[25px] bg-[#00786d] flex-shrink-0
                         cursor-pointer p-4
                         ${selectedReport?.id === report.id ? 'border-2 border-[#e0e0e0]' : ''},
-                        ${isDarkMode ? 'bg-[#040507] border-[#e0e0e0]' : 'bg-[#00786d] border-[#e0e0e0]'}
+                        ${isDarkMode ? 'bg-[#19202b] border-[#e0e0e0]' : 'bg-[#00786d] border-[#e0e0e0]'}
                         `}
                       onClick={() => setSelectedReport(report)}
                     >
@@ -595,7 +617,7 @@ function Core() {
               <div 
                 className={`
                   w-full md:h-[25%] bg-[#00786d] rounded-[15px] text-[#e0e0e0] overflow-y-scroll p-4
-                  ${isDarkMode ? 'bg-[#040507]' : 'bg-[#00786d]'}
+                  ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#00786d]'}
                   `}
               >
                 <p>
@@ -654,7 +676,7 @@ function Core() {
                     }`}
                   />
                   {userClickedButtons[`${selectedReport?.id}_resolved`] 
-                    ? (isFilipino ? translations.fil.reports_beenResolved : translations.en.reports_beenResolved)
+                    ? (isFilipino ? translations.fil.reports_has_been_resolved : translations.en.reports_has_been_resolved)
                     : buttonLoading[`resolved-${selectedReport?.id}`] 
                       ? 'Loading...' 
                       : 'Has been resolved'
@@ -708,9 +730,9 @@ function Core() {
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
               <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
-                Make a Report
+                {isFilipino ? translations.fil.make_report : translations.en.make_report}
               </h1>
-              <p className='text-sm md:text-[0.9rem] text-[#e0e0e0]'>near your location:</p>
+              <p className='text-sm md:text-[0.9rem] text-[#e0e0e0]'>{isFilipino ? translations.fil.make_report_desc : translations.en.make_report_desc}</p>
               <p className='text-sm md:text-[0.9rem] text-[#e0e0e0] italic'>{locationName}</p>
             </div>
 
@@ -740,28 +762,28 @@ function Core() {
                   className='max-w-full max-h-full object-contain'
                 />
               ) : (
-                'Uploaded image preview goes here'
+                (isFilipino ? translations.fil.make_report_upload_preview : translations.en.make_report_upload_preview)
               )}
             </div>
 
             {/* Uploaded Image Info */}
             <p className='text-[#e0e0e0] text-xs md:text-sm mb-3 text-center md:text-left'>
               {uploadedImage ? (
-                <>Image uploaded: <span className='italic'>{uploadedImage.name}</span></>
+                <>{isFilipino ? translations.fil.make_report_upload : translations.en.make_report_upload} <span className='italic'>{uploadedImage.name}</span></>
               ) : (
-                'No image selected'
+                (isFilipino ? translations.fil.make_report_selected_image : translations.en.make_report_selected_image)
               )}
             </p>
 
             {/* Upload / Discard Buttons */}
             <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start mb-4'>
-              <label className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
+              <label className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-xs bg-[#e0e0e0] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)]'>
                 <img
                   src='/upload-photo-icon.png'
                   alt='Upload Photo Icon'
                   className='w-[24px] h-[24px] mr-2'
                 />
-                Upload image
+                {isFilipino ? translations.fil.make_report_choose_image : translations.en.make_report_choose_image}
                 <input
                   type='file'
                   accept='image/*'
@@ -774,14 +796,14 @@ function Core() {
                 type='button'
                 onClick={handleDiscardImage}
                 disabled={!uploadedImage}
-                className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-sm text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)] disabled:opacity-50 disabled:cursor-not-allowed'
+                className='flex items-center justify-center w-full sm:w-[150px] h-[40px] rounded-[15px] text-xs text-[#e0e0e0] bg-[#ff2c2c] cursor-pointer shadow-[_0_2px_2px_rgba(0,0,0,0.5)] disabled:opacity-50 disabled:cursor-not-allowed'
               >
                 <img
                   src='/discard-icon.png'
                   alt='Discard Icon'
                   className='w-[20px] h-[20px] mr-2 filter invert brightness-[200%]'
                 />
-                Discard image
+                {isFilipino ? translations.fil.make_report_discard_image : translations.en.make_report_discard_image}
               </button>
             </div>
 
@@ -796,14 +818,11 @@ function Core() {
                 required
               >
                 <option value='' disabled>
-                  Select type of issue
+                  {isFilipino ? translations.fil.make_report_choose_issue : translations.en.make_report_choose_issue}
                 </option>
-                <option value='custom'>Custom Issue</option>
-                <option value='pothole'>Pothole</option>
-                <option value='broken-streetlight'>Broken Streetlight</option>
-                <option value='graffiti'>Graffiti</option>
-                <option value='garbage'>Garbage/Litter</option>
-                <option value='damaged-sidewalk'>Damaged Sidewalk</option>
+                <option value='custom'>{isFilipino ? translations.fil.make_report_custom_issue : translations.en.make_report_custom_issue}</option>
+                <option value='pothole'>{isFilipino ? translations.fil.issue_pothole : translations.en.issue_pothole}</option>
+                <option value='broken-streetlight'>{isFilipino ? translations.fil.issue_broken_streetlight : translations.en.issue_broken_streetlight}</option>
               </select>
 
               {/* Custom arrow */}
@@ -821,7 +840,7 @@ function Core() {
               <div className='relative w-full sm:w-[350px] mb-4'>
                 <textarea
                   name='customIssue'
-                  placeholder='Describe your issue'
+                  placeholder={isFilipino ? translations.fil.make_report_custom_issue_desc : translations.en.make_report_custom_issue_desc}
                   value={customIssue}
                   onChange={(e) => setCustomIssue(e.target.value)}
                   className='
@@ -836,12 +855,12 @@ function Core() {
             {/* Description Container */}
             <textarea
               name='description'
-              placeholder='Write a short description about the issue'
+              placeholder={isFilipino ? translations.fil.make_report_short_desc : translations.en.make_report_short_desc}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className={`
                 w-full sm:w-[90%] md:w-[600px] h-[100px] resize-none bg-[#009688] text-[#e0e0e0]
-                rounded-[15px] mb-5 pl-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#e0e0e0]
+                rounded-[15px] mb-5 pl-5 pr-5 pt-4 text-sm md:text-base shadow-inner placeholder-[#e0e0e07c]
                 ${isDarkMode ? 'bg-[#19202b]' : 'bg-[#008c7f]'}
                 `}
               required
@@ -863,7 +882,7 @@ function Core() {
                 alt='Upload Icon'
                 className='w-[24px] h-[24px] mr-3 filter invert brightness-[200%]'
               />
-              {isSubmitting ? 'Submitting...' : 'Submit report!'}
+              {isSubmitting ? 'Submitting...' : (isFilipino ? translations.fil.make_report_submit_report : translations.en.make_report_submit_report)}
             </button>
           </form>
         </div>
