@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from './components/DarkModeContext';
 
@@ -6,8 +6,38 @@ function App() {
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
   const [detecting, setDetecting] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [showNamePrompt, setShowNamePrompt] = useState(false);
+  const [nameInput, setNameInput] = useState('');
+  const [message, setMessage] = useState({ text: '', type: '' });
+
   const navigate = useNavigate();
   const { isDarkMode } = useDarkMode();
+
+  // useEffect to handle name storage and retrieval
+  useEffect(() => {
+    const storedName = localStorage.getItem('userName');
+    if (storedName) {
+      setUserName(storedName);
+    } else {
+      setShowNamePrompt(true);
+    }
+  }, []);
+
+  const handleSaveName = () => {
+    if (nameInput.trim()) {
+      localStorage.setItem('userName', nameInput.trim());
+      setUserName(nameInput.trim());
+      setShowNamePrompt(false);
+    } else {
+      showMessage('Please enter a name.', 'error');
+    }
+  };
+
+  const showMessage = (text, type) => {
+    setMessage({ text, type });
+    setTimeout(() => setMessage({ text: '', type: '' }), 5000); // Hide after 5 seconds
+  };
 
   const handleRedirect = async () => {
     if (!location.trim()) return;
@@ -32,11 +62,11 @@ function App() {
 
         navigate('/core');
       } else {
-        alert(data.error || 'Something went wrong');
+        showMessage(data.error || 'Something went wrong', 'error');
       }
     } catch (error) {
       console.error(error);
-      alert('Failed to save location. Check your backend.');
+      showMessage('Failed to save location. Check your backend.', 'error');
     } finally {
       setLoading(false);
     }
@@ -44,7 +74,7 @@ function App() {
 
   const handleDetectLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
+      showMessage('Geolocation is not supported by your browser.', 'error');
       return;
     }
 
@@ -66,11 +96,11 @@ function App() {
           if (response.ok) {
             setLocation(data.address);
           } else {
-            alert(data.error || 'Failed to get address');
+            showMessage(data.error || 'Failed to get address', 'error');
           }
         } catch (error) {
           console.error(error);
-          alert('Failed to detect location. Please try again.');
+          showMessage('Failed to detect location. Please try again.', 'error');
         } finally {
           setDetecting(false);
         }
@@ -78,7 +108,7 @@ function App() {
       (error) => {
         console.error(error);
         setDetecting(false);
-        alert('Unable to retrieve your location. Please check your browser permissions.');
+        showMessage('Unable to retrieve your location. Please check your browser permissions.', 'error');
       }
     );
   };
@@ -87,10 +117,46 @@ function App() {
     <div className={`flex w-full min-h-screen items-center justify-center p-4 transition-colors duration-500 ease-in-out ${
       isDarkMode ? 'bg-[#1b253a]' : 'bg-[#009688]'
     }`}>
+      {/* Message Box */}
+      {message.text && (
+        <div className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${message.type === 'error' ? 'bg-red-500' : 'bg-green-500'}`}>
+          {message.text}
+        </div>
+      )}
+
+      {/* Name Prompt Modal */}
+      {showNamePrompt && (
+        <div className="fixed inset-0 bg-[#11161f] bg-opacity-50 flex items-center justify-center z-50">
+          <div className="flex flex-col items-center justify-center bg-[#1b253a] w-[350px] lg:w-[400px] lg:h-[400px] p-6 text-[#e0e0e0] rounded-[25px] shadow-xl">
+            <img src="./ulat-ph-logo.png" alt="Ulat PH Logo" className='w-[75px] h-[75px] mb-4' />
+            <p className="text-sm text-center mb-4 text-[#e0e0e0] leading-6">
+              Join your neighbors in building a better community! With this app, you can easily crowdsource and track local
+              issues—from potholes to broken streetlights—and see how others are making a difference. Your voice helps us
+              improve our shared spaces.
+            </p>
+            <p className="text-sm text-center mb- text-[#e0e0e0]">
+            </p>
+            <input
+              type="text"
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
+              className="p-2 border rounded-full mb-4 w-full text-center"
+              placeholder="What should I call you?"
+            />
+            <button
+              onClick={handleSaveName}
+              className="bg-[#009688] text-white py-2 px-6 rounded-full hover:bg-[#00796b] transition-colors cursor-pointer"
+            >
+              Let's go!
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Hero Container */}
       <div className='flex flex-col items-center justify-center w-full lg:w-[1000px]'>
         <h1 className='text-[2rem] sm:text-3xl lg:text-4xl mb-4 lg:mb-8 text-[#e0e0e0] text-center'>
-          Good evening, Ivan.
+          Good evening, {userName || 'friend'}.
         </h1>
         {/* Buttons and Text Area Container */}
         <div className='flex w-full lg:w-[600px] items-center justify-center'>
