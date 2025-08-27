@@ -1,159 +1,42 @@
 [
   {
-    "id": "b560558c-556e-42f7-85dd-9bd28acf0e7c",
-    "timestamp": "2025-08-25T17:27:18.460592",
-    "issue_type": "graffiti",
-    "custom_issue": "",
-    "description": "Test description",
-    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
-    "latitude": 14.6887242,
-    "longitude": 121.0187414,
-    "image_filename": "65f397b9-6c4b-4d59-bab4-a23873227147.jpg",
-    "status": "pending",
-    "sightings": {
-      "count": 2,
-      "user_ips": []
-    },
-    "updated_at": "2025-08-26T20:51:18.157979",
-    "resolved": {
-      "count": 3,
-      "user_ips": [
-        "127.0.0.1",
-        "192.168.1.3",
-        "192.168.1.8"
-      ]
-    }
-  },
-  {
-    "id": "7eb8595c-24f0-47fb-8b3f-a3b24697d4be",
-    "timestamp": "2025-08-25T20:20:29.918879",
-    "issue_type": "damaged-sidewalk",
-    "custom_issue": "",
-    "description": "test description hehehe",
-    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
-    "latitude": 14.6887242,
-    "longitude": 121.0187414,
-    "image_filename": "8bf2e465-93c1-447d-b8bf-5088329de4db.jpg",
-    "status": "pending",
-    "resolved": {
-      "count": 3,
-      "user_ips": [
-        "127.0.0.1",
-        "192.168.1.3",
-        "192.168.1.8"
-      ]
-    },
-    "updated_at": "2025-08-26T20:51:35.612706",
-    "sightings": {
-      "count": 4,
-      "user_ips": [
-        "127.0.0.1",
-        "192.168.1.20",
-        "192.168.1.3",
-        "192.168.1.8"
-      ]
-    }
-  },
-  {
-    "id": "de5a3c28-3781-49ff-9586-648862d1ac9f",
-    "timestamp": "2025-08-25T20:22:57.722295",
-    "issue_type": "custom",
-    "custom_issue": "pogi",
-    "description": "12121212121",
-    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
-    "latitude": 14.6887242,
-    "longitude": 121.0187414,
-    "image_filename": "49d36694-d140-4ee4-8e8e-a4d1183a533e.jpg",
-    "status": "pending",
-    "sightings": {
-      "count": 4,
-      "user_ips": [
-        "127.0.0.1",
-        "192.168.1.8",
-        "192.168.1.3",
-        "192.168.1.11"
-      ]
-    },
-    "updated_at": "2025-08-27T08:30:40.326595",
-    "resolved": {
-      "count": 4,
-      "user_ips": [
-        "127.0.0.1",
-        "192.168.1.8",
-        "192.168.1.3",
-        "192.168.1.11"
-      ]
-    }
-  },
-  {
-    "id": "99c0e134-1f68-4371-a7a0-1f224b153c1e",
-    "timestamp": "2025-08-26T16:43:36.192626",
-    "issue_type": "damaged-sidewalk",
-    "custom_issue": "",
-    "description": "The sidewalk is damaged.",
-    "location": "BNJ Tire Supply, Mindanao Avenue, Jem 7, Talipapa, 6th District, Quezon City, Eastern Manila District, Metro Manila, 1440, Philippines",
-    "latitude": 14.688283127555415,
-    "longitude": 121.03054046630861,
-    "image_filename": "cbc7345f-01a3-4159-93f7-db6046ae2753.jpg",
-    "status": "pending",
-    "sightings": {
-      "count": 1,
-      "user_ips": [
-        "192.168.1.3"
-      ]
-    },
-    "resolved": {
-      "count": 1,
-      "user_ips": [
-        "192.168.1.3"
-      ]
-    },
-    "updated_at": "2025-08-26T16:43:53.457185"
-  },
-  {
-    "id": "4f512a29-22d6-4110-8c4a-fb9c45d043ff",
-    "timestamp": "2025-08-27T16:47:37.266931",
-    "issue_type": "pothole",
-    "custom_issue": "",
-    "description": "asdasd",
-    "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
-    "latitude": 14.6887242,
-    "longitude": 121.0187414,
-    "image_filename": null,
-    "status": "pending",
-    "sightings": {
-      "count": 0,
-      "user_ips": []
-    },
-    "resolved": {
-      "count": 1,
-      "user_ips": [
-        "192.168.1.3"
-      ]
-    },
-    "updated_at": "2025-08-27T16:54:14.305353"
-  },
-  {
-    "id": "1c570ba4-aa5d-4c51-bd42-6c5e18ee91ff",
-    "timestamp": "2025-08-27T16:48:11.337848",
+    "id": "1b5494f1-133a-4771-8a17-1f4f8c5aac7c",
+    "timestamp": "2025-08-27T17:45:21.034983",
     "issue_type": "custom",
     "custom_issue": "Test Issue",
-    "description": "Test Issue description.",
+    "description": "This is the description of this custom test issue.",
     "location": "Road 11, Pasong Malapad, GSIS Hills, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
     "latitude": 14.6887242,
     "longitude": 121.0187414,
-    "image_filename": "260d0a9f-5bae-4657-9c91-670b2c77faab.jpg",
+    "image_filename": "d83d9303-d0b2-42b0-811e-b856424f6fac.jpg",
     "status": "pending",
     "sightings": {
       "count": 0,
       "user_ips": []
     },
     "resolved": {
-      "count": 1,
-      "user_ips": [
-        "192.168.1.3"
-      ]
+      "count": 0,
+      "user_ips": []
+    }
+  },
+  {
+    "id": "1823ca1d-f0d9-4a98-ab7f-45cfb37daaa7",
+    "timestamp": "2025-08-27T17:57:52.188358",
+    "issue_type": "custom",
+    "custom_issue": "Doggo",
+    "description": "This is Muffet.",
+    "location": "Ro-Den Refilling Gas Station, J. P. Ramoy Street, Pasong Malapad, Barangay 164, Santa Quiteria/Talipapa, District 1, Caloocan, Northern Manila District, Metro Manila, 1402, Philippines",
+    "latitude": 14.688179345393992,
+    "longitude": 121.02000474929811,
+    "image_filename": "4bc1fac6-a4bc-40f7-b617-ecfb3c6dfe34.jpeg",
+    "status": "pending",
+    "sightings": {
+      "count": 0,
+      "user_ips": []
     },
-    "updated_at": "2025-08-27T16:54:23.657350"
+    "resolved": {
+      "count": 0,
+      "user_ips": []
+    }
   }
 ]

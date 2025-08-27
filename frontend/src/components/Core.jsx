@@ -48,6 +48,7 @@ function Core() {
       reports_seen: "You've seen this",
       reports_has_been_already_resolved: 'Already resolved',
       reports_has_been_resolved: 'Resolved',
+
       make_report: 'Make a Report',
       make_report_desc: 'near your location:',
       make_report_upload_preview: 'Uploaded image preview',
@@ -63,25 +64,27 @@ function Core() {
       make_report_submit_success: 'Report submitted successfully!',
       make_report_submit_error: 'Failed to submit report',
 
-      issue_pothole: 'Pothole',
-      issue_broken_streetlight: 'Broken Streetlight',
+      settings_change_lang: 'Change Language',
+      settings_select_lang_desc: 'Select your preferred language',
 
-      change_lang: 'Change Language',
-      select_lang_desc: 'Select your preferred language'
+      footer_reports: 'Reports',
+      footer_location: 'Location',
+      footer_make_report: 'Make Report',
+      footer_settings: 'Settings'
     },
     fil: {
-      reports: 'Mga Ulat',
+      reports: 'Mga Report',
       reports_desc: 'malapit sa iyong lokasyon:',
       reports_none: 'Walang nahanap na ulat.',
       reports_no_image: 'Walang imahe',
-      reports_details: 'Pumili ng ulat para tingnan ang mga detalye nito',
+      reports_details: 'Pumili ng report para tingnan ang mga detalye nito',
       reports_sightings: 'na tao ang nakakita nito',
       reports_resolved: 'na tao na nagsasabing ito ay nalutas na',
       reports_see: 'Nakita ko rin ito',
       reports_seen: "Nakita mo ito",
-      reports_has_been_already_resolved: 'Nautas na ito',
+      reports_has_been_already_resolved: 'Nalutas na ito',
       reports_has_been_resolved: 'Nautas na',
-      make_report: 'Gumawa ng Ulat',
+      make_report: 'Gumawa ng Report',
       make_report_desc: 'malapit sa iyong lokasyon:',
       make_report_upload_preview: 'Imahe na pinili mo',
       make_report_upload: 'Imahe na pinili mo:',
@@ -89,18 +92,20 @@ function Core() {
       make_report_choose_image: 'Pumili ng imahe',
       make_report_discard_image: 'Alisin ang imahe',
       make_report_choose_issue: 'Pumili ng isyu',
-      make_report_custom_issue: 'Pasadyang ulat',
+      make_report_custom_issue: 'Custom issue',
       make_report_custom_issue_desc: 'Ilarawan ang isyu',
-      make_report_short_desc: 'Sumulat ng maikling paglalarawan tungkol sa isyu',
+      make_report_short_desc: 'Sumulat ng maikling detalye tungkol sa issue',
       make_report_submit_report: 'Isumite and ulat!',
       make_report_submit_success: 'Naisumite na ang ulat!',
       make_report_submit_error: 'Hindi naisumite ang ulat',
 
-      issue_pothole: 'Lubak',
-      issue_broken_streetlight: 'Sirang Poste ng Ilaw',
+      settings_change_lang: 'Baguhin ang Wika',
+      settings_select_lang_desc: 'Piliin ang iyong gustong wika',
 
-      change_lang: 'Baguhin ang Wika',
-      select_lang_desc: 'Piliin ang iyong gustong wika'
+      footer_reports: 'Mga Report',
+      footer_location: 'Lokasyon',
+      footer_make_report: 'Gumawa ng Report',
+      footer_settings: 'Settings'
     },
   }
 
@@ -727,7 +732,7 @@ function Core() {
           >
             {/* Page Header */}
             <div className='flex flex-col items-center justify-center w-full mb-5 text-center'>
-              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold'>
+              <h1 className='text-[2rem] md:text-[2.5rem] text-[#e0e0e0] font-bold md:mt-2'>
                 {isFilipino ? translations.fil.make_report : translations.en.make_report}
               </h1>
               <p className='text-sm md:text-[0.9rem] text-[#e0e0e0]'>{isFilipino ? translations.fil.make_report_desc : translations.en.make_report_desc}</p>
@@ -812,15 +817,25 @@ function Core() {
                 id='issues'
                 value={selectedIssue}
                 onChange={handleIssueChange}
-                className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-5 pr-10 appearance-none'
+                className='w-full h-[40px] rounded-[15px] text-sm md:text-base bg-[#e0e0e0] pl-3 pr-10 appearance-none'
                 required
               >
+                {/* Types of issues */}
                 <option value='' disabled>
                   {isFilipino ? translations.fil.make_report_choose_issue : translations.en.make_report_choose_issue}
                 </option>
-                <option value='custom'>{isFilipino ? translations.fil.make_report_custom_issue : translations.en.make_report_custom_issue}</option>
-                <option value='pothole'>{isFilipino ? translations.fil.issue_pothole : translations.en.issue_pothole}</option>
-                <option value='broken-streetlight'>{isFilipino ? translations.fil.issue_broken_streetlight : translations.en.issue_broken_streetlight}</option>
+                {/* Custom Issue */}
+                <option value='custom'>
+                  Custom Issue
+                </option>
+                {/* Pothole */}
+                <option value='Pothole'>
+                  Pothole (Lubak)
+                </option>
+                {/* Broken Streetlight */}
+                <option value='Broken Streetlight'>
+                  Broken Streetlight (Sirang Ilaw ng Poste)
+                </option>
               </select>
 
               {/* Custom arrow */}
@@ -963,10 +978,10 @@ function Core() {
               />
               <div className='flex flex-col leading-tight'>
                 <h1 className='text-base md:text-lg font-bold'>
-                  {isFilipino ? translations.fil.change_lang : translations.en.change_lang}
+                  {isFilipino ? translations.fil.settings_change_lang : translations.en.settings_change_lang}
                 </h1>
                 <p className='text-xs md:text-sm'>
-                  {isFilipino ? translations.fil.select_lang_desc : translations.en.select_lang_desc}
+                  {isFilipino ? translations.fil.settings_select_lang_desc : translations.en.settings_select_lang_desc}
                 </p>
               </div>
             </div>
@@ -980,7 +995,7 @@ function Core() {
               className='bg-[#e0e0e0] text-[#1e1e1e] w-[100px] md:w-[125px] h-[40px] rounded-xl text-xs md:text-sm appearance-none cursor-pointer text-center focus:outline-none transition-colors duration-500 ease-in-out'
             >
               <option value='english'>English</option>
-              <option value='filipino'>Filipino</option>
+              <option value='filipino'>Taglish</option>
             </select>
           </div>
 
@@ -1100,7 +1115,7 @@ function Core() {
           onClick={() => setActiveDiv('div1')}
         >
           <img src='/reports-icon.png' alt='Reports Icon' className='w-[25px] h-[25px] filter invert' />
-          <p className='font-light text-sm mt-[1px]'>Reports</p>
+          <p className='font-light text-sm mt-[1px]'>{isFilipino ? translations.fil.footer_reports : translations.en.footer_reports}</p>
         </button>
 
         {/* ========================= Location Button ========================= */}
@@ -1114,7 +1129,7 @@ function Core() {
           onClick={() => setActiveDiv('div2')}
         >
           <img src='/location-icon.png' alt='Location Icon' className='w-[25px] h-[25px] filter invert' />
-          <p className='font-light text-sm mt-[1px]'>Location</p>
+          <p className='font-light text-sm mt-[1px]'>{isFilipino ? translations.fil.footer_location : translations.en.footer_location}</p>
         </button>
 
         {/* ========================= Make Report Button ========================= */}
@@ -1128,7 +1143,7 @@ function Core() {
           onClick={() => setActiveDiv('div3')}
         >
           <img src='/make-report-icon.png' alt='Make Report Icon' className='w-[25px] h-[25px] filter invert' />
-          <p className='font-light text-xs sm:text-sm md:text-sm lg:text-sm mt-[1px]'>Make Report</p>
+          <p className='font-light text-xs sm:text-sm md:text-sm lg:text-sm mt-[1px]'>{isFilipino ? translations.fil.footer_make_report : translations.en.footer_make_report}</p>
         </button>
 
         {/* ========================= Settings Button ========================= */}
@@ -1142,7 +1157,7 @@ function Core() {
           onClick={() => setActiveDiv('div4')}
         >
           <img src='/settings-icon.png' alt='Settings Icon' className='w-[25px] h-[25px] filter invert' />
-          <p className='font-light text-sm mt-[1px]'>Settings</p>
+          <p className='font-light text-sm mt-[1px]'>{isFilipino ? translations.fil.footer_settings : translations.en.footer_settings}</p>
         </button>
       </footer>
     </div>
